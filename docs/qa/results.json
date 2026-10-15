@@ -1,0 +1,287 @@
+{
+  "date": "2026-10-15",
+  "environment": {
+    "node": "v24.19.0",
+    "next": "15.5.28",
+    "playwright": "1.56.1",
+    "browser": "Chromium 141.0.7390.37",
+    "viewportHeight": 900,
+    "reducedMotion": "reduce"
+  },
+  "stats": {
+    "startTime": "2026-10-15T20:09:21.704Z",
+    "duration": 78435.171,
+    "expected": 30,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "commands": {
+    "npm ci": "passed",
+    "npm run verify": "passed",
+    "npm run test:browser": "30 passed"
+  },
+  "unitTests": {
+    "api": 1,
+    "web": 8,
+    "shared": 1,
+    "total": 10
+  },
+  "productionBuilds": [
+    "shared TypeScript",
+    "Express API TypeScript",
+    "Next.js optimized build; 31 static outputs"
+  ],
+  "responsiveWidths": [375, 768, 1024, 1440, 1920],
+  "pages": ["home", "about", "programs", "services", "contact"],
+  "axe": {
+    "scans": 10,
+    "widths": [375, 1440],
+    "tags": ["wcag2a", "wcag2aa", "wcag21aa"],
+    "violations": 0
+  },
+  "manifestAssetsChecked": 50,
+  "apiSmoke": [
+    {
+      "path": "/api/health",
+      "status": 200
+    },
+    {
+      "path": "/api/unknown",
+      "status": 404
+    }
+  ],
+  "checks": [
+    {
+      "name": "home renders accessibly at 375px",
+      "status": "expected",
+      "durationMs": 3128,
+      "errors": []
+    },
+    {
+      "name": "about renders accessibly at 375px",
+      "status": "expected",
+      "durationMs": 3048,
+      "errors": []
+    },
+    {
+      "name": "programs renders accessibly at 375px",
+      "status": "expected",
+      "durationMs": 3435,
+      "errors": []
+    },
+    {
+      "name": "services renders accessibly at 375px",
+      "status": "expected",
+      "durationMs": 3227,
+      "errors": []
+    },
+    {
+      "name": "contact renders accessibly at 375px",
+      "status": "expected",
+      "durationMs": 2699,
+      "errors": []
+    },
+    {
+      "name": "home renders accessibly at 768px",
+      "status": "expected",
+      "durationMs": 2127,
+      "errors": []
+    },
+    {
+      "name": "about renders accessibly at 768px",
+      "status": "expected",
+      "durationMs": 2315,
+      "errors": []
+    },
+    {
+      "name": "programs renders accessibly at 768px",
+      "status": "expected",
+      "durationMs": 2598,
+      "errors": []
+    },
+    {
+      "name": "services renders accessibly at 768px",
+      "status": "expected",
+      "durationMs": 2196,
+      "errors": []
+    },
+    {
+      "name": "contact renders accessibly at 768px",
+      "status": "expected",
+      "durationMs": 2012,
+      "errors": []
+    },
+    {
+      "name": "home renders accessibly at 1024px",
+      "status": "expected",
+      "durationMs": 2222,
+      "errors": []
+    },
+    {
+      "name": "about renders accessibly at 1024px",
+      "status": "expected",
+      "durationMs": 2524,
+      "errors": []
+    },
+    {
+      "name": "programs renders accessibly at 1024px",
+      "status": "expected",
+      "durationMs": 2474,
+      "errors": []
+    },
+    {
+      "name": "services renders accessibly at 1024px",
+      "status": "expected",
+      "durationMs": 2346,
+      "errors": []
+    },
+    {
+      "name": "contact renders accessibly at 1024px",
+      "status": "expected",
+      "durationMs": 2401,
+      "errors": []
+    },
+    {
+      "name": "home renders accessibly at 1440px",
+      "status": "expected",
+      "durationMs": 3404,
+      "errors": []
+    },
+    {
+      "name": "about renders accessibly at 1440px",
+      "status": "expected",
+      "durationMs": 3345,
+      "errors": []
+    },
+    {
+      "name": "programs renders accessibly at 1440px",
+      "status": "expected",
+      "durationMs": 3629,
+      "errors": []
+    },
+    {
+      "name": "services renders accessibly at 1440px",
+      "status": "expected",
+      "durationMs": 3117,
+      "errors": []
+    },
+    {
+      "name": "contact renders accessibly at 1440px",
+      "status": "expected",
+      "durationMs": 3039,
+      "errors": []
+    },
+    {
+      "name": "home renders accessibly at 1920px",
+      "status": "expected",
+      "durationMs": 2965,
+      "errors": []
+    },
+    {
+      "name": "about renders accessibly at 1920px",
+      "status": "expected",
+      "durationMs": 2736,
+      "errors": []
+    },
+    {
+      "name": "programs renders accessibly at 1920px",
+      "status": "expected",
+      "durationMs": 3086,
+      "errors": []
+    },
+    {
+      "name": "services renders accessibly at 1920px",
+      "status": "expected",
+      "durationMs": 2706,
+      "errors": []
+    },
+    {
+      "name": "contact renders accessibly at 1920px",
+      "status": "expected",
+      "durationMs": 2547,
+      "errors": []
+    },
+    {
+      "name": "mobile navigation traps focus, closes on Escape, and follows links",
+      "status": "expected",
+      "durationMs": 924,
+      "errors": []
+    },
+    {
+      "name": "desktop dropdowns, skip link, and FAQ work from the keyboard",
+      "status": "expected",
+      "durationMs": 625,
+      "errors": []
+    },
+    {
+      "name": "inquiry validates, reviews locally, preserves text, and never submits data",
+      "status": "expected",
+      "durationMs": 1935,
+      "errors": []
+    },
+    {
+      "name": "all internal destinations, fragments, course pages and assets resolve",
+      "status": "expected",
+      "durationMs": 3093,
+      "errors": []
+    },
+    {
+      "name": "reduced motion keeps all content visible and removes animation",
+      "status": "expected",
+      "durationMs": 511,
+      "errors": []
+    }
+  ],
+  "verifiedLinks": [
+    "/",
+    "/#main-content",
+    "/#services",
+    "/about",
+    "/about#main-content",
+    "/about#our-story",
+    "/career",
+    "/contact",
+    "/contact#inquiry",
+    "/contact#main-content",
+    "/design-system",
+    "/media",
+    "/partners",
+    "/partners/colleges",
+    "/partners/franchise",
+    "/podcast",
+    "/privacy",
+    "/programs",
+    "/programs#digital-marketing",
+    "/programs#main-content",
+    "/programs#web-development",
+    "/programs/advanced-full-stack",
+    "/programs/ai-assisted-web-development",
+    "/programs/ai-digi-hero",
+    "/programs/ai-digital-ninja",
+    "/programs/ai-master",
+    "/programs/ai-professional",
+    "/programs/ai-special",
+    "/programs/digital-marketing-foundation",
+    "/programs/frontend-development",
+    "/programs/full-stack-development",
+    "/programs/web-development-foundation",
+    "/services",
+    "/services#advertising",
+    "/services#brand-identity",
+    "/services#content-creative",
+    "/services#growth-strategy",
+    "/services#main-content",
+    "/services#performance-marketing",
+    "/services#process",
+    "/services#seo",
+    "/services#social-media",
+    "/terms",
+    "/training-placements"
+  ],
+  "limitations": [
+    "Chromium only; no physical-device, Safari, or Firefox run",
+    "No Core Web Vitals field measurements or screen-reader audit",
+    "No live business backend or Parts 03–04 renderer in scope"
+  ]
+}
