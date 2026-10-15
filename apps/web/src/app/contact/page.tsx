@@ -1,0 +1,232 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import { Suspense } from "react";
+import { PageHero } from "@/components/sections/page-hero";
+import {
+  ButtonLink,
+  Eyebrow,
+  Section,
+  SectionHeading,
+  IconTile,
+  Skeleton,
+  FeaturePanel,
+} from "@/components/ui/primitives";
+import { Accordion } from "@/components/ui/accordion";
+import {
+  CapabilityStrip,
+  CTASection,
+  PartnerCards,
+} from "@/components/sections/shared";
+import { OrbitGlobeStage } from "@/components/scenes/scene-stages";
+import { InquiryForm } from "@/components/forms/inquiry-form";
+import { contactFaqs, type IconName } from "@/lib/content";
+import { Icon } from "@/components/ui/icon";
+
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description:
+    "Explore marketing, training, college partnerships, franchise opportunities, and careers with MOUNDWEB.",
+};
+export default function ContactPage() {
+  return (
+    <>
+      <PageHero
+        eyebrow="Contact us"
+        title={
+          <>
+            Let’s start the
+            <br />
+            <em>conversation.</em>
+          </>
+        }
+        description="For brands, students, colleges, and partners. Let’s connect around growth, training, collaboration, and new possibilities."
+        className="contact-hero"
+        artwork={
+          <div className="contact-hero-labels">
+            {[
+              ["lightbulb", "Ideas & possibility"],
+              ["handshake", "Partnerships"],
+              ["chart", "Brand growth"],
+              ["cap", "Learning journeys"],
+            ].map(([icon, label]) => (
+              <div key={label}>
+                <Icon name={icon as IconName} />
+                <span>{label}</span>
+              </div>
+            ))}
+          </div>
+        }
+      >
+        <ButtonLink href="#inquiry">Prepare an inquiry</ButtonLink>
+      </PageHero>
+      <CapabilityStrip />
+      <Section>
+        <SectionHeading
+          eyebrow="Get in touch"
+          title={
+            <>
+              Different ways to <em>connect.</em>
+            </>
+          }
+          description="We’re preparing our contact channels. Confirmed details will be published here."
+        />
+        <div className="contact-method-grid">
+          {[
+            {
+              icon: "mail" as const,
+              title: "Email us",
+              text: "For questions, ideas, and opportunities.",
+              value: "Email to be confirmed",
+            },
+            {
+              icon: "phone" as const,
+              title: "Call us",
+              text: "A direct conversation with the team.",
+              value: "Phone to be confirmed",
+            },
+            {
+              icon: "pin" as const,
+              title: "Visit us",
+              text: "Meet us when location details are live.",
+              value: "Address to be confirmed",
+            },
+            {
+              icon: "clock" as const,
+              title: "Office hours",
+              text: "Find a time that works for everyone.",
+              value: "Hours to be confirmed",
+            },
+          ].map((item) => (
+            <article className="contact-method" key={item.title}>
+              <IconTile name={item.icon} />
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+                <span>{item.value}</span>
+              </div>
+            </article>
+          ))}
+        </div>
+      </Section>
+      <Section id="inquiry" className="inquiry-section">
+        <div className="inquiry-panel">
+          <div className="inquiry-intro">
+            <Eyebrow>Your next step</Eyebrow>
+            <h2>
+              Tell us about
+              <br />
+              your <em>inquiry.</em>
+            </h2>
+            <p>
+              Whether it’s digital growth, a learning path, a college
+              partnership, or a bigger idea, start by telling us what matters to
+              you.
+            </p>
+            <OrbitGlobeStage compact />
+          </div>
+          <div className="inquiry-form-wrap">
+            <Suspense
+              fallback={
+                <div role="status" aria-label="Loading inquiry form">
+                  <Skeleton className="form-skeleton" />
+                </div>
+              }
+            >
+              <InquiryForm />
+            </Suspense>
+          </div>
+          <aside className="inquiry-art">
+            <Image
+              src="/assets/partnerships/contact-network.webp"
+              alt="An illuminated path connects distant mountain peaks"
+              fill
+              sizes="25vw"
+            />
+            <div>
+              <p>
+                Ideas
+                <br />
+                Partnerships
+                <br />
+                People
+                <br />
+                <strong>Real possibility.</strong>
+              </p>
+              <span>
+                Different goals.
+                <br />
+                One shared vision.
+              </span>
+            </div>
+          </aside>
+        </div>
+      </Section>
+      <Section>
+        <SectionHeading
+          eyebrow="Why reach out"
+          title={
+            <>
+              How we can <em>help.</em>
+            </>
+          }
+          description="Find a starting point for your next conversation."
+        />
+        <div className="card-grid help-grid">
+          <FeaturePanel icon="chart" title="Growth consultation">
+            Explore digital marketing, brand strategy, and your next move.
+          </FeaturePanel>
+          <FeaturePanel icon="cap" title="Program guidance">
+            Understand our learning paths and proposed programs.
+          </FeaturePanel>
+          <FeaturePanel icon="handshake" title="Partnership opportunities">
+            Explore collaboration for colleges and franchise partners.
+          </FeaturePanel>
+          <FeaturePanel icon="users" title="Career conversations">
+            Learn about the kind of work we’re building together.
+          </FeaturePanel>
+        </div>
+      </Section>
+      <Section>
+        <SectionHeading
+          eyebrow="Partner with us"
+          title={
+            <>
+              Let’s grow <em>together.</em>
+            </>
+          }
+          description="Bring a shared ambition. Explore what we could build together."
+        />
+        <PartnerCards />
+      </Section>
+      <Section>
+        <div className="split-layout faq-layout">
+          <div>
+            <Eyebrow>Frequently asked questions</Eyebrow>
+            <h2>
+              Quick answers
+              <br />
+              to <em>common questions.</em>
+            </h2>
+            <p className="body-copy">
+              A few things to know before you get started.
+            </p>
+          </div>
+          <Accordion items={contactFaqs} />
+        </div>
+      </Section>
+      <CTASection
+        eyebrow="Let’s create impact"
+        title={
+          <>
+            Ready to build
+            <br />
+            <em>something bigger?</em>
+          </>
+        }
+        description="Your next chapter starts with an idea. Put it into words."
+        primaryLabel="Prepare your inquiry"
+        href="#inquiry"
+      />
+    </>
+  );
+}

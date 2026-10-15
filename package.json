@@ -15,9 +15,20 @@
     "typecheck": "npm run typecheck --workspaces --if-present",
     "lint": "npm run lint --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
-    "verify": "npm run lint && npm run typecheck && npm run test && npm run build"
+    "verify": "npm run lint && npm run typecheck && npm run test && npm run build",
+    "test:browser": "playwright test"
   },
   "engines": {
     "node": ">=22 <25"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.0",
+    "@playwright/test": "1.56.1",
+    "d3-geo": "^3.1.1",
+    "prettier": "3.6.2",
+    "sharp": "^0.35.5",
+    "simple-icons": "16.35.0",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2"
   }
 }

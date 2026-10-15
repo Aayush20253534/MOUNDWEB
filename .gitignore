@@ -9,3 +9,6 @@ coverage
 *.log
 .DS_Store
 *.tsbuildinfo
+playwright-report/
+test-results/
+.asset-inputs.json
