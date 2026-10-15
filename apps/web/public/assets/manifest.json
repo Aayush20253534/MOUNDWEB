@@ -1,0 +1,477 @@
+[
+  {
+    "path": "/assets/brand/app-icon.svg",
+    "width": 512,
+    "height": 512,
+    "bytes": 320,
+    "sha256": "f947b34e4df4f85e022ca75f3e1a08e73ff2dd1d2b64e56ec5b48c83230ecf61",
+    "source": "Original MOUNDWEB vector artwork, authored in scripts/prepare-assets.mjs",
+    "purpose": "Brand identity"
+  },
+  {
+    "path": "/assets/brand/icon-192.png",
+    "width": 192,
+    "height": 192,
+    "bytes": 3848,
+    "sha256": "59702eb53713bf60cdafe230309cdd630b4b4cd7dbcf9c4122ef67eca3ef4797",
+    "source": "Original MOUNDWEB vector artwork, authored in scripts/prepare-assets.mjs",
+    "purpose": "Brand identity"
+  },
+  {
+    "path": "/assets/brand/icon-512.png",
+    "width": 512,
+    "height": 512,
+    "bytes": 14251,
+    "sha256": "d609d18400ef9f62dbdbbf71296471e2bf002389b2037ab24095a649337bcb91",
+    "source": "Original MOUNDWEB vector artwork, authored in scripts/prepare-assets.mjs",
+    "purpose": "Brand identity"
+  },
+  {
+    "path": "/assets/brand/mountain-mark.svg",
+    "width": 58,
+    "height": 36,
+    "bytes": 212,
+    "sha256": "762e8ce8421a18062697444376f4b4f4271791f46fad4036258830658be8682d",
+    "source": "Original MOUNDWEB vector artwork, authored in scripts/prepare-assets.mjs",
+    "purpose": "Brand identity"
+  },
+  {
+    "path": "/assets/brand/wordmark-dark.svg",
+    "width": 300,
+    "height": 54,
+    "bytes": 412,
+    "sha256": "28e47177eadadeda50427877b0e794117b645cff795ce22442c0d260b58b51b6",
+    "source": "Original MOUNDWEB vector artwork, authored in scripts/prepare-assets.mjs",
+    "purpose": "Brand identity"
+  },
+  {
+    "path": "/assets/brand/wordmark-light.svg",
+    "width": 300,
+    "height": 54,
+    "bytes": 412,
+    "sha256": "e3a8aca2073671e1294615e1c5c80030fe12f587ba20485b87b04f6201a644b3",
+    "source": "Original MOUNDWEB vector artwork, authored in scripts/prepare-assets.mjs",
+    "purpose": "Brand identity"
+  },
+  {
+    "path": "/assets/courses/dm-ai-master.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 110564,
+    "sha256": "586d420b21dd759640eb3ad6c5101db189c7c1171bf66f195db7f9e3baf38803",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Course card and course detail artwork",
+    "promptId": "dm-ai-master"
+  },
+  {
+    "path": "/assets/courses/dm-ai-professional.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 73614,
+    "sha256": "a9ba844d33fee6dce4fbaccfe0f6b4d67320da16c80a97ee1dd50e0e758d6551",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Course card and course detail artwork",
+    "promptId": "dm-ai-professional"
+  },
+  {
+    "path": "/assets/courses/dm-ai-special.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 76270,
+    "sha256": "899e02c7eed860896d1c040613bd7b14eb7eb5da5897704b3527a034674fe6ad",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Course card and course detail artwork",
+    "promptId": "dm-ai-special"
+  },
+  {
+    "path": "/assets/courses/dm-digi-hero.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 61986,
+    "sha256": "7fd1e8b02629e8f5fdff6c8fb67367b80519216faf0afd216331fbd5fe00d6c6",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Course card and course detail artwork",
+    "promptId": "dm-digi-hero"
+  },
+  {
+    "path": "/assets/courses/dm-digital-ninja.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 64400,
+    "sha256": "ac1476d51025a405f01baba6b421f6ea22da8cb34dbc498861e97326bfeea55d",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Course card and course detail artwork",
+    "promptId": "dm-digital-ninja"
+  },
+  {
+    "path": "/assets/courses/dm-foundation.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 74994,
+    "sha256": "4f68e675fc083140401bf712b1e9c7f37a1c84aa352a450019f8998f2aa2d844",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Course card and course detail artwork",
+    "promptId": "dm-foundation"
+  },
+  {
+    "path": "/assets/courses/web-advanced.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 133026,
+    "sha256": "bc975d824d7d2343710d1746ade3becb219782f5bd110c0653c6e19632ca4faf",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Course card and course detail artwork",
+    "promptId": "web-advanced"
+  },
+  {
+    "path": "/assets/courses/web-ai.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 98710,
+    "sha256": "62cc4844914ae0044b5ff5f2711eda96a207aae762a25239232af289c630e27e",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Course card and course detail artwork",
+    "promptId": "web-ai"
+  },
+  {
+    "path": "/assets/courses/web-foundation.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 59930,
+    "sha256": "8f2a74a5135293d63334c3df105fcc6ed49e88262b995dfc2c5a577e43aa9196",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Course card and course detail artwork",
+    "promptId": "web-foundation"
+  },
+  {
+    "path": "/assets/courses/web-frontend.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 64900,
+    "sha256": "8c4283f5d6d6f852145d615788b9c4ca43c9d32a9118eacbc1ca69aee3cb00b9",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Course card and course detail artwork",
+    "promptId": "web-frontend"
+  },
+  {
+    "path": "/assets/courses/web-fullstack.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 61896,
+    "sha256": "f0d64e797d6137418a2dac6a4258168812e21ed128470ce53a5a55285188514c",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Course card and course detail artwork",
+    "promptId": "web-fullstack"
+  },
+  {
+    "path": "/assets/graphics/connection-network.svg",
+    "width": 1600,
+    "height": 550,
+    "bytes": 17724,
+    "sha256": "f791fe9a4eba5d3ead05a5706247cdefe2d8a566a3fb215057cd5dec091eac0b",
+    "source": "Original MOUNDWEB vector artwork, authored in scripts/prepare-assets.mjs",
+    "purpose": "Reusable decorative graphic"
+  },
+  {
+    "path": "/assets/graphics/creators.svg",
+    "width": 280,
+    "height": 250,
+    "bytes": 677,
+    "sha256": "f7958ac229cadb62169285319ebc903df6a4b25bee8f19d12896477f05894502",
+    "source": "Original MOUNDWEB vector artwork, authored in scripts/prepare-assets.mjs",
+    "purpose": "Reusable decorative graphic"
+  },
+  {
+    "path": "/assets/graphics/educators.svg",
+    "width": 280,
+    "height": 250,
+    "bytes": 646,
+    "sha256": "d097079a1d081333ba2e8a44207e1095267f538082bad7e7d757f4010894d677",
+    "source": "Original MOUNDWEB vector artwork, authored in scripts/prepare-assets.mjs",
+    "purpose": "Reusable decorative graphic"
+  },
+  {
+    "path": "/assets/graphics/globe-poster.svg",
+    "width": 640,
+    "height": 640,
+    "bytes": 102304,
+    "sha256": "340970c0d32ddc803cd62e4a471a28e54507581215c2960341e2c358c9149f3e",
+    "source": "Natural Earth public-domain land geometry via world-atlas 2.0.2; original d3-geo rendering",
+    "purpose": "Static globe fallback; projected geography, graticule, and land nodes"
+  },
+  {
+    "path": "/assets/graphics/mountain-ridgeline.svg",
+    "width": 1600,
+    "height": 480,
+    "bytes": 616,
+    "sha256": "0edb6e22ca77ea037edefa8cee49890502f73ed511b0fdea15f6841f91931503",
+    "source": "Original MOUNDWEB vector artwork, authored in scripts/prepare-assets.mjs",
+    "purpose": "Reusable decorative graphic"
+  },
+  {
+    "path": "/assets/graphics/orbit-paths.svg",
+    "width": 640,
+    "height": 640,
+    "bytes": 382,
+    "sha256": "dba7b8a9800c6bd200694a6ffb5ae7bc2639c6faec4495dbedbbae5481bda9a9",
+    "source": "Original MOUNDWEB vector artwork, authored in scripts/prepare-assets.mjs",
+    "purpose": "Reusable decorative graphic"
+  },
+  {
+    "path": "/assets/graphics/strategists.svg",
+    "width": 280,
+    "height": 250,
+    "bytes": 702,
+    "sha256": "f9444c900768fe43ce1aa3c853d47e1fb0c63be32d6e24caca0638d34ddd6b6b",
+    "source": "Original MOUNDWEB vector artwork, authored in scripts/prepare-assets.mjs",
+    "purpose": "Reusable decorative graphic"
+  },
+  {
+    "path": "/assets/landscapes/about-world.webp",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 223278,
+    "sha256": "0c36858320552c9e1ab5b2a32ec887509d71aa4b3b6f379e99a89b39db9fb527",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Hero, mission, or CTA background",
+    "promptId": "about-world"
+  },
+  {
+    "path": "/assets/landscapes/mountain-hero.webp",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 215328,
+    "sha256": "b4bec153f5d7f76f5bc1dba01153f149e5f33ca5ab926b919f3c595a0905fd0b",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Hero, mission, or CTA background",
+    "promptId": "mountain-hero"
+  },
+  {
+    "path": "/assets/landscapes/mountain-panorama.webp",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 149862,
+    "sha256": "33d8e423c939d947b0f40528ad14017490bfba19ed398ca9bb2bc05d55937871",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Hero, mission, or CTA background",
+    "promptId": "mountain-panorama"
+  },
+  {
+    "path": "/assets/landscapes/programs-ascent.webp",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 172954,
+    "sha256": "c60ae4cad1828ec2ba414bd20921e4bb0adbc09905b05ba12b4db8a27e7412c4",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Hero, mission, or CTA background",
+    "promptId": "programs-ascent"
+  },
+  {
+    "path": "/assets/landscapes/summit-path.webp",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 204920,
+    "sha256": "744340106fcad00b8824498e83fb8d6ae58eb9699f3cfb8884923252264c2a52",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Hero, mission, or CTA background",
+    "promptId": "summit-path"
+  },
+  {
+    "path": "/assets/partnerships/college-partnership.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 99792,
+    "sha256": "504861c6e35c168f773851603f6d9edc72b26847259af40d3442c619ea425028",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Conceptual partnership/contact illustration",
+    "promptId": "college-partnership"
+  },
+  {
+    "path": "/assets/partnerships/contact-network.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 105106,
+    "sha256": "f8c5bdc67a925530340bab48ae42dcbbcdcafe79481ae5a56789bf55fbb775db",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Conceptual partnership/contact illustration",
+    "promptId": "contact-network"
+  },
+  {
+    "path": "/assets/partnerships/franchise-partnership.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 86952,
+    "sha256": "e849d90b07bf9c4a4b71be9e7dfe1075fbcbd17da4fd2f1535b83618d1aa6ceb",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Conceptual partnership/contact illustration",
+    "promptId": "franchise-partnership"
+  },
+  {
+    "path": "/assets/platforms/analytics.svg",
+    "width": 24,
+    "height": 24,
+    "bytes": 734,
+    "sha256": "c495416f2816b614a9d2694ff3952febae2b80d7d1c9b13cc04c60f034b9c6e6",
+    "source": "Simple Icons Google Analytics; CC0 artwork, trademarks remain with owners",
+    "purpose": "Illustrative marketing channel icon, never a partner endorsement"
+  },
+  {
+    "path": "/assets/platforms/google.svg",
+    "width": 24,
+    "height": 24,
+    "bytes": 463,
+    "sha256": "1dedaf15da6c7b38c11fd902f4b123abf58375d890a0ac0b7d065cef4e46c530",
+    "source": "Simple Icons Google; CC0 artwork, trademarks remain with owners",
+    "purpose": "Illustrative marketing channel icon, never a partner endorsement"
+  },
+  {
+    "path": "/assets/platforms/instagram.svg",
+    "width": 24,
+    "height": 24,
+    "bytes": 2104,
+    "sha256": "193e9c52b196ddbc84e216210fcffed2b509718c7727c8a4e12c8af9394cc733",
+    "source": "Simple Icons Instagram; CC0 artwork, trademarks remain with owners",
+    "purpose": "Illustrative marketing channel icon, never a partner endorsement"
+  },
+  {
+    "path": "/assets/platforms/linkedin.svg",
+    "width": 36,
+    "height": 36,
+    "bytes": 196,
+    "sha256": "fae3a04cf35a6fc6e8cb59a7ea0bc2b5239cad3c7cd5c44319afecf9770da4f7",
+    "source": "Original typographic channel label, not an official logo asset",
+    "purpose": "LinkedIn channel label; no affiliation implied"
+  },
+  {
+    "path": "/assets/platforms/meta.svg",
+    "width": 24,
+    "height": 24,
+    "bytes": 1332,
+    "sha256": "5209eddd3c61c238b4ba4aab267f48793ed970524679efbdd449c6b7935f875d",
+    "source": "Simple Icons Meta; CC0 artwork, trademarks remain with owners",
+    "purpose": "Illustrative marketing channel icon, never a partner endorsement"
+  },
+  {
+    "path": "/assets/platforms/youtube.svg",
+    "width": 24,
+    "height": 24,
+    "bytes": 464,
+    "sha256": "19335a714c3110cdf091487c6718c5c3bf004a40d927623bca53a9fd8daa95d8",
+    "source": "Simple Icons YouTube; CC0 artwork, trademarks remain with owners",
+    "purpose": "Illustrative marketing channel icon, never a partner endorsement"
+  },
+  {
+    "path": "/assets/services/branding.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 73872,
+    "sha256": "b5ef9762f9b9283d977835821853e24ca1314db7de434db62201e42f02764f9a",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Service card artwork",
+    "promptId": "branding"
+  },
+  {
+    "path": "/assets/services/content-creative.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 73986,
+    "sha256": "2fb41813b637a8ed5d04144634e59111c490a244f1a046b6d591d51ce9e28112",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Service card artwork",
+    "promptId": "content-creative"
+  },
+  {
+    "path": "/assets/services/growth-strategy.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 53498,
+    "sha256": "efd994a476c5f4cf242bdc0cc00017ae770cbde244832d18d4e747b7dc42b64b",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Service card artwork",
+    "promptId": "growth-strategy"
+  },
+  {
+    "path": "/assets/services/performance.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 65706,
+    "sha256": "8dc568d467d68ae1c6165b60c6753d347fb598d950f7232729135539861c4164",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Service card artwork",
+    "promptId": "performance"
+  },
+  {
+    "path": "/assets/services/seo.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 89350,
+    "sha256": "295078a552184984040b2ed4cc2608ac818ef31583af3965e4f5f41176eda444",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Service card artwork",
+    "promptId": "seo"
+  },
+  {
+    "path": "/assets/services/social-media.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 67338,
+    "sha256": "92a422465058f7471f456d4d94e991d46a54e415eee2eb6383e8f9b4a578efa7",
+    "source": "Original OpenAI built-in image generation for this project",
+    "purpose": "Service card artwork",
+    "promptId": "social-media"
+  },
+  {
+    "path": "/assets/textures/atmosphere.svg",
+    "width": 512,
+    "height": 512,
+    "bytes": 487,
+    "sha256": "b4daecc8198637019379e83963f199d1317cc67d7cc9e31828adb08c8f5cc195",
+    "source": "Original MOUNDWEB vector artwork, authored in scripts/prepare-assets.mjs",
+    "purpose": "Supporting shader/particle texture for Parts 03–04"
+  },
+  {
+    "path": "/assets/textures/earth-land-mask.png",
+    "width": 2048,
+    "height": 1024,
+    "bytes": 169423,
+    "sha256": "eb4eb9f7221fdc30ccd4bda67c4f2360c6fe37b64b2cfba63595e9ccb2a50e50",
+    "source": "Natural Earth public-domain land geometry via world-atlas 2.0.2; original styling",
+    "purpose": "2:1 equirectangular texture for the Part 04 sphere; no political borders"
+  },
+  {
+    "path": "/assets/textures/earth-surface.png",
+    "width": 2048,
+    "height": 1024,
+    "bytes": 290494,
+    "sha256": "c04f72e237d3211f43c3ee003ff35476a8a9e3ad7e4d1e92132db923787bb62b",
+    "source": "Natural Earth public-domain land geometry via world-atlas 2.0.2; original styling",
+    "purpose": "2:1 equirectangular texture for the Part 04 sphere; no political borders"
+  },
+  {
+    "path": "/assets/textures/explosion-ring.svg",
+    "width": 256,
+    "height": 256,
+    "bytes": 487,
+    "sha256": "6c370762c837583d718a9253ef57c28a7effa550f94ba9e6c0f9a83b936c6f05",
+    "source": "Original MOUNDWEB vector artwork, authored in scripts/prepare-assets.mjs",
+    "purpose": "Supporting shader/particle texture for Parts 03–04"
+  },
+  {
+    "path": "/assets/textures/light-flare.svg",
+    "width": 512,
+    "height": 128,
+    "bytes": 447,
+    "sha256": "4a29973ae0ee9ae71a95c205aef999413818e65dd9c793d2c38e8ab44a66e964",
+    "source": "Original MOUNDWEB vector artwork, authored in scripts/prepare-assets.mjs",
+    "purpose": "Supporting shader/particle texture for Parts 03–04"
+  },
+  {
+    "path": "/assets/textures/particle-soft.svg",
+    "width": 128,
+    "height": 128,
+    "bytes": 384,
+    "sha256": "c945d5affbc140ebbf068f83f0c0f4883192751799a057666773913579bac6c0",
+    "source": "Original MOUNDWEB vector artwork, authored in scripts/prepare-assets.mjs",
+    "purpose": "Supporting shader/particle texture for Parts 03–04"
+  }
+]
