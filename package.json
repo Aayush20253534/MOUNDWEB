@@ -1,0 +1,23 @@
+{
+  "name": "moundweb",
+  "private": true,
+  "version": "0.0.0",
+  "packageManager": "npm@10.9.2",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @moundweb/web & npm run dev --workspace @moundweb/api",
+    "dev:web": "npm run dev --workspace @moundweb/web",
+    "dev:api": "npm run dev --workspace @moundweb/api",
+    "build": "npm run build --workspace @moundweb/shared && npm run build --workspace @moundweb/api && npm run build --workspace @moundweb/web",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "verify": "npm run lint && npm run typecheck && npm run test && npm run build"
+  },
+  "engines": {
+    "node": ">=22 <25"
+  }
+}

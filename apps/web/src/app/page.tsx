@@ -1,0 +1,3 @@
+export default function HomePage() {
+  return <main className="shell"><header className="nav"><a className="logo" href="/" aria-label="MOUNDWEB home"><span aria-hidden="true">▲▲</span> MOUND<span>WEB</span></a><span className="eyebrow">PART 00 · FOUNDATION</span></header><section className="hero"><p className="eyebrow">DIGITAL MARKETING & TRAINING</p><h1>We turn attention<br />into <em>growth.</em></h1><p>Building the foundation for MOUNDWEB’s cinematic digital experience.</p><p className="status">Part 00: project structure initialized. Page designs and animation systems arrive in later parts.</p></section></main>;
+}
