@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import type { Server } from "node:http";
 import { createApp } from "./app.js";
 import type { SubmissionStore, NotificationSender } from "./submissions.js";
+import type { ContactPayload, PartnershipPayload } from "./submission-schemas.js";
 
 const requestId = "123e4567-e89b-42d3-a456-426614174000";
 const payload = {
@@ -20,11 +21,11 @@ const env = {
   APPROVED_PRIVACY_NOTICE_VERSION: "approved-2026",
 };
 const counters = {
-  save: vi.fn(async () => ({ id: "accepted-record", duplicate: false })),
-  partner: vi.fn(async () => ({ id: "accepted-partner", duplicate: false })),
-  notified: vi.fn(async () => undefined),
-  partnerNotified: vi.fn(async () => undefined),
-  mark: vi.fn(async () => undefined),
+  save: vi.fn(async (_data: ContactPayload) => ({ id: "accepted-record", duplicate: false })),
+  partner: vi.fn(async (_data: PartnershipPayload) => ({ id: "accepted-partner", duplicate: false })),
+  notified: vi.fn(async (_data: ContactPayload) => undefined),
+  partnerNotified: vi.fn(async (_data: PartnershipPayload) => undefined),
+  mark: vi.fn(async (_id: string, _status: string) => undefined),
 };
 const store: SubmissionStore = {
   saveContact: (...args) => counters.save(...args),
@@ -54,7 +55,7 @@ async function start(config = env) {
   };
 }
 afterEach(async () => {
-  vi.resetAllMocks();
+  vi.clearAllMocks();
   await Promise.all(running.splice(0).map((server) =>
     new Promise<void>((resolve) => server.close(() => resolve()))));
 });
