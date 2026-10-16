@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { sceneAssets } from "./scene-contracts";
+import { MountainRuntime } from "./mountain-runtime";
 
 /** Supply a canvas as children in Part 03; semantic hero copy stays outside the scene. */
 export function ParticleMountainStage({ children }: { children?: ReactNode }) {
@@ -22,6 +23,7 @@ export function ParticleMountainStage({ children }: { children?: ReactNode }) {
       />
       <div className="mountain-stage-shade" />
       {children}
+      <MountainRuntime />
     </div>
   );
 }
