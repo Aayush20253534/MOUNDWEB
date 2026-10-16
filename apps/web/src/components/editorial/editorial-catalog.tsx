@@ -36,6 +36,35 @@ export function EditorialCatalog({ kind }: { kind: Kind }) {
             : "Approved features, galleries and dated updates will be listed here when published."}</p>
         </div>
       )}
+      {published.length > 0 && (
+        <div className="editorial-published-section">
+          <div className="editorial-catalog-heading">
+            <div>
+              <span className="eyebrow">Published library</span>
+              <h2>Now <em>available.</em></h2>
+              <p className="body-copy">Verified releases with approved editorial information.</p>
+            </div>
+          </div>
+          <div className="editorial-card-grid">
+            {published.map((item) => (
+              <article className="editorial-card" key={item.slug}>
+                <Link href={"/" + kind + "/" + item.slug} className="editorial-card-image"
+                  aria-label={"Open published " + item.title}>
+                  <Image src={item.artwork} alt="" fill
+                    sizes="(max-width: 700px) 100vw, (max-width: 1050px) 50vw, 33vw" />
+                </Link>
+                <div className="editorial-card-copy">
+                  <span className="editorial-status editorial-status--published">Published</span>
+                  <span className="editorial-card-category">{item.category} · <time dateTime={item.publishedAt}>{item.publishedAt}</time></span>
+                  <h3><Link href={"/" + kind + "/" + item.slug}>{item.title}</Link></h3>
+                  <p>{item.summary}</p>
+                  <Link className="text-link" href={"/" + kind + "/" + item.slug}>Open release <ArrowRight size={15} aria-hidden="true"/></Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      )}
       <div className="editorial-catalog-heading">
         <div>
           <span className="eyebrow">Editorial planning board</span>
@@ -83,7 +112,6 @@ export function EditorialCatalog({ kind }: { kind: Kind }) {
           <button className="button button--secondary" type="button" onClick={reset}><X size={16} aria-hidden="true" /> Reset filters</button>
         </div>
       )}
-      {published.length > 0 && <p className="micro-note">Published items are reserved for verified editorial records.</p>}
     </div>
   );
 }
