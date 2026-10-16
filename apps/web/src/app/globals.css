@@ -3734,3 +3734,41 @@
     transform: none;
   }
 }
+
+
+/* Part 03: actual GPU mountain, safely layered over the existing SSR fallback. */
+.mountain-scene-runtime {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 2;
+  pointer-events: none;
+}
+.mountain-webgl-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.mountain-stage .mountain-poster { transition: opacity 700ms ease; }
+.mountain-stage[data-phase="forming"] .mountain-poster { opacity: 0.10; }
+.mountain-stage[data-phase="formed"] .mountain-poster,
+.mountain-stage[data-phase^="impact-"] .mountain-poster { opacity: 0.33; }
+.mountain-stage[data-phase="exploding"] .mountain-poster { opacity: 0.18; }
+.mountain-stage[data-phase="revealed"] .mountain-poster { opacity: 0.43; }
+.home-hero:has(.mountain-stage[data-phase="forming"]) .home-hero-copy h1 {
+  opacity: 0.55;
+  transform: translateY(7px);
+}
+.home-hero:has(.mountain-stage[data-phase="revealed"]) .home-hero-copy h1 {
+  animation: mountain-wordmark-reveal 850ms cubic-bezier(.22,1,.36,1) both;
+}
+.home-hero-copy h1 { transition: opacity 380ms ease, transform 650ms ease; }
+@keyframes mountain-wordmark-reveal {
+  from { opacity: 0.6; transform: translateY(10px); filter: drop-shadow(0 0 0 transparent); }
+  to { opacity: 1; transform: translateY(0); filter: drop-shadow(0 0 15px #ff6b2c25); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mountain-stage .mountain-poster,
+  .home-hero-copy h1 { animation: none !important; transition: none !important; }
+}
