@@ -521,3 +521,95 @@ test("marketing services and Coming Soon respect reduced motion", async ({ page 
   );
   expect(animation).toBe("none");
 });
+
+
+test("Contact page routes visitors into dedicated college and franchise inquiries", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/contact");
+  const chooser = page.locator(".connection-pathways");
+  await expect(chooser.locator(".connection-path-card")).toHaveCount(4);
+  await chooser.getByRole("link", { name: /College partnership/ }).click();
+  await expect(page).toHaveURL(/\/partners\/colleges#partnership-inquiry$/);
+  await expect(page.locator("#partnership-inquiry")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "College Partnerships" })).toBeVisible();
+  await expect(page.locator(".partner-process-step")).toHaveCount(3);
+});
+
+test("college partnership form validates field errors, acknowledges draft and reviews locally", async ({ page }) => {
+  const posts: string[] = [];
+  page.on("request", (request) => {
+    if (request.method() === "POST") posts.push(request.url());
+  });
+  await page.goto("/partners/colleges");
+  const form = page.locator("#partnership-inquiry");
+  await form.getByRole("button", { name: /Review partnership inquiry/ }).click();
+  await expect(form.locator("#partner-name")).toHaveAttribute("aria-invalid", "true");
+  await expect(form.locator("#partner-acknowledged")).toHaveAttribute("aria-invalid", "true");
+  await form.locator("#partner-name").fill("Academic Coordinator");
+  await form.locator("#partner-email").fill("person@example.edu");
+  await form.locator("#partner-organization").fill("Example College");
+  await form.locator("#partner-role").fill("Program Coordinator");
+  await form.locator("#partner-location").fill("Prayagraj");
+  await form.locator("#partner-interest").selectOption("workshops");
+  await form.locator("#partner-message").fill("We would like to explore a supervised learning workshop for students.");
+  await form.getByRole("checkbox").check();
+  await form.getByRole("button", { name: /Review partnership inquiry/ }).click();
+  const review = page.getByRole("dialog", { name: "Review partnership inquiry" });
+  await expect(review).toBeVisible();
+  await expect(review).toContainText("Example College");
+  await expect(review).toContainText("No application has been sent");
+  await review.getByRole("button", { name: "Copy inquiry draft" }).click();
+  await expect(review.getByRole("status")).not.toBeEmpty();
+  await review.getByRole("button", { name: "Back to draft" }).click();
+  await expect(review).not.toBeVisible();
+  expect(posts).toEqual([]);
+});
+
+test("franchise form offers region-specific choices and avoids an implied business offer", async ({ page }) => {
+  await page.goto("/partners/franchise");
+  const form = page.locator("#partnership-inquiry");
+  await expect(page.getByRole("heading", { name: "Franchise Partnerships" })).toBeVisible();
+  await expect(form.getByRole("option", { name: "Explore a local learning centre" })).toHaveCount(1);
+  await expect(form.getByRole("option", { name: "Workshops and training sessions" })).toHaveCount(0);
+  await expect(form).toContainText("not a submitted application");
+  await expect(page.locator(".partner-faq")).toContainText("No investment return");
+  await form.locator("#partner-name").fill("Regional Partner");
+  await form.locator("#partner-email").fill("regional@example.com");
+  await form.locator("#partner-organization").fill("Sample Training Business");
+  await form.locator("#partner-role").fill("Owner");
+  await form.locator("#partner-location").fill("Lucknow");
+  await form.locator("#partner-interest").selectOption("market");
+  await form.locator("#partner-message").fill("We want to understand the possible partnership terms for our region.");
+  await form.getByRole("checkbox").check();
+  await form.getByRole("button", { name: /Review partnership inquiry/ }).click();
+  await expect(page.getByRole("dialog", { name: "Review partnership inquiry" })).toContainText("Discuss regional opportunities");
+});
+
+test("Contact review supports copyable local drafts and never makes a network submission", async ({ page }) => {
+  await page.goto("/contact?type=growth&subject=Digital%20growth#inquiry");
+  const form = page.locator(".inquiry-form");
+  await form.locator("#name").fill("Example Client");
+  await form.locator("#email").fill("client@example.com");
+  await form.locator("#message").fill("I would like information about your marketing strategy services.");
+  await form.getByRole("button", { name: /Review inquiry/ }).click();
+  const dialog = page.getByRole("dialog", { name: "Review your inquiry" });
+  await expect(dialog).toContainText("Digital growth");
+  await expect(dialog).toContainText("Nothing has been sent or saved");
+  await dialog.getByRole("button", { name: "Copy inquiry draft" }).click();
+  await expect(dialog.getByRole("status")).not.toBeEmpty();
+});
+
+test("partnership and contact motion respect reduced-motion preference", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.setViewportSize({ width: 375, height: 900 });
+  await page.goto("/partners/colleges");
+  await expect(page.locator(".partner-process-step")).toHaveCount(3);
+  await expect(page.locator("#partnership-inquiry")).toBeVisible();
+  const anim = await page.locator(".connection-reveal").first().evaluate((el) => getComputedStyle(el).animationName);
+  expect(anim).toBe("none");
+  await page.goto("/contact");
+  await expect(page.locator(".connection-pathways .connection-path-card")).toHaveCount(4);
+  await expect(page.locator(".connection-hero")).toBeVisible();
+  const heroMotion = await page.locator(".contact-hero-labels > div").first().evaluate((el) => getComputedStyle(el).animationName);
+  expect(heroMotion).toBe("none");
+});
