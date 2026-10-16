@@ -175,11 +175,12 @@ export function createMountainWebGL(
   onPhase: (phase: MountainPhase) => void,
   quality: "low" | "high",
 ): Controller {
-  const gl = canvas.getContext("webgl2", {
+  const context = canvas.getContext("webgl2", {
     alpha: true, antialias: false, powerPreference: quality === "low" ? "low-power" : "high-performance",
     premultipliedAlpha: false, depth: false, stencil: false,
   });
-  if (!gl) throw new Error("WebGL2 unavailable");
+  if (!context) throw new Error("WebGL2 unavailable");
+  const gl: WebGL2RenderingContext = context;
   const program = programFor(gl);
   const particles = makeMountainParticles(quality === "low" ? 76 : 152, quality === "low" ? 49 : 94);
   const mountain = bufferFor(gl, particles, gl.STATIC_DRAW);
