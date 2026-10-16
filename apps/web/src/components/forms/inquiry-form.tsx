@@ -191,6 +191,7 @@ export function InquiryForm() {
               This is a local preview. Nothing has been sent or saved.
             </Dialog.Description>
             {review && (
+              <>
               <dl>
                 <div>
                   <dt>Name</dt>
@@ -222,6 +223,7 @@ export function InquiryForm() {
                 </div>
               </dl>
               <CopyDraft text={formatInquiryDraft(review)} />
+              </>
             )}
             <Dialog.Close asChild>
               <Button variant="secondary" arrow={false}>
