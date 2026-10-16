@@ -81,3 +81,5 @@ API tests include disabled-by-default status, contact/partnership validation, ex
 ## Pending
 
 Real Neon database credentials, Resend credentials, an approved privacy policy and receiving team email must come from the organization. Database migrations have not been executed on any remote Neon instance by this implementation. No user data has been submitted by this build.
+
+The npm lockfile was regenerated and committed by the dedicated Part 11 GitHub Actions workflow after adding Prisma and Resend dependencies.
