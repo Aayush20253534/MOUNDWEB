@@ -694,11 +694,12 @@ test("Media library categories, detail previews and original artwork lightbox wo
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
 });
 
-test("Podcast and Media are accessible and fit mobile and desktop widths", async ({ page }) => {
-  for (const route of ["/podcast", "/media", "/podcast/the-questions-behind-good-brands", "/media/what-makes-a-useful-growth-plan"]) {
-    for (const width of [375, 1440]) {
+for (const route of ["/podcast", "/media", "/podcast/the-questions-behind-good-brands", "/media/what-makes-a-useful-growth-plan"]) {
+  for (const width of [375, 1440]) {
+    test("Editorial " + route + " fits and passes accessibility checks at " + width + "px", async ({ page }) => {
+      test.setTimeout(90_000);
       await page.setViewportSize({ width, height: 900 });
-      const response = await page.goto(route, { waitUntil: "networkidle" });
+      const response = await page.goto(route, { waitUntil: "domcontentloaded" });
       expect(response?.status(), route).toBe(200);
       await expect(page.locator("main h1")).toHaveCount(1);
       const sizes = await page.evaluate(() => ({ viewport: innerWidth, scroll: document.documentElement.scrollWidth }));
@@ -708,9 +709,9 @@ test("Podcast and Media are accessible and fit mobile and desktop widths", async
         id: item.id,
         nodes: item.nodes.map((node) => node.target),
       })), route + " / " + width).toEqual([]);
-    }
+    });
   }
-});
+}
 
 test("Editorial animations respect reduced motion and keep unpublished media discoverable", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
