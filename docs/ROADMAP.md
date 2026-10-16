@@ -15,7 +15,7 @@
 | 10   | Careers and training/placement records                                            | Careers explorer and training methodology/reporting UI implemented; verified postings and application backend pending                 |
 | 11   | Neon/Prisma, REST business APIs and Resend                                        | Schema, opt-in API, validation, resilient notifications and frontend integration implemented; credentials/migrations pending |
 | 12   | Admin dashboard                                                                   | Not started                                                                                       |
-| 13   | Final responsive and motion polish                                                | Static foundation verified at five widths; animated flows require later verification              |
+| 13   | Final responsive and motion polish                                                | Shared route motion, safe-area/mobile polish and 22-route ten-width audit implemented; CI verification pending              |
 | 14   | Security, final SEO, deployment and release                                       | Not started; do not infer production launch readiness from the frontend build                     |
 
 ## Content required before launch
@@ -26,4 +26,4 @@ The website never advertises Website Development as a client service. AI marketi
 
 ## Continuation
 
-Continue from the current verified `main` branch. Parts 00–09 have been implemented progressively; preserve all existing pages and brand assets. Next is Part 12 (admin dashboard and publishing management), then final responsive QA and launch-hardening. Part 11 needs real credentials, migration deployment and privacy approval before live operation. Do not present editorial drafts, missing placement figures or unreleased media as verified publications.
+Continue from the current `main` branch. Parts 00–11 and Part 13 have been implemented; Part 12 (Admin Dashboard) remains not started and Part 14 (security, SEO, deployment and release) remains not started. Keep Part 11 submissions disabled until the approved privacy policy, Neon migrations and verified Resend configuration have passed a staging smoke test. Part 13's 22-route responsive/accessibility suite must pass before the frontend polish can be called complete. Do not present editorial drafts, missing placement figures or unreleased media as verified publications.
