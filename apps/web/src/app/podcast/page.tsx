@@ -5,12 +5,21 @@ import { CTASection } from "@/components/sections/shared";
 import { Eyebrow, Section, ButtonLink } from "@/components/ui/primitives";
 import { EditorialCatalog } from "@/components/editorial/editorial-catalog";
 import { EditorialMotion } from "@/components/editorial/editorial-motion";
+import { getPublicEditorialLists } from "@/lib/editorial-remote";
 
-export const metadata: Metadata = {
-  title: "Podcast | Ideas & Conversations",
-  description: "Explore proposed conversations about digital growth, creative thinking and learning. MOUNDWEB has no published episodes yet.",
-  robots: { index: false, follow: true },
-};
+import { getPublicEditorialLists } from "@/lib/editorial-remote";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const content = await getPublicEditorialLists();
+  const hasPublished = content.podcast.length > 0;
+  return {
+    title: "Podcast | Ideas & Conversations",
+    description: hasPublished
+      ? "Published MOUNDWEB podcast episodes on digital growth, creative thinking and learning."
+      : "Explore proposed conversations about digital growth, creative thinking and learning. MOUNDWEB has no published episodes yet.",
+    robots: { index: hasPublished, follow: true },
+  };
+}
 export default function PodcastPage() {
   return (
     <>
