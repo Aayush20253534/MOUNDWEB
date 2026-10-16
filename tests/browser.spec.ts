@@ -531,7 +531,7 @@ test("Contact page routes visitors into dedicated college and franchise inquirie
   await chooser.getByRole("link", { name: /College partnership/ }).click();
   await expect(page).toHaveURL(/\/partners\/colleges#partnership-inquiry$/);
   await expect(page.locator("#partnership-inquiry")).toBeVisible();
-  await expect(page.getByRole("heading", { name: "College Partnerships" })).toBeVisible();
+  await expect(page.locator(".page-hero .eyebrow")).toHaveText("College Partnerships");
   await expect(page.locator(".partner-process-step")).toHaveCount(3);
 });
 
@@ -568,7 +568,7 @@ test("college partnership form validates field errors, acknowledges draft and re
 test("franchise form offers region-specific choices and avoids an implied business offer", async ({ page }) => {
   await page.goto("/partners/franchise");
   const form = page.locator("#partnership-inquiry");
-  await expect(page.getByRole("heading", { name: "Franchise Partnerships" })).toBeVisible();
+  await expect(page.locator(".page-hero .eyebrow")).toHaveText("Franchise Partnerships");
   await expect(form.getByRole("option", { name: "Explore a local learning centre" })).toHaveCount(1);
   await expect(form.getByRole("option", { name: "Workshops and training sessions" })).toHaveCount(0);
   await expect(form).toContainText("not a submitted application");
