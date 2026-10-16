@@ -16,7 +16,7 @@ describe("Part 06 course guidance", () => {
     }
   });
   it("keeps children’s course with parent/guardian guidance", () => {
-    const guide = courseGuides["ai-digital-ninja"];
+    const guide = courseGuides["ai-digital-ninja"]!;
     expect(guide.level).toBe("Young learners");
     expect(guide.prerequisites).toMatch(/guardian consent/);
     expect(courses.find((course) => course.slug === guide.slug)?.category).toBe("Digital Marketing");
