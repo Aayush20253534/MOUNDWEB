@@ -4,16 +4,17 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Images } from "lucide-react";
 import { getMedia, isPublishedMedia, mediaItems } from "@/lib/editorial";
+import { getPublishedMedia } from "@/lib/editorial-remote";
 import { EditorialMotion } from "@/components/editorial/editorial-motion";
 import { Breadcrumbs, Container, Eyebrow, Section, ButtonLink } from "@/components/ui/primitives";
 import { CTASection } from "@/components/sections/shared";
 
 type Props = { params: Promise<{ slug: string }> };
-export const dynamicParams = false;
+export const dynamicParams = true;
 export function generateStaticParams() { return mediaItems.map(({ slug }) => ({ slug })); }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const item = getMedia(slug);
+  const item = await getPublishedMedia(slug) ?? getMedia(slug);
   return {
     title: item ? item.title + " | Media" : "Media",
     description: item?.summary,
