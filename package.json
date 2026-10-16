@@ -16,7 +16,10 @@
     "lint": "npm run lint --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
     "verify": "npm run lint && npm run typecheck && npm run test && npm run build",
-    "test:browser": "playwright test"
+    "test:browser": "playwright test",
+    "db:generate": "npm run db:generate --workspace @moundweb/api",
+    "db:migrate": "npm run db:migrate --workspace @moundweb/api",
+    "postinstall": "npm run db:generate"
   },
   "engines": {
     "node": ">=22 <25"
