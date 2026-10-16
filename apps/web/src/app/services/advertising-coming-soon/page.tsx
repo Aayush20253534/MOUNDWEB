@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { ArrowRight, Clock3, Orbit, Sparkles } from "lucide-react";
+import { Clock3, Orbit, Sparkles } from "lucide-react";
 import { Breadcrumbs, ButtonLink, Container, Eyebrow, Section } from "@/components/ui/primitives";
 import { ServiceMotion } from "@/components/services/service-motion";
 
@@ -62,9 +62,9 @@ export default function AdvertisingComingSoon() {
           </article>
           <div>
             <Eyebrow>Explore our work</Eyebrow>
-            <h3>Today's focus. <em>Tomorrow's possibilities.</em></h3>
+            <h3>Today’s focus. <em>Tomorrow’s possibilities.</em></h3>
             <ButtonLink href="/services#service-explorer" variant="secondary">
-              Discover your next step <ArrowRight size={15} aria-hidden="true" />
+              Discover your next step
             </ButtonLink>
           </div>
         </div>

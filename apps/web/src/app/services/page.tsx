@@ -103,7 +103,7 @@ export default function ServicesPage() {
             <h2>Advertising services</h2>
             <p>A dedicated offering is taking shape. Explore the preview.</p>
             <ButtonLink href="/services/advertising-coming-soon" size="small" variant="secondary">
-              Explore what's coming
+              Explore what’s coming
             </ButtonLink>
           </div>
           <Badge>Coming soon</Badge>
