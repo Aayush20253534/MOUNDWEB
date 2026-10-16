@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import * as Dialog from "@radix-ui/react-dialog";
 import { X, CheckCircle2 } from "lucide-react";
 import { CopyDraft } from "./copy-draft";
+import { LiveSubmission } from "./live-submission";
 import { Button, Field } from "../ui/primitives";
 import {
   inquiryTypes,
@@ -20,6 +21,7 @@ export function InquiryForm() {
   const initialMessage = search.get("message")?.slice(0, 3000) ?? "";
   const [errors, setErrors] = useState<InquiryErrors>({});
   const [review, setReview] = useState<Inquiry | null>(null);
+  const [submitted, setSubmitted] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const submitRef = useRef<HTMLButtonElement>(null);
   const [attempted, setAttempted] = useState(false);
@@ -50,6 +52,7 @@ export function InquiryForm() {
       );
       return;
     }
+    setSubmitted(false);
     setReview(value);
   }
   return (
@@ -154,8 +157,9 @@ export function InquiryForm() {
           </Field>
         </div>
         <p className="form-preview-note" id="form-preview-note">
-          Preview only: you can review your inquiry, but it will not be sent or
-          saved. Message delivery is coming soon.
+          In preview mode, details will not be sent or saved. Review your inquiry
+          first. When live processing is approved and enabled, a separate consent
+          step will appear before you can submit.
         </p>
         <div aria-live="polite" className="form-validation-status">
           {attempted && Object.keys(errors).length > 0
@@ -188,7 +192,7 @@ export function InquiryForm() {
             <CheckCircle2 className="review-icon" size={32} />
             <Dialog.Title>Review your inquiry</Dialog.Title>
             <Dialog.Description>
-              This is a local preview. Nothing has been sent or saved.
+              {submitted ? "Your inquiry has been received, subject to further review." : "This is a local preview. Nothing has been sent or saved."}
             </Dialog.Description>
             {review && (
               <>
@@ -223,6 +227,7 @@ export function InquiryForm() {
                 </div>
               </dl>
               <CopyDraft text={formatInquiryDraft(review)} />
+              <LiveSubmission value={{ kind: "contact", data: review }} onSubmitted={() => setSubmitted(true)} />
               </>
             )}
             <Dialog.Close asChild>

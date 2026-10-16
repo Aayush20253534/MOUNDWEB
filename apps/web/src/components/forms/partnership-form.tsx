@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { CheckCircle2, X } from "lucide-react";
 import { CopyDraft } from "./copy-draft";
+import { LiveSubmission } from "./live-submission";
 import { Field } from "@/components/ui/primitives";
 import {
   formatPartnershipDraft, partnershipOptions, validatePartnershipDraft,
@@ -15,6 +16,7 @@ const fields = ["name", "email", "phone", "organization", "role", "location", "i
 export function PartnershipForm({ kind }: { kind: PartnershipKind }) {
   const [errors, setErrors] = useState<PartnershipErrors>({});
   const [review, setReview] = useState<PartnershipDraft | null>(null);
+  const [submitted, setSubmitted] = useState(false);
   const [attempted, setAttempted] = useState(false);
   const [messageLength, setMessageLength] = useState(0);
   const formRef = useRef<HTMLFormElement>(null);
@@ -42,6 +44,7 @@ export function PartnershipForm({ kind }: { kind: PartnershipKind }) {
       requestAnimationFrame(() => formRef.current?.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus());
       return;
     }
+    setSubmitted(false);
     setReview(draft);
   }
 
@@ -105,7 +108,8 @@ export function PartnershipForm({ kind }: { kind: PartnershipKind }) {
           {errors.acknowledged && <p id="partner-acknowledged-error" className="field-error">{errors.acknowledged}</p>}
         </div>
         <p id="partner-preview-disclosure" className="form-preview-note">
-          Preview only. Your details will not be uploaded, emailed, saved, or shared with MOUNDWEB.
+          In preview mode, your details will not be uploaded, emailed, or saved.
+          If secure submission is enabled after privacy approval, explicit consent will be required in the review dialog.
           Partnership terms and availability remain unconfirmed.
         </p>
         <p aria-live="polite" className="form-validation-status">
@@ -124,7 +128,7 @@ export function PartnershipForm({ kind }: { kind: PartnershipKind }) {
           >
             <CheckCircle2 className="review-icon" size={31} aria-hidden="true" />
             <Dialog.Title>Review partnership inquiry</Dialog.Title>
-            <Dialog.Description>This is a local draft. No application has been sent, recorded or approved.</Dialog.Description>
+            <Dialog.Description>{submitted ? "Your inquiry was received. No partnership has been approved." : "This is a local draft. No application has been sent, recorded or approved."}</Dialog.Description>
             {review && (
               <>
                 <dl>
@@ -139,6 +143,7 @@ export function PartnershipForm({ kind }: { kind: PartnershipKind }) {
                   <div><dt>Message</dt><dd>{review.message}</dd></div>
                 </dl>
                 <CopyDraft text={formatPartnershipDraft(review)} />
+                <LiveSubmission value={{ kind: "partnership", data: review }} onSubmitted={() => setSubmitted(true)} />
               </>
             )}
             <Dialog.Close asChild>
