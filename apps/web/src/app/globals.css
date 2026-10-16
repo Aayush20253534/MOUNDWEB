@@ -5008,3 +5008,54 @@
   .training-hero-disc,.training-hero-ring,.training-hero-symbol { animation: none !important; transition: none !important; }
   .career-domain-card:hover,.training-track-grid > a:hover { transform: none !important; }
 }
+
+
+/* Part 11: server-confirmed submission is an explicit, optional privacy-consent step. */
+.live-submission {
+  border-top: 1px solid var(--accent-border);
+  padding-top: 20px;
+  margin-top: 19px;
+  display: grid;
+  gap: 14px;
+}
+.live-submission-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  color: #e4d3c5;
+  font-size: 12px;
+  line-height: 1.65;
+}
+.live-submission-consent input {
+  flex: none;
+  accent-color: var(--accent);
+  width: 17px;
+  height: 17px;
+  margin-top: 3px;
+}
+.live-submission-consent a {
+  color: var(--accent-soft);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.live-submission .button {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.live-submission .button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+.live-submission-success {
+  border: 1px solid #688c56;
+  background: #112414;
+  border-radius: 8px;
+  color: #c9f4cf;
+  padding: 15px;
+  font-size: 12px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+.live-submission .field-error { margin: 0; }
