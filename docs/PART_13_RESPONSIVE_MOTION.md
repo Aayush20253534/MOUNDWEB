@@ -32,3 +32,10 @@ Existing tests from Parts 03–11 continue to exercise page-specific GPU scenes,
 Run \`npm ci && npm run verify && npm run test:browser\`. A successful static build alone is not the acceptance criterion; the full browser suite and responsive matrix must complete.
 
 Part 12 (Admin Dashboard) remains a separate, not-yet-implemented part. Part 14 must still address the dependency audit, deployment security, database readiness/migrations, verified privacy and business records, production environment variables, headers, SEO and launch rehearsal. Part 11's real Neon migration and Resend smoke tests still require the organization's own credentials. Do not enable live collection just to make the user interface look complete.
+
+
+## Verified CI result
+
+The full GitHub Actions workflow passed on implementation commit \`ea640e15d8415392c30fcafc45637643e25e84ff\`: npm installation, Prisma Client generation, lint, TypeScript, unit tests, production build and **94/94 browser tests**. The route-wide suite reported no horizontal overflow across the tested viewport matrix and passed its WCAG 2.0/2.1 AA automated checks. Final design-system heading and 1280px header overflow fixes are included in this verified commit.
+
+Security note: the dependency audit still reports 14 vulnerabilities, including 2 critical. Part 14 must review and remediate them; passing UI tests is not a production security signoff.

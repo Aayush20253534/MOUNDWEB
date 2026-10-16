@@ -15,7 +15,7 @@
 | 10   | Careers and training/placement records                                            | Careers explorer and training methodology/reporting UI implemented; verified postings and application backend pending                 |
 | 11   | Neon/Prisma, REST business APIs and Resend                                        | Schema, opt-in API, validation, resilient notifications and frontend integration implemented; credentials/migrations pending |
 | 12   | Admin dashboard                                                                   | Not started                                                                                       |
-| 13   | Final responsive and motion polish                                                | Shared route motion, safe-area/mobile polish and 22-route ten-width audit implemented; CI verification pending              |
+| 13   | Final responsive and motion polish                                                | Shared route transitions, safe-area and touch polish; 22-route ten-width matrix and all 94 browser tests passed in CI (`ea640e1`)              |
 | 14   | Security, final SEO, deployment and release                                       | Not started; do not infer production launch readiness from the frontend build                     |
 
 ## Content required before launch
