@@ -5171,7 +5171,7 @@ main :where(h1, h2, h3, h4) {
   border-radius: 4px;
 }
 #main-content[data-route-transition="entering"] {
-  contain: paint;
+  will-change: opacity, transform;
 }
 @media (max-width: 1100px) {
   .site-header .header-inner {
