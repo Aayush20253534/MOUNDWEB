@@ -9,7 +9,7 @@
 | 04   | Genuine revolving Earth, orbital behavior and homepage motion                     | Implemented; WebGL2 globe, six 3D-projected orbits, scroll motion; see `PART_04_GLOBE.md`                                                      |
 | 05   | About content approval and page-specific motion                                   | Page-specific motion and illustrated approach timeline implemented; factual content approval pending                                       |
 | 06   | Programs content, admissions details and enrollment behavior                      | Filterable paths, 11 draft guides and course inquiry prefill complete; real backend/approval pending                          |
-| 07   | Digital marketing services and advertising                                        | Six service layouts and Coming Soon banner complete; business content approval pending            |
+| 07   | Digital marketing services and advertising                                        | Six detail pages, goal explorer, and standalone Advertising Coming Soon implemented; business content approval pending            |
 | 08   | Contact and college/franchise partnerships                                        | Layouts and local inquiry review complete; message delivery and confirmed contact details pending |
 | 09   | Podcast and media publishing                                                      | Reusable editorial templates complete; verified content/player/CMS pending                        |
 | 10   | Careers and training/placement records                                            | Honest empty-state templates complete; verified records/application flows pending                 |
