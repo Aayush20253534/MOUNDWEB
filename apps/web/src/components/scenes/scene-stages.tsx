@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { sceneAssets } from "./scene-contracts";
 import { MountainRuntime } from "./mountain-runtime";
+import { GlobeRuntime } from "./globe-runtime";
 
 /** Supply a canvas as children in Part 03; semantic hero copy stays outside the scene. */
 export function ParticleMountainStage({ children }: { children?: ReactNode }) {
@@ -61,6 +62,7 @@ export function OrbitGlobeStage({
     <div
       className={cn("globe-stage", compact && "globe-stage--compact")}
       data-scene="orbit-globe"
+      data-phase="poster"
     >
       <div className="globe-aura" />
       <Image
@@ -124,6 +126,7 @@ export function OrbitGlobeStage({
           ))}
         </div>
       )}
+      {!compact && <GlobeRuntime />}
       {children}
     </div>
   );
