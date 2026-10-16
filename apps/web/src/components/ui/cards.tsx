@@ -43,6 +43,16 @@ export function ServiceCard({
             ))}
           </ul>
         )}
+        {!compact && (
+          <Link
+            className="service-card-explore"
+            href={`/services/${service.slug}`}
+            aria-label={`Explore ${service.title} service details`}
+          >
+            Explore service details
+            <ArrowRight size={15} aria-hidden="true" />
+          </Link>
+        )}
         <Link
           className="text-link"
           href={
