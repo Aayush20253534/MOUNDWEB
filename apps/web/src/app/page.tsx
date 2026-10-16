@@ -15,6 +15,7 @@ import {
   Badge,
 } from "@/components/ui/primitives";
 import { ServiceCard } from "@/components/ui/cards";
+import { HomeMotion } from "@/components/scenes/home-motion";
 import {
   CapabilityStrip,
   CheckList,
@@ -118,8 +119,9 @@ export default function HomePage() {
           </div>
         </Container>
       </section>
+      <HomeMotion />
       <CapabilityStrip />
-      <Section id="services">
+      <Section id="services" className="home-motion">
         <SectionHeading
           eyebrow="Our services"
           title={
@@ -141,7 +143,7 @@ export default function HomePage() {
           ))}
         </div>
       </Section>
-      <Section className="approach-section">
+      <Section className="approach-section home-motion">
         <div className="split-layout approach-layout">
           <OrbitGlobeStage />
           <div>
@@ -172,8 +174,10 @@ export default function HomePage() {
           </div>
         </div>
       </Section>
-      <MeasurementPanel />
-      <Section className="home-learning">
+      <div className="home-motion">
+        <MeasurementPanel />
+      </div>
+      <Section className="home-learning home-motion">
         <div className="split-layout">
           <div>
             <Eyebrow>Grow beyond your brand</Eyebrow>
@@ -208,7 +212,7 @@ export default function HomePage() {
           </div>
         </div>
       </Section>
-      <Section className="stories-section">
+      <Section className="stories-section home-motion">
         <div className="split-layout">
           <div>
             <Eyebrow>Built on relationships</Eyebrow>
