@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
-import { courses, programFaqs } from "@/lib/content";
+import { programFaqs } from "@/lib/content";
+import { ProgramCatalog } from "@/components/programs/program-catalog";
+import { ProgramMotion } from "@/components/programs/program-motion";
 import { PageHero } from "@/components/sections/page-hero";
 import {
   Section,
   SectionHeading,
   Eyebrow,
   IconTile,
-  Badge,
   FeaturePanel,
 } from "@/components/ui/primitives";
-import { CourseCard } from "@/components/ui/cards";
 import { Icon } from "@/components/ui/icon";
 import { Accordion } from "@/components/ui/accordion";
 import { CTASection } from "@/components/sections/shared";
@@ -24,6 +24,7 @@ export const metadata: Metadata = {
 export default function ProgramsPage() {
   return (
     <>
+      <ProgramMotion />
       <PageHero
         eyebrow="Our programs"
         title={
@@ -63,7 +64,7 @@ export default function ProgramsPage() {
           ))}
         </div>
       </PageHero>
-      <Section className="program-paths">
+      <Section className="program-paths program-reveal">
         <SectionHeading
           eyebrow="Explore our programs"
           title={
@@ -81,7 +82,7 @@ export default function ProgramsPage() {
               icon: "chart" as const,
               title: "Digital Marketing",
               body: "Strategy, content, campaigns, and the growing role of AI in marketing.",
-              tag: "6 programs · AI included",
+              tag: "6 programs · AI courses within Digital Marketing",
             },
             {
               id: "web-development",
@@ -103,54 +104,24 @@ export default function ProgramsPage() {
           ))}
         </div>
       </Section>
-      <Section className="program-catalog">
-        <div className="program-group" id="digital-marketing">
-          <div className="program-group-header">
-            <IconTile name="chart" />
-            <div>
-              <Eyebrow>Find your momentum</Eyebrow>
-              <h2>Digital Marketing programs</h2>
-              <p>
-                Build a foundation, explore AI, and develop a broader marketing
-                practice.
-              </p>
-            </div>
-            <Badge>AI-integrated learning</Badge>
-          </div>
-          <div className="card-grid course-grid">
-            {courses
-              .filter((c) => c.category === "Digital Marketing")
-              .map((course) => (
-                <CourseCard course={course} key={course.slug} />
-              ))}
-          </div>
+      <Section className="program-catalog program-reveal">
+        <div className="program-catalog-intro">
+          <Eyebrow>Choose your next step</Eyebrow>
+          <h2>Explore the <em>learning paths.</em></h2>
+          <p className="body-copy">
+            Search by skill, select an experience level, or focus on one of our two program categories.
+            All AI marketing tracks remain under Digital Marketing.
+          </p>
         </div>
-        <div className="program-group" id="web-development">
-          <div className="program-group-header">
-            <IconTile name="code" />
-            <div>
-              <Eyebrow>Build what comes next</Eyebrow>
-              <h2>Web Development programs</h2>
-              <p>Explore the craft behind modern websites and applications.</p>
-            </div>
-            <Badge>Course offerings</Badge>
-          </div>
-          <div className="card-grid course-grid">
-            {courses
-              .filter((c) => c.category === "Web Development")
-              .map((course) => (
-                <CourseCard course={course} key={course.slug} />
-              ))}
-          </div>
-        </div>
+        <ProgramCatalog />
         <p className="catalog-note">
-          <strong>Program information:</strong> Course focus areas are proposed
-          outlines. Web Development durations, all fees, final curricula,
-          delivery formats, and outcomes are to be confirmed before enrollment.
-          No employment outcome is guaranteed.
+          <strong>Before enrollment:</strong> All curriculum modules, prerequisites,
+          project examples, outcomes, Web Development durations, fees, schedules and delivery
+          arrangements are draft guidance requiring approval. These are information previews,
+          not confirmed admission offers or employment guarantees.
         </p>
       </Section>
-      <Section>
+      <Section className="program-reveal">
         <div className="split-layout">
           <div>
             <Eyebrow>Why learn with MOUNDWEB</Eyebrow>
@@ -196,7 +167,7 @@ export default function ProgramsPage() {
         primaryLabel="Ask about a program"
         href="/contact?type=course#inquiry"
       />
-      <Section>
+      <Section className="program-reveal">
         <div className="split-layout faq-layout">
           <div>
             <Eyebrow>Frequently asked questions</Eyebrow>
