@@ -31,6 +31,7 @@ const VERTEX = [
   "out float vBrightness;",
   "out float vOpacity;",
   "void main(){",
+  "  if(aSize <= 0.001){ gl_Position = vec4(2.0,2.0,2.0,1.0); gl_PointSize = 0.0; vOpacity = 0.0; vBrightness = 0.0; return; }",
   "  float jitter = smoothstep(0.0, 1.0, uFormation * 1.09 - aRandom * 0.13);",
   "  vec3 p = mix(aOrigin, aTarget, jitter);",
   "  float burstTime = uTime - 3.21;",
@@ -99,7 +100,7 @@ function bufferFor(gl: WebGL2RenderingContext, data: Float32Array, usage: number
   gl.bindVertexArray(vao);
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
   gl.bufferData(gl.ARRAY_BUFFER, data, usage);
-  for (const [location, length, offset] of [[0, 3, 0], [1, 3, 3], [2, 1, 6], [3, 1, 7]]) {
+  for (const [location, length, offset] of [[0, 3, 0], [1, 3, 3], [2, 1, 6], [3, 1, 7]] as const) {
     gl.enableVertexAttribArray(location);
     gl.vertexAttribPointer(location, length, gl.FLOAT, false, STRIDE * 4, offset * 4);
   }
