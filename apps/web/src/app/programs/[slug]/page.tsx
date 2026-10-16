@@ -113,7 +113,7 @@ export default async function CoursePage({ params }: Props) {
               <ArrowLeft size={17} aria-hidden="true" /> Back to {course.category}
             </Link>
           </div>
-          <aside className="course-details">
+          <aside className="course-details course-admissions">
             <Eyebrow>Program overview</Eyebrow>
             <h2>Your next chapter</h2>
             <dl>
