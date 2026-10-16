@@ -24,11 +24,14 @@ export default function DesignSystemPage() {
   return (
     <>
       <Section>
-        <SectionHeading
-          eyebrow="MOUNDWEB · Internal reference"
-          title="The design system."
-          description="Components, tokens, and interaction states used throughout the site. Examples on this page are design samples."
-        />
+        <div className="design-system-page-heading">
+          <p className="eyebrow">MOUNDWEB · Internal reference</p>
+          <h1>The design system.</h1>
+          <p className="body-copy">
+            Components, tokens, and interaction states used throughout the site.
+            Examples on this page are design samples.
+          </p>
+        </div>
         <Brand />
         <div className="design-swatches mt-10">
           {[

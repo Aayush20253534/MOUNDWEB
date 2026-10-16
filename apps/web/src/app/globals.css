@@ -2592,7 +2592,7 @@
     min-height: 620px;
   }
 }
-@media (max-width: 1230px) {
+@media (max-width: 1320px) {
   .container {
     width: calc(100% - 64px);
   }
@@ -5339,4 +5339,18 @@ main :where(h1, h2, h3, h4) {
   .mobile-nav-panel {
     scroll-behavior: auto !important;
   }
+}
+
+
+/* Internal design reference follows the same single-H1 document structure. */
+.design-system-page-heading {
+  max-width: 860px;
+  margin-bottom: 34px;
+}
+.design-system-page-heading h1 {
+  font-size: clamp(34px, 4.75vw, 68px);
+  letter-spacing: -0.045em;
+}
+.design-system-page-heading .body-copy {
+  margin-top: 16px;
 }
