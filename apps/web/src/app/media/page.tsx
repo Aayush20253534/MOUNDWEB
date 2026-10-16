@@ -6,12 +6,21 @@ import { Section, Eyebrow, ButtonLink } from "@/components/ui/primitives";
 import { EditorialCatalog } from "@/components/editorial/editorial-catalog";
 import { EditorialMotion } from "@/components/editorial/editorial-motion";
 import { MediaGallery } from "@/components/editorial/media-gallery";
+import { getPublicEditorialLists } from "@/lib/editorial-remote";
 
-export const metadata: Metadata = {
-  title: "Media | Editorial & Visual Archive",
-  description: "Explore MOUNDWEB editorial concepts and original visual studies. No press coverage or news updates are represented as published yet.",
-  robots: { index: false, follow: true },
-};
+import { getPublicEditorialLists } from "@/lib/editorial-remote";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const content = await getPublicEditorialLists();
+  const hasPublished = content.media.length > 0;
+  return {
+    title: "Media | Editorial & Visual Archive",
+    description: hasPublished
+      ? "Published MOUNDWEB perspectives, original features, and editorial updates."
+      : "Explore MOUNDWEB editorial concepts and original visual studies. No press coverage or news updates are represented as published yet.",
+    robots: { index: hasPublished, follow: true },
+  };
+}
 export default function MediaPage() {
   return (
     <>
