@@ -15,12 +15,13 @@ import {
 export function InquiryForm() {
   const search = useSearchParams();
   const initialType = search.get("type") ?? "";
+  const initialMessage = search.get("message")?.slice(0, 3000) ?? "";
   const [errors, setErrors] = useState<InquiryErrors>({});
   const [review, setReview] = useState<Inquiry | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const submitRef = useRef<HTMLButtonElement>(null);
   const [attempted, setAttempted] = useState(false);
-  const [messageLength, setMessageLength] = useState(0);
+  const [messageLength, setMessageLength] = useState(initialMessage.length);
   const controlProps = (name: keyof Inquiry) => ({
     id: name,
     name,
@@ -142,6 +143,7 @@ export function InquiryForm() {
               minLength={10}
               maxLength={3000}
               rows={5}
+              defaultValue={initialMessage}
               onChange={(e) => setMessageLength(e.target.value.length)}
             />
             <span className="character-count">
