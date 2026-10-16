@@ -297,6 +297,7 @@ test("reduced motion keeps all content visible and removes animation", async ({
 
 
 test("GPU mountain completes its one-shot reveal where WebGL2 is supported", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/");
   const supported = await page.evaluate(() => {
