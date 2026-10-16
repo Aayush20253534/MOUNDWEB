@@ -294,3 +294,22 @@ test("reduced motion keeps all content visible and removes animation", async ({
     await page.evaluate(() => document.querySelectorAll("canvas,video").length),
   ).toBe(0);
 });
+
+
+test("GPU mountain completes its one-shot reveal where WebGL2 is supported", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  const supported = await page.evaluate(() => {
+    const probe = document.createElement("canvas");
+    return Boolean(probe.getContext("webgl2"));
+  });
+  const stage = page.locator('[data-scene="particle-mountain"]');
+  if (!supported) {
+    await expect(stage).toHaveAttribute("data-phase", "poster");
+    await expect(page.locator(".mountain-webgl-canvas")).toHaveCount(0);
+    return;
+  }
+  await expect(page.locator(".mountain-webgl-canvas")).toHaveCount(1, { timeout: 10000 });
+  await expect(stage).toHaveAttribute("data-phase", "revealed", { timeout: 13000 });
+  await expect(page.locator("#home-title")).toBeVisible();
+});
