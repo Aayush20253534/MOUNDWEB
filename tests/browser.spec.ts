@@ -641,3 +641,84 @@ test("college and franchise pages have no horizontal overflow or critical a11y f
     }
   }
 });
+
+
+test("Podcast discovery filters draft episodes and never claims a released recording", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/podcast");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("The minds behind");
+  await expect(page.locator(".editorial-empty-live")).toContainText("No published episodes yet");
+  await expect(page.locator(".editorial-card")).toHaveCount(3);
+  await expect(page.locator(".editorial-status")).toHaveCount(3);
+  await page.getByRole("button", { name: "Creative Thinking", exact: true }).click();
+  await expect(page.locator(".editorial-card")).toHaveCount(1);
+  await expect(page.locator(".editorial-card")).toContainText("Creativity With AI");
+  await expect(page.getByRole("button", { name: "Creative Thinking", exact: true })).toHaveAttribute("aria-pressed", "true");
+  await page.getByRole("searchbox", { name: "Search podcast concepts" }).fill("unmatched query");
+  await expect(page.locator(".editorial-filter-empty")).toBeVisible();
+  await page.getByRole("button", { name: "Reset filters" }).click();
+  await expect(page.locator(".editorial-card")).toHaveCount(3);
+  await page.getByRole("link", { name: /Explore draft: The Questions Behind Good Brands/ }).click();
+  await expect(page).toHaveURL(/\/podcast\/the-questions-behind-good-brands$/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("The Questions Behind Good Brands");
+  await expect(page.locator(".editorial-audio audio")).toHaveCount(0);
+  await expect(page.locator(".editorial-audio-unavailable")).toContainText("not a recording");
+  await expect(page.locator(".editorial-transcript")).toContainText("No transcript or episode audio is published yet");
+  const robots = await page.locator('meta[name="robots"]').getAttribute("content");
+  expect(robots).toMatch(/noindex/);
+});
+
+test("Media library categories, detail previews and original artwork lightbox work", async ({ page }) => {
+  await page.goto("/media");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Ideas worth");
+  await expect(page.locator(".editorial-empty-live")).toContainText("No published media releases yet");
+  await expect(page.locator(".editorial-card")).toHaveCount(4);
+  await page.getByRole("button", { name: "Learning", exact: true }).click();
+  await expect(page.locator(".editorial-card")).toHaveCount(1);
+  await expect(page.locator(".editorial-card")).toContainText("Learning Through Small Projects");
+  await page.getByRole("button", { name: "All formats" }).click();
+  await expect(page.locator(".editorial-card")).toHaveCount(4);
+  const tile = page.getByRole("button", { name: /View concept artwork: Inside an Ideas Workshop/ });
+  await tile.click();
+  const dialog = page.getByRole("dialog", { name: "Inside an Ideas Workshop — Concept artwork" });
+  await expect(dialog).toBeVisible();
+  await expect(dialog).toContainText("not a photograph");
+  await page.keyboard.press("Escape");
+  await expect(dialog).not.toBeVisible();
+  await expect(tile).toBeFocused();
+  await page.getByRole("link", { name: /Explore draft: What Makes a Useful Growth Plan/ }).click();
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("What Makes a Useful Growth Plan?");
+  await expect(page.locator(".editorial-draft-disclosure")).toContainText("not published journalism");
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+});
+
+test("Podcast and Media are accessible and fit mobile and desktop widths", async ({ page }) => {
+  for (const route of ["/podcast", "/media", "/podcast/the-questions-behind-good-brands", "/media/what-makes-a-useful-growth-plan"]) {
+    for (const width of [375, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      const response = await page.goto(route, { waitUntil: "networkidle" });
+      expect(response?.status(), route).toBe(200);
+      await expect(page.locator("main h1")).toHaveCount(1);
+      const sizes = await page.evaluate(() => ({ viewport: innerWidth, scroll: document.documentElement.scrollWidth }));
+      expect(sizes.scroll, route + " / " + width).toBeLessThanOrEqual(sizes.viewport);
+      const axe = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa"]).analyze();
+      expect(axe.violations.map((item) => ({
+        id: item.id,
+        nodes: item.nodes.map((node) => node.target),
+      })), route + " / " + width).toEqual([]);
+    }
+  }
+});
+
+test("Editorial animations respect reduced motion and keep unpublished media discoverable", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.setViewportSize({ width: 375, height: 900 });
+  await page.goto("/podcast");
+  const animation = await page.locator(".podcast-artwork-circle").first().evaluate((el) => getComputedStyle(el).animationName);
+  expect(animation).toBe("none");
+  await expect(page.locator(".editorial-card")).toHaveCount(3);
+  await page.goto("/media");
+  const motion = await page.locator(".media-hero-collage > div").first().evaluate((el) => getComputedStyle(el).animationName);
+  expect(motion).toBe("none");
+  await expect(page.locator(".editorial-gallery-tile")).toHaveCount(4);
+});
