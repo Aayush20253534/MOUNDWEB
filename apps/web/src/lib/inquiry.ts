@@ -40,3 +40,21 @@ export function validateInquiry(value: Inquiry): InquiryErrors {
     errors.message = "Enter a message between 10 and 3,000 characters.";
   return errors;
 }
+
+
+/** Copyable local draft text. This function performs no submission or storage. */
+export function formatInquiryDraft(value: Inquiry): string {
+  const label = inquiryTypes.find((item) => item.value === value.type)?.label ?? "General inquiry";
+  return [
+    "MOUNDWEB — Inquiry Draft",
+    "Status: Local preview only. Not sent or saved.",
+    "Full name: " + value.name,
+    "Email: " + value.email,
+    "Phone: " + (value.phone || "Not provided"),
+    "Inquiry type: " + label,
+    "Subject: " + value.subject,
+    "",
+    "Message:",
+    value.message,
+  ].join("\n");
+}

@@ -4,10 +4,12 @@ import { useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import * as Dialog from "@radix-ui/react-dialog";
 import { X, CheckCircle2 } from "lucide-react";
+import { CopyDraft } from "./copy-draft";
 import { Button, Field } from "../ui/primitives";
 import {
   inquiryTypes,
   validateInquiry,
+  formatInquiryDraft,
   type Inquiry,
   type InquiryErrors,
 } from "@/lib/inquiry";
@@ -219,6 +221,7 @@ export function InquiryForm() {
                   <dd>{review.message}</dd>
                 </div>
               </dl>
+              <CopyDraft text={formatInquiryDraft(review)} />
             )}
             <Dialog.Close asChild>
               <Button variant="secondary" arrow={false}>

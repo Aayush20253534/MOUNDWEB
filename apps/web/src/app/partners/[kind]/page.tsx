@@ -10,6 +10,11 @@ import {
   Badge,
 } from "@/components/ui/primitives";
 import { CTASection } from "@/components/sections/shared";
+import { ConnectionMotion } from "@/components/scenes/connection-motion";
+import { PartnershipForm } from "@/components/forms/partnership-form";
+import { PartnershipProcess } from "@/components/partners/partnership-process";
+import { Accordion } from "@/components/ui/accordion";
+import { Eyebrow } from "@/components/ui/primitives";
 
 const partners = {
   colleges: {
@@ -83,6 +88,7 @@ export default async function PartnershipPage({ params }: Props) {
   if (!item) notFound();
   return (
     <>
+      <ConnectionMotion />
       <PageHero
         eyebrow={item.title}
         title={
@@ -93,12 +99,13 @@ export default async function PartnershipPage({ params }: Props) {
           </>
         }
         description={item.description}
+        className="connection-hero"
       >
-        <ButtonLink href={`/contact?type=${item.type}#inquiry`}>
+        <ButtonLink href="#partnership-inquiry">
           Explore a partnership
         </ButtonLink>
       </PageHero>
-      <Section>
+      <Section className="connection-reveal">
         <div className="split-layout">
           <div>
             <Image
@@ -145,7 +152,48 @@ export default async function PartnershipPage({ params }: Props) {
           </div>
         </div>
       </Section>
-      <Section>
+      <PartnershipProcess kind={kind as Kind} />
+      <Section className="partner-inquiry-section connection-reveal">
+        <div className="partner-inquiry-layout">
+          <div className="partner-inquiry-guidance">
+            <Eyebrow>Explore a partnership</Eyebrow>
+            <h2>Start with a <em>clear idea.</em></h2>
+            <p>
+              {kind === "colleges"
+                ? "Tell us about your institution and the kind of learning collaboration you would like to explore."
+                : "Share the region and business direction you would like to discuss. No franchise rights or returns are promised."}
+            </p>
+            <div className="partner-guidance-points">
+              <span>01 / Prepare your details</span>
+              <span>02 / Check a local preview</span>
+              <span>03 / Copy your inquiry draft</span>
+            </div>
+            <p className="micro-note">
+              Inquiries cannot be sent from this website yet. Message delivery and review will be implemented with the backend in Part 11.
+            </p>
+          </div>
+          <PartnershipForm kind={kind as Kind} />
+        </div>
+      </Section>
+      <Section className="partner-faq connection-reveal">
+        <div className="split-layout faq-layout">
+          <div>
+            <Eyebrow>Before we collaborate</Eyebrow>
+            <h2>Questions worth <em>asking.</em></h2>
+            <p className="body-copy">Proposal details must be confirmed independently before any commitment.</p>
+          </div>
+          <Accordion items={kind === "colleges" ? [
+            { question: "Is a college partnership confirmed by this form?", answer: "No. The form only prepares a draft. Availability, institutional permissions, scope and terms require independent agreement." },
+            { question: "Are workshops and training programs already scheduled?", answer: "No schedule is guaranteed here. Timing, format, learner suitability, safeguarding and curriculum would be agreed with the institution." },
+            { question: "How should we discuss student data?", answer: "Do not include student records or confidential information in the draft. Any future data processing requires an approved privacy and consent process." },
+          ] : [
+            { question: "Does sending an inquiry grant franchise rights?", answer: "No. The form is a draft-only preview. There is no franchise offer, exclusivity, signed agreement or reservation." },
+            { question: "Are returns or franchise fees confirmed?", answer: "No. No investment return, exclusivity, fee, location or commercial commitment is promised on this page." },
+            { question: "What happens before any potential agreement?", answer: "Eligibility review, due diligence, legal and financial advice, confirmed terms and separate written agreements would be required." },
+          ]} />
+        </div>
+      </Section>
+      <Section className="connection-reveal">
         <Badge>Proposal stage · details to be confirmed</Badge>
         <p className="body-copy">
           Partnership availability, locations, eligibility, commercial terms,
@@ -162,7 +210,7 @@ export default async function PartnershipPage({ params }: Props) {
             <em>Built together.</em>
           </>
         }
-        href={`/contact?type=${item.type}#inquiry`}
+        href="#partnership-inquiry"
       />
     </>
   );

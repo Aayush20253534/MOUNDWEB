@@ -21,6 +21,9 @@ import { OrbitGlobeStage } from "@/components/scenes/scene-stages";
 import { InquiryForm } from "@/components/forms/inquiry-form";
 import { contactFaqs, type IconName } from "@/lib/content";
 import { Icon } from "@/components/ui/icon";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { ConnectionMotion } from "@/components/scenes/connection-motion";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -30,6 +33,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
+      <ConnectionMotion />
       <PageHero
         eyebrow="Contact us"
         title={
@@ -40,7 +44,7 @@ export default function ContactPage() {
           </>
         }
         description="For brands, students, colleges, and partners. Let’s connect around growth, training, collaboration, and new possibilities."
-        className="contact-hero"
+        className="contact-hero connection-hero"
         artwork={
           <div className="contact-hero-labels">
             {[
@@ -60,7 +64,7 @@ export default function ContactPage() {
         <ButtonLink href="#inquiry">Prepare an inquiry</ButtonLink>
       </PageHero>
       <CapabilityStrip />
-      <Section>
+      <Section className="connection-reveal">
         <SectionHeading
           eyebrow="Get in touch"
           title={
@@ -108,7 +112,29 @@ export default function ContactPage() {
           ))}
         </div>
       </Section>
-      <Section id="inquiry" className="inquiry-section">
+      <Section className="connection-pathways connection-reveal">
+        <SectionHeading
+          eyebrow="Choose a conversation"
+          title={<>What brings you <em>here?</em></>}
+          description="Start with the right context. College and franchise opportunities have dedicated inquiry preparation."
+        />
+        <div className="connection-path-grid">
+          {[
+            { icon: "chart" as const, title: "Brand growth", description: "SEO, social media, performance and creative strategy.", href: "/contact?type=growth&subject=Brand%20growth%20consultation#inquiry", label: "Prepare marketing inquiry" },
+            { icon: "cap" as const, title: "Learning guidance", description: "Explore programs, suitability and course information.", href: "/contact?type=course&subject=Program%20guidance#inquiry", label: "Prepare program inquiry" },
+            { icon: "building" as const, title: "College partnership", description: "Structured discussion for institutions and colleges.", href: "/partners/colleges#partnership-inquiry", label: "Explore college inquiry" },
+            { icon: "handshake" as const, title: "Franchise partnership", description: "Explore a proposed learning or business partnership.", href: "/partners/franchise#partnership-inquiry", label: "Explore franchise inquiry" },
+          ].map((path) => (
+            <Link href={path.href} className="connection-path-card" key={path.title}>
+              <IconTile name={path.icon} />
+              <h3>{path.title}</h3>
+              <p>{path.description}</p>
+              <span>{path.label}<ArrowRight size={16} aria-hidden="true" /></span>
+            </Link>
+          ))}
+        </div>
+      </Section>
+      <Section id="inquiry" className="inquiry-section connection-reveal">
         <div className="inquiry-panel">
           <div className="inquiry-intro">
             <Eyebrow>Your next step</Eyebrow>
@@ -161,7 +187,7 @@ export default function ContactPage() {
           </aside>
         </div>
       </Section>
-      <Section>
+      <Section className="connection-reveal">
         <SectionHeading
           eyebrow="Why reach out"
           title={
@@ -186,7 +212,7 @@ export default function ContactPage() {
           </FeaturePanel>
         </div>
       </Section>
-      <Section>
+      <Section className="connection-reveal">
         <SectionHeading
           eyebrow="Partner with us"
           title={
@@ -198,7 +224,7 @@ export default function ContactPage() {
         />
         <PartnerCards />
       </Section>
-      <Section>
+      <Section className="connection-reveal">
         <div className="split-layout faq-layout">
           <div>
             <Eyebrow>Frequently asked questions</Eyebrow>
