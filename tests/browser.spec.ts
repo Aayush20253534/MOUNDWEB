@@ -179,8 +179,10 @@ test("desktop dropdowns, skip link, and FAQ work from the keyboard", async ({
   await expect(explore).toBeFocused();
   await expect(explore).toHaveAttribute("aria-expanded", "false");
   const faq = page.locator("summary").first();
+  await faq.scrollIntoViewIfNeeded();
   await faq.focus();
-  await page.keyboard.press("Enter");
+  await expect(faq).toBeFocused();
+  await faq.press("Enter");
   await expect(page.locator("details").first()).toHaveAttribute("open", "");
 });
 
