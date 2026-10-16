@@ -756,7 +756,7 @@ test("Training and Placements offers verifiable methodology without fabricated r
   await expect(page.locator(".placement-toolbar > span")).toContainText("0 verified reports");
   await page.getByRole("button", { name: "Verified employment", exact: true }).click();
   await expect(page.locator(".placement-definition-card h4")).toHaveText("Confirmed employment outcomes");
-  await expect(page.locator(".placement-definition-card")).toContainText("not");
+  await expect(page.locator(".placement-definition-card")).toContainText("Not included");
   await expect(page.locator(".placement-report")).toHaveCount(0);
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
 });
