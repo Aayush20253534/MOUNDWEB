@@ -13,7 +13,7 @@
 | 08   | Contact and college/franchise partnerships                                        | Contact route picker, college/franchise draft forms, validation/copy and motion complete; live delivery and verified contact details pending |
 | 09   | Podcast and media publishing                                                      | Podcast/Media galleries, filters, draft routes and gated native player implemented; verified recordings and CMS pending                        |
 | 10   | Careers and training/placement records                                            | Careers explorer and training methodology/reporting UI implemented; verified postings and application backend pending                 |
-| 11   | Neon/Prisma, REST business APIs and Resend                                        | Not started                                                                                       |
+| 11   | Neon/Prisma, REST business APIs and Resend                                        | Schema, opt-in API, validation, resilient notifications and frontend integration implemented; credentials/migrations pending |
 | 12   | Admin dashboard                                                                   | Not started                                                                                       |
 | 13   | Final responsive and motion polish                                                | Static foundation verified at five widths; animated flows require later verification              |
 | 14   | Security, final SEO, deployment and release                                       | Not started; do not infer production launch readiness from the frontend build                     |
@@ -26,4 +26,4 @@ The website never advertises Website Development as a client service. AI marketi
 
 ## Continuation
 
-Continue from the current verified `main` branch. Parts 00–09 have been implemented progressively; preserve all existing pages and brand assets. Next is Part 11 (Neon/Prisma, REST APIs and Resend), then admin publishing and final launch QA. Do not present editorial drafts, missing placement figures or unreleased media as verified publications.
+Continue from the current verified `main` branch. Parts 00–09 have been implemented progressively; preserve all existing pages and brand assets. Next is Part 12 (admin dashboard and publishing management), then final responsive QA and launch-hardening. Part 11 needs real credentials, migration deployment and privacy approval before live operation. Do not present editorial drafts, missing placement figures or unreleased media as verified publications.

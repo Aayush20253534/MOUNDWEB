@@ -169,7 +169,7 @@ export default async function PartnershipPage({ params }: Props) {
               <span>03 / Copy your inquiry draft</span>
             </div>
             <p className="micro-note">
-              Inquiries cannot be sent from this website yet. Message delivery and review will be implemented with the backend in Part 11.
+              You can review and copy a local draft. Secure submission is only available when an approved privacy policy, database and email delivery are configured.
             </p>
           </div>
           <PartnershipForm kind={kind as Kind} />
