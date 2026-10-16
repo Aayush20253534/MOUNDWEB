@@ -6,7 +6,7 @@
 | 01   | Design tokens, typography, brand, navigation, reusable UI and page foundations    | Implemented                                                                                       |
 | 02   | Original artwork, optimized assets, fonts, icons, texture maps and manifest       | Implemented                                                                                       |
 | 03   | Particle mountain formation, exactly three impacts, explosion and MOUNDWEB reveal | Implemented; GPU renderer and handoff in `PART_03_MOUNTAIN.md`; browser visual QA pending                                                          |
-| 04   | Genuine revolving Earth, orbital behavior and homepage motion                     | Not started; static stage and textures ready                                                      |
+| 04   | Genuine revolving Earth, orbital behavior and homepage motion                     | Implemented; WebGL2 globe, six 3D-projected orbits, scroll motion; see `PART_04_GLOBE.md`                                                      |
 | 05   | About content approval and page-specific motion                                   | Responsive layout complete; verified content/motion pending                                       |
 | 06   | Programs content, admissions details and enrollment behavior                      | Two paths and 11 course templates complete; approval/integration pending                          |
 | 07   | Digital marketing services and advertising                                        | Six service layouts and Coming Soon banner complete; business content approval pending            |
