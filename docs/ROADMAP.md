@@ -5,7 +5,7 @@
 | 00   | Next.js/Express/shared npm workspace, TypeScript, health API, CI                  | Preserved; lint/configuration repaired and reproducible lockfile added                            |
 | 01   | Design tokens, typography, brand, navigation, reusable UI and page foundations    | Implemented                                                                                       |
 | 02   | Original artwork, optimized assets, fonts, icons, texture maps and manifest       | Implemented                                                                                       |
-| 03   | Particle mountain formation, exactly three impacts, explosion and MOUNDWEB reveal | Not started; read `ANIMATION_HANDOFF.md`                                                          |
+| 03   | Particle mountain formation, exactly three impacts, explosion and MOUNDWEB reveal | Implemented; GPU renderer and handoff in `PART_03_MOUNTAIN.md`; browser visual QA pending                                                          |
 | 04   | Genuine revolving Earth, orbital behavior and homepage motion                     | Not started; static stage and textures ready                                                      |
 | 05   | About content approval and page-specific motion                                   | Responsive layout complete; verified content/motion pending                                       |
 | 06   | Programs content, admissions details and enrollment behavior                      | Two paths and 11 course templates complete; approval/integration pending                          |
