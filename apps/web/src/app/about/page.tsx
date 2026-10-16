@@ -61,10 +61,6 @@ export default function AboutPage() {
         className="about-hero about-reveal"
         artwork={
           <div className="hero-pillar-grid">
-            <div className="about-hero-orbits" aria-hidden="true">
-              <span /><span /><span />
-              <i /><i /><i />
-            </div>
             {[
               ["chart", "Brand growth"],
               ["brain", "AI-integrated learning"],
@@ -76,6 +72,10 @@ export default function AboutPage() {
                 <span>{label}</span>
               </div>
             ))}
+            <div className="about-hero-orbits" aria-hidden="true">
+              <span /><span /><span />
+              <i /><i /><i />
+            </div>
           </div>
         }
       >

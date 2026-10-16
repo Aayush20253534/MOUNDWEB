@@ -348,3 +348,44 @@ test("globe respects reduced-motion and preserves the static illustration", asyn
   await expect(globe.locator(".globe-webgl-canvas")).toHaveCount(0);
   await expect(globe.locator(".globe-image")).toBeVisible();
 });
+
+
+test("About page animates the guiding approach without showing invented statistics", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/about");
+  const hero = page.locator(".about-hero");
+  await expect(hero).toBeVisible();
+  const bounds = await hero.boundingBox();
+  expect(bounds).not.toBeNull();
+  await page.mouse.move(bounds!.x + bounds!.width * 0.75, bounds!.y + bounds!.height * 0.35);
+  await expect.poll(async () => hero.evaluate((el) =>
+    (el as HTMLElement).style.getPropertyValue("--about-parallax-x")
+  )).not.toBe("");
+  const journey = page.locator(".about-journey");
+  await journey.scrollIntoViewIfNeeded();
+  await expect(journey).toHaveAttribute("data-about-motion", "entered");
+  const steps = journey.locator(".about-journey-step");
+  await expect(steps).toHaveCount(4);
+  await expect(steps.first()).toHaveAttribute("data-about-motion", "entered");
+  await expect(journey.getByRole("list", { name: "Four parts of our approach" }))
+    .toContainText("Understand");
+  await expect(page.locator(".about-verified-stats")).toContainText("Verification pending");
+  await expect(page.locator(".about-verified-stats")).not.toContainText("100%");
+});
+
+test("About page reduced-motion mode is accessible without animations", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.setViewportSize({ width: 375, height: 900 });
+  await page.goto("/about");
+  const journey = page.locator(".about-journey");
+  await journey.scrollIntoViewIfNeeded();
+  await expect(journey).toBeVisible();
+  await expect(journey).not.toHaveAttribute("data-about-motion", "entered");
+  await expect(journey.locator(".about-journey-step")).toHaveCount(4);
+  await expect(page.getByRole("heading", { name: "Our mission" })).toBeVisible();
+  const motion = await journey.evaluate((element) =>
+    getComputedStyle(element.querySelector(".about-journey-step")!).animationName
+  );
+  expect(motion).toBe("none");
+});

@@ -3933,10 +3933,10 @@
 .about-hero-orbits > i:nth-of-type(2) { left: 22%; top: 72%; animation-delay: -3s; }
 .about-hero-orbits > i:nth-of-type(3) { left: 84%; top: 48%; animation-delay: -5s; }
 .about-hero .hero-pillar { z-index: 1; }
-.about-hero .hero-pillar:nth-child(2) { animation: about-pillar-left 8s ease-in-out infinite; }
-.about-hero .hero-pillar:nth-child(3) { animation: about-pillar-right 7s ease-in-out infinite; }
-.about-hero .hero-pillar:nth-child(4) { animation: about-pillar-left 9s ease-in-out infinite reverse; }
-.about-hero .hero-pillar:nth-child(5) { animation: about-pillar-right 8.5s ease-in-out infinite reverse; }
+.about-hero .hero-pillar:nth-child(1) { animation: about-pillar-left 8s ease-in-out infinite; }
+.about-hero .hero-pillar:nth-child(2) { animation: about-pillar-right 7s ease-in-out infinite; }
+.about-hero .hero-pillar:nth-child(3) { animation: about-pillar-left 9s ease-in-out infinite reverse; }
+.about-hero .hero-pillar:nth-child(4) { animation: about-pillar-right 8.5s ease-in-out infinite reverse; }
 @keyframes about-orbital-line {
   to { transform: rotateX(65deg) rotateZ(380deg); }
 }
