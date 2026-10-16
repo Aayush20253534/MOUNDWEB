@@ -1,4 +1,4 @@
-name: Sync Part 11 dependency lockfile
+name: Dependency lockfile sync and audit remediation
 on:
   push:
     branches: [main]
@@ -10,7 +10,7 @@ on:
 permissions:
   contents: write
 jobs:
-  lockfile:
+  dependency-maintenance:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,14 +19,27 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: npm
       - name: Resolve lockfile from npm registry
         run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
-      - name: Commit reproducible lockfile
+      - name: Apply non-breaking security updates allowed by package ranges
+        run: |
+          npm audit fix --package-lock-only --ignore-scripts --no-fund || echo "Some advisories may require explicit dependency review."
+      - name: Capture dependency audit report
+        run: npm audit --json > npm-audit-report.json || true
+      - name: Commit the reproducible lockfile
         run: |
           if ! git diff --quiet -- package-lock.json; then
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git config user.name "github-actions[bot]"
             git add package-lock.json
-            git commit -m "chore(lockfile): sync Prisma and Resend dependencies"
+            git commit -m "chore(security): refresh lockfile and apply compatible audit fixes"
             git push origin HEAD:main
           fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: npm-audit-report
+          path: npm-audit-report.json
+          if-no-files-found: ignore
+          retention-days: 14
