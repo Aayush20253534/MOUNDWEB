@@ -404,9 +404,9 @@ test("program catalog filters course categories, experience and search", async (
   await expect(page.locator(".course-card")).toHaveCount(3);
   await page.getByRole("searchbox", { name: "Search courses" }).fill("full-stack");
   await expect(page.locator(".course-card")).toHaveCount(1);
-  await expect(page.locator(".course-card")).toContainText(["Full-Stack Development"]);
+  await expect(page.locator(".course-card").first()).toContainText("Full-Stack Development");
   await page.getByRole("searchbox", { name: "Search courses" }).fill("nonexistent course name");
-  await expect(page.getByRole("status", { name: undefined }).filter({ hasText: "No matching programs" })).toBeVisible();
+  await expect(page.locator(".catalog-empty")).toBeVisible();
   await page.getByRole("button", { name: "Show all programs" }).click();
   await expect(page.locator(".course-card")).toHaveCount(11);
 });
@@ -435,8 +435,8 @@ test("course inquiry builder prefills contact without submitting an application"
   await expect(page).toHaveURL(/\/contact\?type=course/);
   await expect(page.getByLabel("Inquiry type")).toHaveValue("course");
   await expect(page.getByLabel("Subject", { exact: false })).toHaveValue("AI Master");
-  await expect(page.getByLabel(/^Message/)).toContainText("Some prior experience");
-  await expect(page.getByLabel(/^Message/)).toContainText("eligibility, fees and dates");
+  await expect(page.getByLabel(/^Message/)).toHaveValue(/Some prior experience/);
+  await expect(page.getByLabel(/^Message/)).toHaveValue(/eligibility, fees and dates/);
   await expect(page.locator(".form-preview-note")).toContainText("not be sent or saved");
   expect(posts).toEqual([]);
 });
