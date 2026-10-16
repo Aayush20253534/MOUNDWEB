@@ -314,3 +314,37 @@ test("GPU mountain completes its one-shot reveal where WebGL2 is supported", asy
   await expect(stage).toHaveAttribute("data-phase", "revealed", { timeout: 13000 });
   await expect(page.locator("#home-title")).toBeVisible();
 });
+
+
+test("revolving Earth renders with moving channel icons when motion is enabled", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  const globe = page.locator('[data-scene="orbit-globe"]').first();
+  await globe.scrollIntoViewIfNeeded();
+  const webgl = await page.evaluate(() => Boolean(document.createElement("canvas").getContext("webgl2")));
+  if (!webgl) {
+    await expect(globe).toHaveAttribute("data-phase", "poster");
+    await expect(globe.locator(".globe-webgl-canvas")).toHaveCount(0);
+    return;
+  }
+  await expect(globe).toHaveAttribute("data-phase", "orbiting", { timeout: 20000 });
+  await expect(globe.locator(".globe-webgl-canvas")).toHaveCount(1);
+  const tiles = globe.locator(".orbit-platform");
+  await expect(tiles).toHaveCount(6);
+  const before = await tiles.first().evaluate((element: HTMLElement) => element.style.left);
+  await page.waitForTimeout(1000);
+  const after = await tiles.first().evaluate((element: HTMLElement) => element.style.left);
+  expect(before).not.toBe(after);
+  await expect(page.getByRole("heading", { name: /Multiple channels/i })).toBeVisible();
+});
+
+test("globe respects reduced-motion and preserves the static illustration", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  const globe = page.locator('[data-scene="orbit-globe"]').first();
+  await globe.scrollIntoViewIfNeeded();
+  await expect(globe).toHaveAttribute("data-phase", "poster");
+  await expect(globe.locator(".globe-webgl-canvas")).toHaveCount(0);
+  await expect(globe.locator(".globe-image")).toBeVisible();
+});
