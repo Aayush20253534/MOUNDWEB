@@ -90,3 +90,7 @@ export async function getPublicEditorialLists(): Promise<{ podcast: Episode[]; m
     media: media.filter((item): item is MediaItem => "body" in item),
   };
 }
+
+export async function getPublishedItems(kind: "podcast" | "media"): Promise<PublishedEditorial[]> {
+  return fetchEditorial(kind);
+}
