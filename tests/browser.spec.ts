@@ -444,7 +444,7 @@ test("course inquiry builder prefills contact without submitting an application"
 test("young learner page requests guardian consent rather than direct enrollment", async ({ page }) => {
   await page.goto("/programs/ai-digital-ninja");
   await expect(page.locator(".course-details")).toContainText("Parents or guardians");
-  await expect(page.locator(".course-info-panel")).toContainText("guardian consent");
+  await expect(page.locator(".course-info-panel").first()).toContainText("guardian consent");
   await expect(page.locator(".course-interest")).toContainText("No application, payment, seat reservation");
 });
 
