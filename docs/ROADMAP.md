@@ -11,7 +11,7 @@
 | 06   | Programs content, admissions details and enrollment behavior                      | Filterable paths, 11 draft guides and course inquiry prefill complete; real backend/approval pending                          |
 | 07   | Digital marketing services and advertising                                        | Six detail pages, goal explorer, and standalone Advertising Coming Soon implemented; business content approval pending            |
 | 08   | Contact and college/franchise partnerships                                        | Contact route picker, college/franchise draft forms, validation/copy and motion complete; live delivery and verified contact details pending |
-| 09   | Podcast and media publishing                                                      | Reusable editorial templates complete; verified content/player/CMS pending                        |
+| 09   | Podcast and media publishing                                                      | Podcast/Media galleries, filters, draft routes and gated native player implemented; verified recordings and CMS pending                        |
 | 10   | Careers and training/placement records                                            | Honest empty-state templates complete; verified records/application flows pending                 |
 | 11   | Neon/Prisma, REST business APIs and Resend                                        | Not started                                                                                       |
 | 12   | Admin dashboard                                                                   | Not started                                                                                       |
@@ -26,4 +26,4 @@ The website never advertises Website Development as a client service. AI marketi
 
 ## Continuation
 
-Start Part 03 from the verified `main` commit accompanying this delivery. Preserve the design system, page structure, asset paths, content constraints, and accessible DOM. Implement the particle renderer inside `ParticleMountainStage`; continue with `OrbitGlobeStage` in Part 04. Do not restart the frontend from a new template.
+Continue from the current verified `main` branch. Parts 00–09 have been implemented progressively; preserve all existing pages and brand assets. Next is Part 10 (Careers and Training/Placements), then database/Resend integration, admin publishing and final launch QA. Do not present editorial drafts, missing placement figures or unreleased media as verified publications.
