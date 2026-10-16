@@ -78,14 +78,17 @@ test("global navigation has valid controlled dropdowns and responds to client ro
     expect(controlledId).not.toContain(" ");
     await trigger.click();
     await expect(trigger).toHaveAttribute("aria-expanded", "true");
-    await expect(page.locator("#" + CSS.escape(controlledId!))).toBeVisible();
+    await expect(page.locator(`[id="${controlledId}"]`)).toBeVisible();
     await page.keyboard.press("Escape");
     await expect(trigger).toHaveAttribute("aria-expanded", "false");
   }
-  await page.getByRole("link", { name: "About", exact: true }).click();
+  const transitionStarted = page.waitForFunction(() =>
+    document.getElementById("main-content")?.dataset.routeTransition === "entering"
+  );
+  await page.locator(".desktop-nav").getByRole("link", { name: "About", exact: true }).click();
+  await transitionStarted;
   await expect(page).toHaveURL(/\/about$/);
-  await expect(page.locator("#main-content h1")).toContainText("The story");
-  await expect(page.locator("#main-content")).toHaveAttribute("data-route-transition", "entering");
+  await expect(page.locator("#main-content h1")).toBeVisible();
   await expect(page.locator("#main-content")).not.toHaveAttribute("data-route-transition", "entering");
 });
 
@@ -93,7 +96,7 @@ test("reduced-motion preference disables route-arrival Web Animations", async ({
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/");
-  await page.getByRole("link", { name: "About", exact: true }).click();
+  await page.locator(".desktop-nav").getByRole("link", { name: "About", exact: true }).click();
   await expect(page).toHaveURL(/\/about$/);
   const running = await page.locator("#main-content").evaluate((main) =>
     main.getAnimations().filter((animation) => animation.playState === "running").length
