@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { ChevronDown, Menu, X, ArrowUpRight } from "lucide-react";
 import { navigation, exploreLinks, partnerLinks } from "@/lib/content";
@@ -21,6 +21,7 @@ function NavDropdown({
   pathname: string;
 }) {
   const [open, setOpen] = useState(false);
+  const panelId = useId();
   const ref = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   useEffect(() => {
@@ -53,17 +54,17 @@ function NavDropdown({
         ref={buttonRef}
         className={cn(
           "nav-link",
-          links.some((link) => link.href === pathname) && "is-active",
+          links.some((link) => pathname === link.href || pathname.startsWith(link.href + "/")) && "is-active",
         )}
         aria-expanded={open}
-        aria-controls={`nav-${label}`}
+        aria-controls={panelId}
         onClick={() => setOpen(!open)}
       >
         {label}
         <ChevronDown size={12} aria-hidden="true" />
       </button>
       {open && (
-        <div id={`nav-${label}`} className="dropdown-panel">
+        <div id={panelId} className="dropdown-panel">
           {links.map((link) => (
             <Link
               key={link.href}
@@ -88,7 +89,10 @@ export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname.startsWith(href);
+    href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/");
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
   return (
     <header className="site-header">
       <div className="container header-inner">
