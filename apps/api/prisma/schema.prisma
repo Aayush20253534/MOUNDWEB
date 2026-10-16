@@ -18,11 +18,15 @@ model InquirySubmission {
   message        String   @db.Text
   consentVersion String   @db.VarChar(50)
   consentAt      DateTime @default(now())
-  emailStatus    String   @default("pending") @db.VarChar(20)
-  createdAt      DateTime @default(now())
+  emailStatus    String           @default("pending") @db.VarChar(20)
+  status         SubmissionStatus @default(NEW)
+  internalNote   String?          @db.VarChar(2000)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
 
   @@index([createdAt])
   @@index([category, createdAt])
+  @@index([status, createdAt])
 }
 
 model PartnershipSubmission {
@@ -39,9 +43,96 @@ model PartnershipSubmission {
   message        String   @db.Text
   consentVersion String   @db.VarChar(50)
   consentAt      DateTime @default(now())
-  emailStatus    String   @default("pending") @db.VarChar(20)
-  createdAt      DateTime @default(now())
+  emailStatus    String           @default("pending") @db.VarChar(20)
+  status         SubmissionStatus @default(NEW)
+  internalNote   String?          @db.VarChar(2000)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
 
   @@index([createdAt])
   @@index([kind, createdAt])
+  @@index([status, createdAt])
+}
+
+
+enum SubmissionStatus {
+  NEW
+  IN_REVIEW
+  RESOLVED
+  ARCHIVED
+}
+enum AdminRole {
+  ADMIN
+  EDITOR
+}
+enum EditorialKind {
+  PODCAST
+  MEDIA
+}
+enum EditorialStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model AdminUser {
+  id           String          @id @default(uuid()) @db.Uuid
+  email        String          @unique @db.VarChar(254)
+  passwordHash String          @db.VarChar(255)
+  role         AdminRole       @default(ADMIN)
+  active       Boolean         @default(true)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  sessions     AdminSession[]
+  auditLogs    AdminAuditLog[]
+}
+model AdminSession {
+  id        String     @id @default(uuid()) @db.Uuid
+  tokenHash String     @unique @db.VarChar(64)
+  adminId   String     @db.Uuid
+  createdAt DateTime   @default(now())
+  expiresAt DateTime
+  lastSeenAt DateTime  @default(now())
+  revokedAt DateTime?
+  admin     AdminUser  @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@index([adminId, expiresAt])
+}
+model AdminAuditLog {
+  id         String    @id @default(uuid()) @db.Uuid
+  adminId    String?   @db.Uuid
+  action     String    @db.VarChar(80)
+  entityType String    @db.VarChar(40)
+  entityId   String?   @db.VarChar(80)
+  createdAt  DateTime  @default(now())
+  admin      AdminUser? @relation(fields: [adminId], references: [id], onDelete: SetNull)
+
+  @@index([createdAt])
+  @@index([adminId, createdAt])
+}
+model EditorialEntry {
+  id              String           @id @default(uuid()) @db.Uuid
+  kind            EditorialKind
+  slug            String           @db.VarChar(100)
+  title           String           @db.VarChar(140)
+  category        String           @db.VarChar(60)
+  summary         String           @db.VarChar(600)
+  artwork         String           @db.VarChar(400)
+  caption         String?          @db.VarChar(600)
+  topics          String[]         @default([])
+  outline         String[]         @default([])
+  body            String[]         @default([])
+  audioUrl        String?          @db.VarChar(1000)
+  durationSeconds Int?
+  transcript      String?          @db.Text
+  author          String?          @db.VarChar(100)
+  status          EditorialStatus  @default(DRAFT)
+  publishedAt     DateTime?
+  editedById      String?          @db.Uuid
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  @@unique([kind, slug])
+  @@index([status, publishedAt])
+  @@index([kind, status])
 }
