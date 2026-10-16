@@ -14,9 +14,9 @@
 | 09   | Podcast and media publishing                                                      | Podcast/Media galleries, filters, draft routes and gated native player implemented; verified recordings and CMS pending                        |
 | 10   | Careers and training/placement records                                            | Careers explorer and training methodology/reporting UI implemented; verified postings and application backend pending                 |
 | 11   | Neon/Prisma, REST business APIs and Resend                                        | Schema, opt-in API, validation, resilient notifications and frontend integration implemented; credentials/migrations pending |
-| 12   | Admin dashboard                                                                   | Not started                                                                                       |
+| 12   | Admin dashboard                                                                   | Implemented: Argon2id login, hashed/expiring sessions, ADMIN/EDITOR role separation, private lead workflow, audit records and editorial CMS; remote migration/provisioning pending |
 | 13   | Final responsive and motion polish                                                | Shared route transitions, safe-area and touch polish; 22-route ten-width matrix and all 94 browser tests passed in CI (`ea640e1`)              |
-| 14   | Security, final SEO, deployment and release                                       | Not started; do not infer production launch readiness from the frontend build                     |
+| 14   | Security, final SEO, deployment and release                                       | Next/Prisma/Vitest upgraded, admin/SEO/headers/readiness hardened, npm audit reports zero advisories; final CI and real staging/credential smoke tests pending |
 
 ## Content required before launch
 
@@ -26,4 +26,4 @@ The website never advertises Website Development as a client service. AI marketi
 
 ## Continuation
 
-Continue from the current `main` branch. Parts 00–11 and Part 13 have been implemented; Part 12 (Admin Dashboard) remains not started and Part 14 (security, SEO, deployment and release) remains not started. Keep Part 11 submissions disabled until the approved privacy policy, Neon migrations and verified Resend configuration have passed a staging smoke test. Part 13's 22-route responsive/accessibility suite must pass before the frontend polish can be called complete. Do not present editorial drafts, missing placement figures or unreleased media as verified publications.
+Parts 00–14 now have implementation work in `main`. The latest dependency audit artifact reports zero known advisories; final CI must pass on the lockfile-updated HEAD. Do not enable admin or public submissions until a real Neon migration, secure admin provisioning, approved privacy policy, verified Resend configuration and staging smoke tests have succeeded. No remote database migration or real email delivery is claimed by these code changes. Do not present editorial drafts, missing placement figures or unreleased media as verified publications.
