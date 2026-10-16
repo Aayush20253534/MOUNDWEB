@@ -18,6 +18,8 @@ import {
   ProcessSteps,
 } from "@/components/sections/shared";
 import { Icon } from "@/components/ui/icon";
+import { ServiceMotion } from "@/components/services/service-motion";
+import { ServiceExplorer } from "@/components/services/service-explorer";
 
 export const metadata: Metadata = {
   title: "Our Services",
@@ -27,6 +29,7 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <>
+      <ServiceMotion />
       <PageHero
         eyebrow="Our services"
         title={
@@ -38,7 +41,8 @@ export default function ServicesPage() {
             <em>real direction.</em>
           </>
         }
-        description="From strategy to execution, help your brand get noticed, connect with its audience, and make the next move with confidence."
+        description="From search and social to brand identity and performance, build meaningful connections with your audience through digital marketing."
+        className="services-hero"
         artwork={
           <div className="summit-labels">
             {[
@@ -65,7 +69,7 @@ export default function ServicesPage() {
         </div>
       </PageHero>
       <CapabilityStrip />
-      <Section>
+      <Section className="service-reveal">
         <SectionHeading
           eyebrow="What we do"
           title={
@@ -82,22 +86,30 @@ export default function ServicesPage() {
             <ServiceCard service={service} key={service.slug} />
           ))}
         </div>
-        <div className="advertising-banner" id="advertising">
+      </Section>
+      <Section id="service-explorer" className="service-explorer-section service-reveal">
+        <ServiceExplorer />
+      </Section>
+      <Section className="service-reveal">
+        <div className="advertising-banner advertising-banner--interactive" id="advertising">
           <Image
             src="/assets/landscapes/mountain-panorama.webp"
             alt=""
             fill
             sizes="100vw"
           />
-          <div>
+          <div className="advertising-banner-copy">
             <Eyebrow>The next horizon</Eyebrow>
             <h2>Advertising services</h2>
-            <p>Another way to put your brand in the spotlight.</p>
+            <p>A dedicated offering is taking shape. Explore the preview.</p>
+            <ButtonLink href="/services/advertising-coming-soon" size="small" variant="secondary">
+              Explore what's coming
+            </ButtonLink>
           </div>
           <Badge>Coming soon</Badge>
         </div>
       </Section>
-      <Section className="why-section">
+      <Section className="why-section service-reveal">
         <div className="split-layout">
           <div>
             <Eyebrow>Why MOUNDWEB</Eyebrow>
@@ -127,7 +139,7 @@ export default function ServicesPage() {
           </div>
         </div>
       </Section>
-      <Section id="process" className="process-section">
+      <Section id="process" className="process-section service-reveal">
         <div className="process-layout">
           <div>
             <Eyebrow>Our process</Eyebrow>
@@ -143,7 +155,9 @@ export default function ServicesPage() {
           <ProcessSteps />
         </div>
       </Section>
-      <MeasurementPanel compact />
+      <div className="service-reveal">
+        <MeasurementPanel compact />
+      </div>
       <CTASection
         title={
           <>
