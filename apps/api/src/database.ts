@@ -7,7 +7,7 @@ export function getDatabase(): PrismaClient {
 }
 export async function checkDatabase(): Promise<boolean> {
   try {
-    await getDatabase().$queryRaw\`SELECT 1\`;
+    await getDatabase().$queryRaw`SELECT 1`;
     return true;
   } catch {
     return false;

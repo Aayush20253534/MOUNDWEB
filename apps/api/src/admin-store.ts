@@ -1,5 +1,5 @@
 import {
-  AdminRole, EditorialKind, EditorialStatus, Prisma, PrismaClient, SubmissionStatus,
+  AdminRole, EditorialKind, EditorialStatus, PrismaClient, SubmissionStatus,
 } from "@prisma/client";
 import { getDatabase } from "./database.js";
 

@@ -147,7 +147,7 @@ export function createAdminRouter(options: AdminRouterOptions = {}) {
     adminStore = module.createPrismaAdminStore();
     return adminStore;
   }
-  let verifyPassword = options.verifyPassword;
+  const verifyPassword = options.verifyPassword;
   let dummyHashPromise: Promise<string> | undefined;
   async function verify(plain: string, hash: string) {
     if (verifyPassword) return verifyPassword(plain, hash);
