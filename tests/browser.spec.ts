@@ -455,3 +455,69 @@ test("program animations respect reduced-motion and leave course information vis
   const animation = await page.locator(".program-reveal").first().evaluate((element) => getComputedStyle(element).animationName);
   expect(animation).toBe("none");
 });
+
+
+test("services page offers only six brand-growth services and working detail links", async ({ page }) => {
+  await page.goto("/services");
+  await expect(page.locator(".services-full-grid .service-card")).toHaveCount(6);
+  await expect(page.locator(".services-full-grid .service-card-explore")).toHaveCount(6);
+  const titles = await page.locator(".services-full-grid h3").allTextContents();
+  expect(titles.join(" ")).not.toMatch(/web.*development/i);
+  await page.getByRole("link", { name: "Explore Search Engine Optimization service details" }).click();
+  await expect(page).toHaveURL(/\/services\/seo$/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Search Engine Optimization");
+});
+
+test("interactive service explorer selects a goal and updates the linked recommendation", async ({ page }) => {
+  await page.goto("/services");
+  const explorer = page.locator(".service-explorer");
+  await expect(explorer.getByRole("button", { name: /Help people find us/ })).toHaveAttribute("aria-pressed", "true");
+  await explorer.getByRole("button", { name: /Plan paid campaigns/ }).click();
+  await expect(explorer.getByRole("heading", { level: 3 })).toHaveText("Performance Marketing");
+  await expect(explorer.getByRole("link", { name: /Explore this service/ })).toHaveAttribute("href", "/services/performance-marketing");
+  await explorer.getByRole("button", { name: /Clarify our identity/ }).click();
+  await expect(explorer.getByRole("heading", { level: 3 })).toHaveText("Brand Identity & Growth");
+  await expect(explorer.getByRole("button", { name: /Clarify our identity/ })).toHaveAttribute("aria-pressed", "true");
+  await expect(explorer.getByRole("link", { name: /Discuss with us/ })).toHaveAttribute("href", /subject=Brand%20Identity%20%26%20Growth/);
+});
+
+test("marketing service details have process, scope, meaningful metrics and honest FAQs", async ({ page }) => {
+  await page.goto("/services/performance-marketing");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Performance Marketing");
+  await expect(page.locator(".service-activity")).toHaveCount(6);
+  await expect(page.locator(".service-detail-steps li")).toHaveCount(3);
+  await expect(page.locator(".service-signal-list > div")).toHaveCount(3);
+  const faq = page.locator(".service-detail-faq details").first();
+  await faq.locator("summary").click();
+  await expect(faq).toHaveAttribute("open", "");
+  await expect(page.locator(".service-detail-signals")).toContainText("not achieved client results");
+  await expect(page.getByRole("link", { name: /Discuss this service/ })).toHaveAttribute("href", /type=growth/);
+});
+
+test("Advertising Coming Soon teaser opens a dedicated non-bookable page", async ({ page }) => {
+  await page.goto("/services");
+  await page.locator(".advertising-banner").getByRole("link", { name: /Explore what/ }).click();
+  await expect(page).toHaveURL(/\/services\/advertising-coming-soon$/);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Something powerful");
+  await expect(page.locator(".advertising-coming-status")).toContainText("Coming Soon");
+  await expect(page.locator(".advertising-coming-content")).toContainText("not available to book today");
+  await expect(page.getByRole("link", { name: /Explore current services/ })).toHaveAttribute("href", "/services");
+});
+
+test("marketing services and Coming Soon respect reduced motion", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.setViewportSize({ width: 375, height: 900 });
+  await page.goto("/services");
+  const hero = page.locator(".services-hero");
+  await expect(hero).toBeVisible();
+  const duration = await hero.locator(".summit-labels > div").first().evaluate(
+    (el) => getComputedStyle(el).animationDuration,
+  );
+  expect(duration).toBe("0s");
+  await page.goto("/services/advertising-coming-soon");
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+  const animation = await page.locator(".advertising-coming-ring").first().evaluate(
+    (el) => getComputedStyle(el).animationName,
+  );
+  expect(animation).toBe("none");
+});
