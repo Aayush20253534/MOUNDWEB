@@ -725,3 +725,66 @@ test("Editorial animations respect reduced motion and keep unpublished media dis
   expect(motion).toBe("none");
   await expect(page.locator(".editorial-gallery-tile")).toHaveCount(4);
 });
+
+
+test("Careers explores work areas without creating false vacancies or applications", async ({ page }) => {
+  await page.goto("/career");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Build ideas");
+  await expect(page.locator(".career-open-count")).toContainText("0 verified open roles");
+  await expect(page.locator(".career-no-roles")).toContainText("no confirmed open vacancies");
+  await expect(page.locator(".career-domain-card")).toHaveCount(4);
+  await expect(page.locator(".career-verified-role")).toHaveCount(0);
+  await page.getByRole("button", { name: "Learning & Education", exact: true }).click();
+  await expect(page.locator(".career-domain-card")).toHaveCount(1);
+  await expect(page.locator(".career-domain-card")).toContainText("Learning & Education");
+  await page.getByRole("searchbox", { name: "Search work areas" }).fill("no matching interest phrase");
+  await expect(page.locator(".career-filter-empty")).toBeVisible();
+  await page.getByRole("button", { name: "Reset filters" }).click();
+  await expect(page.locator(".career-domain-card")).toHaveCount(4);
+  await expect(page.locator(".career-domain-card a.text-link").first()).toHaveAttribute("href", /type=career/);
+  await expect(page.locator("main")).toContainText("No application form, CV upload, payment");
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+});
+
+test("Training and Placements offers verifiable methodology without fabricated results", async ({ page }) => {
+  await page.goto("/training-placements");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Learn with purpose");
+  await expect(page.locator(".training-track-grid > a")).toHaveCount(2);
+  await expect(page.locator(".placement-verification-status")).toContainText("0");
+  await expect(page.locator(".placement-no-data")).toContainText("No verified reports have been published");
+  await page.getByLabel("Training track").selectOption("Web Development");
+  await expect(page.locator(".placement-toolbar > span")).toContainText("0 verified reports");
+  await page.getByRole("button", { name: "Verified employment", exact: true }).click();
+  await expect(page.locator(".placement-definition-card h4")).toHaveText("Confirmed employment outcomes");
+  await expect(page.locator(".placement-definition-card")).toContainText("not");
+  await expect(page.locator(".placement-report")).toHaveCount(0);
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+});
+
+for (const route of ["/career", "/training-placements"]) {
+  for (const width of [375, 1440]) {
+    test("Part 10 " + route + " has no overflow or accessibility failures at " + width + "px", async ({ page }) => {
+      test.setTimeout(90_000);
+      await page.setViewportSize({ width, height: 900 });
+      const response = await page.goto(route, { waitUntil: "domcontentloaded" });
+      expect(response?.status()).toBe(200);
+      await expect(page.locator("main h1")).toHaveCount(1);
+      const sizes = await page.evaluate(() => ({ viewport: innerWidth, content: document.documentElement.scrollWidth }));
+      expect(sizes.content).toBeLessThanOrEqual(sizes.viewport);
+      const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa"]).analyze();
+      expect(results.violations.map((item) => ({
+        id: item.id, nodes: item.nodes.map((node) => node.target),
+      }))).toEqual([]);
+    });
+  }
+}
+
+test("Career and training pages disable decorative motion for reduced-motion visitors", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/career");
+  await expect(page.locator(".career-domain-card")).toHaveCount(4);
+  expect(await page.locator(".career-hero-orbit").first().evaluate((el) => getComputedStyle(el).animationName)).toBe("none");
+  await page.goto("/training-placements");
+  expect(await page.locator(".training-hero-ring").first().evaluate((el) => getComputedStyle(el).animationName)).toBe("none");
+  await expect(page.locator(".placement-no-data")).toBeVisible();
+});
