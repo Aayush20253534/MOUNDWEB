@@ -1,23 +1,35 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Search, X } from "lucide-react";
 import {
   episodes, episodeCategories, mediaCategories, mediaItems, isPublishedEpisode, isPublishedMedia,
 } from "@/lib/editorial";
+import { getPublishedItems, type PublishedEditorial } from "@/lib/editorial-remote";
 
 type Kind = "podcast" | "media";
 
 export function EditorialCatalog({ kind }: { kind: Kind }) {
   const [query, setQuery] = useState("");
+  const [remotePublished, setRemotePublished] = useState<PublishedEditorial[]>([]);
+  useEffect(() => {
+    let active = true;
+    void getPublishedItems(kind).then((items) => { if (active) setRemotePublished(items); });
+    return () => { active = false; };
+  }, [kind]);
   const [category, setCategory] = useState("All " + (kind === "podcast" ? "topics" : "formats"));
   const items = kind === "podcast" ? episodes : mediaItems;
   const categories = kind === "podcast" ? episodeCategories : mediaCategories;
-  const published = items.filter((item) =>
+  const localPublished = items.filter((item) =>
     kind === "podcast" ? isPublishedEpisode(item as (typeof episodes)[number]) : isPublishedMedia(item as (typeof mediaItems)[number])
   );
+  const published: PublishedEditorial[] = [
+    ...localPublished,
+    ...remotePublished.filter((item) => (kind === "podcast" ? "topics" in item : "body" in item) &&
+      !localPublished.some((current) => current.slug === item.slug)),
+  ];
   const draft = items.filter((item) => !published.some((live) => live.slug === item.slug));
   const search = query.trim().toLocaleLowerCase();
   const visible = useMemo(() => draft.filter((item) =>
