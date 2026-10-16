@@ -389,3 +389,69 @@ test("About page reduced-motion mode is accessible without animations", async ({
   );
   expect(motion).toBe("none");
 });
+
+
+test("program catalog filters course categories, experience and search", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/programs");
+  await expect(page.locator(".course-card")).toHaveCount(11);
+  await expect(page.locator(".catalog-result-count")).toContainText("11 programs");
+  await page.getByRole("button", { name: "Web Development", exact: true }).click();
+  await expect(page.locator(".course-card")).toHaveCount(5);
+  await expect(page.locator("#web-development")).toBeVisible();
+  await expect(page.locator("#digital-marketing")).toHaveCount(0);
+  await page.getByRole("combobox", { name: "Experience level" }).selectOption("Intermediate");
+  await expect(page.locator(".course-card")).toHaveCount(3);
+  await page.getByRole("searchbox", { name: "Search courses" }).fill("full-stack");
+  await expect(page.locator(".course-card")).toHaveCount(1);
+  await expect(page.locator(".course-card")).toContainText(["Full-Stack Development"]);
+  await page.getByRole("searchbox", { name: "Search courses" }).fill("nonexistent course name");
+  await expect(page.getByRole("status", { name: undefined }).filter({ hasText: "No matching programs" })).toBeVisible();
+  await page.getByRole("button", { name: "Show all programs" }).click();
+  await expect(page.locator(".course-card")).toHaveCount(11);
+});
+
+test("course detail offers proposed modules and preserves Web Development category", async ({ page }) => {
+  await page.goto("/programs/full-stack-development");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Full-Stack Development");
+  await expect(page.locator(".course-admissions")).toContainText("To be confirmed");
+  await expect(page.locator(".course-admissions")).toContainText("Information requests only");
+  await expect(page.locator(".course-curriculum summary")).toHaveCount(3);
+  await page.locator(".course-curriculum summary").first().click();
+  await expect(page.locator(".course-curriculum details").first()).toHaveAttribute("open", "");
+  await expect(page.locator(".course-outcome-list li")).toHaveCount(3);
+  await expect(page.getByRole("link", { name: /Back to Web Development/ })).toHaveAttribute("href", "/programs#web-development");
+});
+
+test("course inquiry builder prefills contact without submitting an application", async ({ page }) => {
+  const posts: string[] = [];
+  page.on("request", (request) => {
+    if (request.method() === "POST") posts.push(request.url());
+  });
+  await page.goto("/programs/ai-master");
+  await page.getByLabel("Your experience").selectOption("Some prior experience");
+  await page.getByLabel("What would help most?").selectOption("Ask about eligibility, fees and dates");
+  await page.getByRole("link", { name: /Prepare program inquiry/ }).click();
+  await expect(page).toHaveURL(/\/contact\?type=course/);
+  await expect(page.getByLabel("Inquiry type")).toHaveValue("course");
+  await expect(page.getByLabel("Subject", { exact: false })).toHaveValue("AI Master");
+  await expect(page.getByLabel(/^Message/)).toContainText("Some prior experience");
+  await expect(page.getByLabel(/^Message/)).toContainText("eligibility, fees and dates");
+  await expect(page.locator(".form-preview-note")).toContainText("not be sent or saved");
+  expect(posts).toEqual([]);
+});
+
+test("young learner page requests guardian consent rather than direct enrollment", async ({ page }) => {
+  await page.goto("/programs/ai-digital-ninja");
+  await expect(page.locator(".course-details")).toContainText("Parents or guardians");
+  await expect(page.locator(".course-info-panel")).toContainText("guardian consent");
+  await expect(page.locator(".course-interest")).toContainText("No application, payment, seat reservation");
+});
+
+test("program animations respect reduced-motion and leave course information visible", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/programs");
+  await expect(page.locator(".program-catalog")).toBeVisible();
+  const animation = await page.locator(".program-reveal").first().evaluate((element) => getComputedStyle(element).animationName);
+  expect(animation).toBe("none");
+});
