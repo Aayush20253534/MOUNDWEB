@@ -613,3 +613,31 @@ test("partnership and contact motion respect reduced-motion preference", async (
   const heroMotion = await page.locator(".contact-hero-labels > div").first().evaluate((el) => getComputedStyle(el).animationName);
   expect(heroMotion).toBe("none");
 });
+
+
+test("college and franchise pages have no horizontal overflow or critical a11y failures", async ({ page }) => {
+  for (const kind of ["colleges", "franchise"]) {
+    for (const width of [375, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      const response = await page.goto("/partners/" + kind, { waitUntil: "networkidle" });
+      expect(response?.status()).toBe(200);
+      await expect(page.locator("main h1")).toHaveCount(1);
+      const widths = await page.evaluate(() => ({
+        viewport: window.innerWidth,
+        document: document.documentElement.scrollWidth,
+      }));
+      expect(widths.document, kind + ": " + width).toBeLessThanOrEqual(widths.viewport);
+      const a11y = await new AxeBuilder({ page })
+        .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+        .analyze();
+      expect(
+        a11y.violations.map((item) => ({
+          id: item.id,
+          impact: item.impact,
+          nodes: item.nodes.map((node) => node.target),
+        })),
+        kind + ": " + width,
+      ).toEqual([]);
+    }
+  }
+});
