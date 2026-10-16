@@ -1,5 +1,6 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+import { Prisma } from "./generated/prisma/client.js";
 import { Resend } from "resend";
+import { getDatabase } from "./database.js";
 import type { ContactPayload, PartnershipPayload } from "./submission-schemas.js";
 
 export interface SubmissionStore {
@@ -13,11 +14,7 @@ export interface NotificationSender {
   sendPartnership(data: PartnershipPayload): Promise<void>;
 }
 
-let db: PrismaClient | undefined;
-function prisma() {
-  if (!db) db = new PrismaClient();
-  return db;
-}
+function prisma() { return getDatabase(); }
 function duplicateKey(error: unknown) {
   return error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002";
 }

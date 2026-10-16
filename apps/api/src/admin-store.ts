@@ -1,6 +1,5 @@
-import {
-  AdminRole, EditorialKind, EditorialStatus, PrismaClient, SubmissionStatus,
-} from "@prisma/client";
+import { PrismaClient } from "./generated/prisma/client.js";
+import { AdminRole, EditorialKind, EditorialStatus, SubmissionStatus } from "./generated/prisma/enums.js";
 import { getDatabase } from "./database.js";
 
 export type AdminActor = { id: string; email: string; role: "ADMIN" | "EDITOR" };

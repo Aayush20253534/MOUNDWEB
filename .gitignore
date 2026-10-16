@@ -12,3 +12,6 @@ coverage
 playwright-report/
 test-results/
 .asset-inputs.json
+
+# Generated Prisma 7 client (re-created by npm postinstall)
+apps/api/src/generated/prisma/
