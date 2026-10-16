@@ -6,7 +6,7 @@ import { useEffect } from "react";
 export function HomeMotion() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const targets = [...document.querySelectorAll<HTMLElement>("[data-home-motion]")];
+    const targets = [...document.querySelectorAll<HTMLElement>(".home-motion")];
     if (!("IntersectionObserver" in window)) return;
     const observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
