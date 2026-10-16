@@ -105,7 +105,7 @@ describe("Part 11 public API integration", () => {
     counters.notified.mockRejectedValueOnce(new Error("Resend unavailable"));
     const response = await instance.post("/api/v1/inquiries", payload);
     expect(response.status).toBe(201);
-    expect((await response.json()).status).toBe("received");
+    expect((await response.json() as { status: string }).status).toBe("received");
     expect(counters.mark).toHaveBeenCalledWith("accepted-record", "failed");
   });
   it("returns 503 when storage fails and does not pretend an inquiry was accepted", async () => {
