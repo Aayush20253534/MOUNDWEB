@@ -8,7 +8,7 @@ import {
 } from "@/lib/submission-client";
 
 /** Never imply review == submission. Only activate after server confirms readiness. */
-export function LiveSubmission({ value }: { value: SubmissionValue }) {
+export function LiveSubmission({ value, onSubmitted }: { value: SubmissionValue; onSubmitted?: () => void }) {
   const [status, setStatus] = useState<{ enabled: boolean; noticeVersion: string | null }>({
     enabled: false, noticeVersion: null,
   });
@@ -29,6 +29,7 @@ export function LiveSubmission({ value }: { value: SubmissionValue }) {
     setSending(true);
     try {
       const receipt = await submitInquiry(value, status.noticeVersion, requestId.current);
+      onSubmitted?.();
       setResult("Your inquiry was received. Reference: " + receipt.receipt +
         ". This does not confirm enrollment, employment, a partnership or email delivery.");
     } catch (cause) {
