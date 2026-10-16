@@ -8,7 +8,7 @@
 | 03   | Particle mountain formation, exactly three impacts, explosion and MOUNDWEB reveal | Implemented; GPU renderer and handoff in `PART_03_MOUNTAIN.md`; browser visual QA pending                                                          |
 | 04   | Genuine revolving Earth, orbital behavior and homepage motion                     | Implemented; WebGL2 globe, six 3D-projected orbits, scroll motion; see `PART_04_GLOBE.md`                                                      |
 | 05   | About content approval and page-specific motion                                   | Page-specific motion and illustrated approach timeline implemented; factual content approval pending                                       |
-| 06   | Programs content, admissions details and enrollment behavior                      | Two paths and 11 course templates complete; approval/integration pending                          |
+| 06   | Programs content, admissions details and enrollment behavior                      | Filterable paths, 11 draft guides and course inquiry prefill complete; real backend/approval pending                          |
 | 07   | Digital marketing services and advertising                                        | Six service layouts and Coming Soon banner complete; business content approval pending            |
 | 08   | Contact and college/franchise partnerships                                        | Layouts and local inquiry review complete; message delivery and confirmed contact details pending |
 | 09   | Podcast and media publishing                                                      | Reusable editorial templates complete; verified content/player/CMS pending                        |
