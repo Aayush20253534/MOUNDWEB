@@ -1,4 +1,4 @@
-# Part 11 — Express + Neon PostgreSQL + Prisma + Resend
+# Part 11 — Express + Neon PostgreSQL + Prisma 7 + Resend
 
 ## Implemented
 
@@ -23,19 +23,20 @@ The existing copy-only workflows remain available, and unchanged by default. No 
 
 ### apps/api/.env
 
-\`\`\`ini
+```ini
 PORT=4000
 CLIENT_ORIGIN=http://localhost:3000
-DATABASE_URL=postgresql://<user>:<password>@<neon-host>/<db>?sslmode=require
+DATABASE_URL=postgresql://<user>:<password>@<neon-pooler-host>/<db>?sslmode=require
+DIRECT_URL=postgresql://<user>:<password>@<neon-direct-host>/<db>?sslmode=require
 SUBMISSIONS_ENABLED=false
 APPROVED_PRIVACY_NOTICE_VERSION=pending
 RESEND_API_KEY=
 RESEND_FROM_EMAIL=
 RESEND_TO_EMAIL=
 TRUST_PROXY=false
-\`\`\`
+```
 
-**Production:** HTTPS-only CLIENT_ORIGIN matching Vercel site, actual Neon pooled PostgreSQL connection string, RESEND_FROM_EMAIL verified with Resend, authenticated receiving mailbox in RESEND_TO_EMAIL, TRUST_PROXY=true behind a single trusted reverse proxy. Never commit credentials, connection strings or actual applicant information.
+**Prisma 7:** `DATABASE_URL` is the runtime Neon connection used by the `@prisma/adapter-neon` driver adapter; `DIRECT_URL` is the direct Neon connection preferred by Prisma CLI migrations. If using one connection string in a test environment, `DIRECT_URL` may be omitted and the CLI falls back to `DATABASE_URL`. Never commit credentials, connection strings or actual applicant information.
 
 ### apps/web/.env.local
 
@@ -48,8 +49,8 @@ On Vercel use the HTTPS URL of the Render backend, without a path. Public variab
 
 ## Setup (after receiving secrets and approved policies)
 
-1. Publish a legally reviewed privacy policy at \`/privacy\`, including purposes, retention, lawful basis, contact details, consent withdrawal/erasure mechanism, subcontractors/transfers and age-related safeguards as applicable.
-2. Provision Neon and fill DATABASE_URL securely on Render. Run \`npm ci\` and \`npm run db:generate\`, then \`npm run db:migrate\` **after review** to apply the checked-in Prisma migration.
+1. Publish a legally reviewed privacy policy at `/privacy`, including purposes, retention, lawful basis, contact details, consent withdrawal/erasure mechanism, subcontractors/transfers and age-related safeguards as applicable.
+2. Provision Neon and configure `DATABASE_URL` and `DIRECT_URL` securely on the API host. Run `npm ci` (which generates the Prisma 7 client), then `npm run db:migrate` **after review** to apply the checked-in Prisma migrations. The migration command fails before connecting when both URLs are absent.
 3. Verify Resend sending domain and configure RESEND_API_KEY, RESEND_FROM_EMAIL and RESEND_TO_EMAIL securely. Test notification delivery in a private staging environment.
 4. Set APPROVED_PRIVACY_NOTICE_VERSION to the exact published policy version, not "pending"; then enable SUBMISSIONS_ENABLED=true **on the backend**. Check GET /api/submission-status. This must remain false when a dependency or approved policy is missing.
 5. Set NEXT_PUBLIC_SUBMISSIONS_ENABLED=true on the frontend along with NEXT_PUBLIC_API_BASE_URL and redeploy. The frontend additionally checks live backend readiness before displaying the submission control.
@@ -82,4 +83,4 @@ API tests include disabled-by-default status, contact/partnership validation, ex
 
 Real Neon database credentials, Resend credentials, an approved privacy policy and receiving team email must come from the organization. Database migrations have not been executed on any remote Neon instance by this implementation. No user data has been submitted by this build.
 
-The npm lockfile was regenerated and committed by the dedicated Part 11 GitHub Actions workflow after adding Prisma and Resend dependencies.
+The Prisma client now uses Prisma ORM 7.10.1 with the Neon serverless driver adapter. The new `prisma.config.ts` separates CLI configuration from the schema, while a pre-migration guard prevents running migrations without an explicit database URL.
