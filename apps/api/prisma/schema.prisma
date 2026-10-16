@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model InquirySubmission {
+  id             String   @id @default(uuid()) @db.Uuid
+  requestId      String   @unique @db.Uuid
+  category       String   @db.VarChar(30)
+  name           String   @db.VarChar(100)
+  email          String   @db.VarChar(254)
+  phone          String?  @db.VarChar(24)
+  subject        String   @db.VarChar(160)
+  message        String   @db.Text
+  consentVersion String   @db.VarChar(50)
+  consentAt      DateTime @default(now())
+  emailStatus    String   @default("pending") @db.VarChar(20)
+  createdAt      DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([category, createdAt])
+}
+
+model PartnershipSubmission {
+  id             String   @id @default(uuid()) @db.Uuid
+  requestId      String   @unique @db.Uuid
+  kind           String   @db.VarChar(20)
+  name           String   @db.VarChar(100)
+  email          String   @db.VarChar(254)
+  phone          String?  @db.VarChar(24)
+  organization   String   @db.VarChar(140)
+  role           String   @db.VarChar(90)
+  location       String   @db.VarChar(120)
+  interest       String   @db.VarChar(50)
+  message        String   @db.Text
+  consentVersion String   @db.VarChar(50)
+  consentAt      DateTime @default(now())
+  emailStatus    String   @default("pending") @db.VarChar(20)
+  createdAt      DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([kind, createdAt])
+}
