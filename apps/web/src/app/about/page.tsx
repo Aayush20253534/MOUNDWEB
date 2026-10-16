@@ -14,6 +14,8 @@ import {
 import { StatCard } from "@/components/ui/cards";
 import { CTASection, PartnerCards } from "@/components/sections/shared";
 import { Icon } from "@/components/ui/icon";
+import { AboutMotion } from "@/components/scenes/about-motion";
+import { AboutJourney } from "@/components/sections/about-journey";
 import type { IconName } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -46,6 +48,7 @@ const values: { icon: IconName; title: string; body: string }[] = [
 export default function AboutPage() {
   return (
     <>
+      <AboutMotion />
       <PageHero
         eyebrow="About MOUNDWEB"
         title={
@@ -55,16 +58,20 @@ export default function AboutPage() {
         }
         description="We bring brands, skills, and opportunity together. MOUNDWEB connects digital marketing, AI-integrated learning, and a practical approach to growth."
         image="about-world"
-        className="about-hero"
+        className="about-hero about-reveal"
         artwork={
           <div className="hero-pillar-grid">
+            <div className="about-hero-orbits" aria-hidden="true">
+              <span /><span /><span />
+              <i /><i /><i />
+            </div>
             {[
               ["chart", "Brand growth"],
               ["brain", "AI-integrated learning"],
               ["code", "Web development courses"],
               ["handshake", "Partnerships"],
             ].map(([icon, label]) => (
-              <div className="hero-pillar" key={label}>
+              <div className="hero-pillar about-animate-item" key={label}>
                 <Icon name={icon as IconName} />
                 <span>{label}</span>
               </div>
@@ -79,7 +86,7 @@ export default function AboutPage() {
         </h2>
         <ButtonLink href="#our-story">Our story</ButtonLink>
       </PageHero>
-      <Section id="our-story">
+      <Section id="our-story" className="about-reveal">
         <div className="split-layout story-layout">
           <div>
             <Eyebrow>Our story</Eyebrow>
@@ -105,23 +112,25 @@ export default function AboutPage() {
               Explore our programs
             </ButtonLink>
           </div>
-          <div className="feature-grid">
+          <div className="feature-grid about-values">
             {values.map((item) => (
+              <div className="about-animate-item" key={item.title}>
               <FeaturePanel
-                key={item.title}
                 icon={item.icon}
                 title={item.title}
               >
                 {item.body}
               </FeaturePanel>
+              </div>
             ))}
           </div>
         </div>
       </Section>
-      <Section className="mission-section">
+      <AboutJourney />
+      <Section className="mission-section about-reveal">
         <Eyebrow>Our mission & vision</Eyebrow>
         <div className="mission-grid">
-          <article className="mission-card">
+          <article className="mission-card about-animate-item">
             <Image
               src="/assets/landscapes/summit-path.webp"
               alt=""
@@ -155,7 +164,7 @@ export default function AboutPage() {
           </article>
         </div>
       </Section>
-      <Section>
+      <Section className="about-reveal">
         <SectionHeading
           eyebrow="What we do"
           title={
@@ -204,7 +213,7 @@ export default function AboutPage() {
               body: "A shared approach to opportunity.",
             },
           ].map((item) => (
-            <article key={item.title}>
+            <article className="about-animate-item" key={item.title}>
               <Icon name={item.icon} size={30} />
               <h3>{item.title}</h3>
               <p>{item.body}</p>
@@ -212,7 +221,7 @@ export default function AboutPage() {
           ))}
         </div>
       </Section>
-      <Section className="impact-section">
+      <Section className="impact-section about-reveal">
         <div className="split-layout">
           <div>
             <Eyebrow>Training & placement impact</Eyebrow>
@@ -230,7 +239,7 @@ export default function AboutPage() {
             </ButtonLink>
           </div>
           <div>
-            <div className="impact-cards">
+            <div className="impact-cards about-verified-stats">
               {[
                 { icon: "users" as const, label: "Learners trained" },
                 { icon: "briefcase" as const, label: "Placements assisted" },
@@ -259,7 +268,7 @@ export default function AboutPage() {
           </div>
         </div>
       </Section>
-      <Section className="subtle-section">
+      <Section className="subtle-section about-reveal">
         <div className="split-layout">
           <div>
             <Eyebrow>Why MOUNDWEB</Eyebrow>
@@ -317,7 +326,7 @@ export default function AboutPage() {
           </div>
         </div>
       </Section>
-      <Section>
+      <Section className="about-reveal">
         <SectionHeading
           eyebrow="Partner with us"
           title={
@@ -331,7 +340,7 @@ export default function AboutPage() {
         />
         <PartnerCards />
       </Section>
-      <Section className="team-section">
+      <Section className="team-section about-reveal">
         <div className="split-layout">
           <div>
             <Eyebrow>Our team & culture</Eyebrow>
@@ -367,7 +376,7 @@ export default function AboutPage() {
                 image: "creators",
               },
             ].map((item) => (
-              <article key={item.title}>
+              <article className="about-animate-item" key={item.title}>
                 <Image
                   src={`/assets/graphics/${item.image}.svg`}
                   alt=""
