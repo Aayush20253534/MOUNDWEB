@@ -1,9 +1,17 @@
-import nextVitals from "eslint-config-next/core-web-vitals";
-import nextTypescript from "eslint-config-next/typescript";
+import js from "@eslint/js";
+import globals from "globals";
+import tseslint from "typescript-eslint";
 
-const config = [
-  { ignores: [".next/**", "out/**", "next-env.d.ts", "src/generated/prisma/**"] },
-  ...nextVitals,
-  ...nextTypescript,
-];
-export default config;
+export default tseslint.config(
+  {
+    ignores: [".next/**", "out/**", "next-env.d.ts", "src/generated/prisma/**"],
+  },
+  {
+    files: ["**/*.{js,mjs,cjs,ts,tsx}"],
+    ...js.configs.recommended,
+    languageOptions: {
+      globals: { ...globals.browser, ...globals.node },
+    },
+  },
+  ...tseslint.configs.recommended,
+);
