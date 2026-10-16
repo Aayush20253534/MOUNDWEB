@@ -13,6 +13,8 @@ export function MountainRuntime() {
     const target = host.current;
     const stage = target?.closest<HTMLElement>(".mountain-stage");
     if (!target || !stage) return;
+    const mount: HTMLDivElement = target;
+    const stageElement: HTMLElement = stage;
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
     if (motion.matches || connection?.saveData) return;
@@ -20,7 +22,7 @@ export function MountainRuntime() {
     let visible = false;
     let initializing = false;
     let controller: Controller | null = null;
-    const onPhase = (phase: MountainPhase) => { stage.dataset.phase = phase; };
+    const onPhase = (phase: MountainPhase) => { stageElement.dataset.phase = phase; };
     const eligible = () => visible && !document.hidden && !motion.matches;
     const stop = () => { controller?.pause(); };
     async function activate() {
@@ -35,13 +37,13 @@ export function MountainRuntime() {
       try {
         const renderer = await import("./mountain-webgl");
         if (cancelled || !eligible()) return;
-        target.appendChild(canvas);
+        mount.appendChild(canvas);
         const low = window.innerWidth < 800 ||
           (navigator.hardwareConcurrency ?? 4) <= 4;
         controller = renderer.createMountainWebGL(canvas, onPhase, low ? "low" : "high");
       } catch {
         canvas.remove();
-        stage.dataset.phase = "poster";
+        stageElement.dataset.phase = "poster";
       } finally {
         initializing = false;
       }
@@ -51,7 +53,7 @@ export function MountainRuntime() {
       if (eligible()) void activate();
       else stop();
     }, { rootMargin: "120px", threshold: 0 });
-    intersection.observe(stage);
+    intersection.observe(stageElement);
     const onVisibility = () => {
       if (eligible()) void activate();
       else stop();
@@ -59,8 +61,8 @@ export function MountainRuntime() {
     const onMotion = () => {
       if (motion.matches) {
         stop();
-        stage.dataset.phase = "poster";
-        target.querySelector("canvas")?.remove();
+        stageElement.dataset.phase = "poster";
+        mount.querySelector("canvas")?.remove();
         controller?.dispose();
         controller = null;
       } else if (eligible()) void activate();
@@ -73,7 +75,7 @@ export function MountainRuntime() {
       document.removeEventListener("visibilitychange", onVisibility);
       motion.removeEventListener("change", onMotion);
       controller?.dispose();
-      target.querySelector("canvas")?.remove();
+      mount.querySelector("canvas")?.remove();
     };
   }, []);
   return <div className="mountain-scene-runtime" ref={host} aria-hidden="true" />;
