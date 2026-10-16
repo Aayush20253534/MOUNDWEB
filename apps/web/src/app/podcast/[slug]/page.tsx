@@ -4,17 +4,18 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, ListMusic, ScrollText } from "lucide-react";
 import { episodes, getEpisode, isPublishedEpisode } from "@/lib/editorial";
+import { getPublishedEpisode } from "@/lib/editorial-remote";
 import { AudioPlayer } from "@/components/editorial/audio-player";
 import { EditorialMotion } from "@/components/editorial/editorial-motion";
 import { Breadcrumbs, ButtonLink, Container, Eyebrow, Section } from "@/components/ui/primitives";
 import { CTASection } from "@/components/sections/shared";
 
 type Props = { params: Promise<{ slug: string }> };
-export const dynamicParams = false;
+export const dynamicParams = true;
 export function generateStaticParams() { return episodes.map(({ slug }) => ({ slug })); }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const item = getEpisode(slug);
+  const item = await getPublishedEpisode(slug) ?? getEpisode(slug);
   return {
     title: item ? item.title + " | Podcast" : "Podcast",
     description: item?.summary,
