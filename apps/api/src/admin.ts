@@ -301,11 +301,14 @@ export function createAdminRouter(options: AdminRouterOptions = {}) {
   router.put("/editorial/:kind/:slug", authenticate, requireRole("ADMIN", "EDITOR"), async (req: AdminRequest, res) => {
     if (!req.moundAdmin) { res.status(401).json({ error: "Authentication required." }); return; }
     if (!requireOrigin(req, res)) return;
-    const kind = req.params.kind.toUpperCase();
+    const rawKind = req.params.kind;
+    const slug = req.params.slug;
+    if (!rawKind || !slug) { res.status(404).json({ error: "Unknown editorial section." }); return; }
+    const kind = rawKind.toUpperCase();
     if (kind !== "PODCAST" && kind !== "MEDIA") { res.status(404).json({ error: "Unknown editorial section." }); return; }
     const parsed = editorialSchema.safeParse(req.body);
     if (!parsed.success) { res.status(422).json({ error: "Invalid editorial fields.", fields: parsed.error.flatten().fieldErrors }); return; }
-    const validated = validateEditorial(kind, req.params.slug, parsed.data, env);
+    const validated = validateEditorial(kind, slug, parsed.data, env);
     if (typeof validated === "string") { res.status(422).json({ error: validated }); return; }
     try {
       const item = await (await getStore()).upsertEditorial(validated, req.moundAdmin);
