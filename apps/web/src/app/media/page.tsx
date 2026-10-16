@@ -8,8 +8,6 @@ import { EditorialMotion } from "@/components/editorial/editorial-motion";
 import { MediaGallery } from "@/components/editorial/media-gallery";
 import { getPublicEditorialLists } from "@/lib/editorial-remote";
 
-import { getPublicEditorialLists } from "@/lib/editorial-remote";
-
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getPublicEditorialLists();
   const hasPublished = content.media.length > 0;

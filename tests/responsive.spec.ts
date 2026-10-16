@@ -24,6 +24,7 @@ const routes = [
   "/privacy",
   "/terms",
   "/design-system",
+  "/admin",
 ] as const;
 
 const widths = [320, 360, 375, 430, 600, 768, 1024, 1280, 1440, 1920] as const;

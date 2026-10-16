@@ -23,7 +23,20 @@ export const viewport: Viewport = {
   viewportFit: "cover",
   themeColor: "#070707",
 };
+function getMetadataBase(): URL | undefined {
+  const raw = process.env.NEXT_PUBLIC_SITE_URL;
+  if (!raw) return undefined;
+  try {
+    const url = new URL(raw);
+    if (url.protocol !== "https:" &&
+      !(url.protocol === "http:" && ["localhost", "127.0.0.1"].includes(url.hostname))) return undefined;
+    if (url.username || url.password || url.search || url.hash || url.pathname !== "/") return undefined;
+    return url;
+  } catch { return undefined; }
+}
+const resolvedMetadataBase = getMetadataBase();
 export const metadata: Metadata = {
+  metadataBase: resolvedMetadataBase,
   title: { default: "MOUNDWEB | Digital Growth", template: "%s | MOUNDWEB" },
   description: "Digital marketing, brand growth, and career-focused training.",
   icons: {

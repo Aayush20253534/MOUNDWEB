@@ -7,8 +7,6 @@ import { EditorialCatalog } from "@/components/editorial/editorial-catalog";
 import { EditorialMotion } from "@/components/editorial/editorial-motion";
 import { getPublicEditorialLists } from "@/lib/editorial-remote";
 
-import { getPublicEditorialLists } from "@/lib/editorial-remote";
-
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getPublicEditorialLists();
   const hasPublished = content.podcast.length > 0;

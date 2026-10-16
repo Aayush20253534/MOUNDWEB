@@ -24,6 +24,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...courses.map((course) => "/programs/" + course.slug),
   ];
   const editorial = await getPublicEditorialLists();
+  if (editorial.podcast.length) paths.push("/podcast");
+  if (editorial.media.length) paths.push("/media");
   paths.push(
     ...editorial.podcast.map((item) => "/podcast/" + item.slug),
     ...editorial.media.map((item) => "/media/" + item.slug),
