@@ -33,12 +33,12 @@ export function MountainRuntime() {
       canvas.setAttribute("aria-hidden", "true");
       canvas.setAttribute("role", "presentation");
       try {
-        const module = await import("./mountain-webgl");
+        const renderer = await import("./mountain-webgl");
         if (cancelled || !eligible()) return;
         target.appendChild(canvas);
         const low = window.innerWidth < 800 ||
           (navigator.hardwareConcurrency ?? 4) <= 4;
-        controller = module.createMountainWebGL(canvas, onPhase, low ? "low" : "high");
+        controller = renderer.createMountainWebGL(canvas, onPhase, low ? "low" : "high");
       } catch {
         canvas.remove();
         stage.dataset.phase = "poster";
