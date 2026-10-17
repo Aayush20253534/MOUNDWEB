@@ -6,7 +6,7 @@ services:
     buildCommand: npm ci && npm run build --workspace @moundweb/shared && npm run build --workspace @moundweb/api
     startCommand: npm run start --workspace @moundweb/api
     healthCheckPath: /api/health
-    autoDeployTrigger: commit
+    autoDeployTrigger: checksPass
     envVars:
       - key: NODE_ENV
         value: production

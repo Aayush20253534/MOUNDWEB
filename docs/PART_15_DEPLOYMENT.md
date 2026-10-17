@@ -42,7 +42,7 @@ Before production, run the checked-in migrations against staging and verify the 
 
 ## 3. Deploy the API on Render
 
-1. Open Render and create a **Blueprint** from `Aayush20253534/MOUNDWEB`, branch `main`. Render detects the repository's `render.yaml`.
+1. Open Render and create a **Blueprint** from `Aayush20253534/MOUNDWEB`, branch `main`. Render detects the repository's `render.yaml`; the Blueprint waits for GitHub checks to pass before automatically deploying a commit.
 2. Review the Blueprint before applying it. Select an appropriate service plan based on your availability and budget. The API health check is `/api/health`, a liveness endpoint that works even while the database is being configured.
 3. The Blueprint sets `ADMIN_ENABLED=false`, `SUBMISSIONS_ENABLED=false`, `APPROVED_PRIVACY_NOTICE_VERSION=pending`, `ADMIN_COOKIE_SECURE=true` and `TRUST_PROXY=true`. Do not switch the disabled features on yet.
 4. Copy the API's Render URL. Later, attach the custom API domain in Render if the site will use a custom domain.
