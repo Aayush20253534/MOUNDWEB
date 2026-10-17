@@ -20,11 +20,12 @@ In a second terminal, run `npm run dev:api`. The frontend is `http://localhost:3
 ```sh
 npm run verify
 npm audit --audit-level=high
+npm run test:deployment
 npx playwright install chromium
 npm run test:browser
 ```
 
-The workflow performs dependency installation and Prisma generation, lint, strict TypeScript, unit tests, production builds, the npm high-severity audit gate and Playwright browser tests. Responsive checks cover 22 routes at widths from 320px through 1920px, with automated mobile/desktop WCAG checks.
+The workflow performs dependency installation and Prisma generation, lint, strict TypeScript, unit tests, production builds, the npm high-severity audit gate, deployment smoke utility tests and Playwright browser tests. Responsive checks cover 22 routes at widths from 320px through 1920px, with automated mobile/desktop WCAG checks.
 
 ## Important routes
 
@@ -38,9 +39,22 @@ The workflow performs dependency installation and Prisma generation, lint, stric
 
 ## Admin, database and live submissions
 
-See [Part 11 Backend](docs/PART_11_BACKEND.md), [Part 12 Admin](docs/PART_12_ADMIN.md), and [Part 14 Security & Release](docs/PART_14_SECURITY_RELEASE.md). No default admin account exists. Provision one through the documented secure bootstrap command after reviewing/applying migrations; never commit its password.
+See [Part 11 Backend](docs/PART_11_BACKEND.md), [Part 12 Admin](docs/PART_12_ADMIN.md), [Part 14 Security & Release](docs/PART_14_SECURITY_RELEASE.md), and [Part 15 Deployment](docs/PART_15_DEPLOYMENT.md). No default admin account exists. Provision one through the documented secure bootstrap command after reviewing/applying migrations; never commit its password.
 
 **Keep `ADMIN_ENABLED=false` and both submission flags false until real environment setup is complete.** The repository cannot apply a remote Neon migration, verify a Resend domain, or send real production mail without owner-controlled credentials. An API receipt is not an enrollment, placement, contract, or partnership approval.
+
+## Deployment
+
+The repository now includes a Render Blueprint for the API (`render.yaml`), Vercel monorepo configuration (`apps/web/vercel.json`), and a post-deployment check. After deploying the frontend and API, configure the actual environment variables and run:
+
+```powershell
+$env:SITE_URL = "https://www.yourdomain.com"
+$env:API_URL = "https://api.yourdomain.com"
+npm run smoke:deployment
+Remove-Item Env:SITE_URL, Env:API_URL
+```
+
+The full check expects API/database readiness. Use `npm run smoke:deployment -- --skip-database-check` only for an early infrastructure check; it is not production launch approval. Follow the Part 15 runbook before enabling the admin or personal-data collection.
 
 ## Handoff and asset references
 
