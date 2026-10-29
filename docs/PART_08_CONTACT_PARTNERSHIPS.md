@@ -6,7 +6,9 @@ Contact and partnership frontend flows have been implemented in the existing Nex
 
 ### Contact
 
-- Preserves the dark-orange contact page, responsive inquiry form, information cards, FAQ and network imagery.
+- The Contact hero uses original HTML/CSS inquiry artwork in the dark-orange visual style: a draft letter rises from an open envelope while idea bubbles, a paper plane and connections to the four inquiry pathways animate around it. It replaces the old mountain hero, without presenting a live chat, delivery confirmation or availability claim.
+- Pause/resume controls, automatic pause offscreen or in a hidden tab, and a complete static scene for reduced-motion preferences. The hero links to the existing inquiry form and conversation-path chooser. No new dependencies, image requests or message submissions are introduced.
+- Preserves the responsive inquiry form, information cards, confirmed social links, FAQ and supporting network imagery.
 - Adds four route selectors: brand growth, programs, colleges and franchises. College and franchise selections navigate to their purpose-built inquiry sections instead of a generic contact dropdown.
 - Existing Contact inquiry validates name, email, optional international phone, inquiry type, subject and message. A valid draft opens a modal review, with a copy-to-clipboard action and an accessible status message.
 - Messages and prefilled course/service context from earlier parts remain intact. The Contact form still makes no HTTP submission or local persistence.

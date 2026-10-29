@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Suspense } from "react";
-import { PageHero } from "@/components/sections/page-hero";
+import { ContactHero } from "@/components/contact/contact-hero";
 import {
-  ButtonLink,
   Eyebrow,
   Section,
   SectionHeading,
@@ -19,8 +18,7 @@ import {
 } from "@/components/sections/shared";
 import { OrbitGlobeStage } from "@/components/scenes/scene-stages";
 import { InquiryForm } from "@/components/forms/inquiry-form";
-import { contactFaqs, type IconName } from "@/lib/content";
-import { Icon } from "@/components/ui/icon";
+import { contactFaqs } from "@/lib/content";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ConnectionMotion } from "@/components/scenes/connection-motion";
@@ -35,35 +33,7 @@ export default function ContactPage() {
   return (
     <>
       <ConnectionMotion />
-      <PageHero
-        eyebrow="Contact us"
-        title={
-          <>
-            Let’s start the
-            <br />
-            <em>conversation.</em>
-          </>
-        }
-        description="For brands, students, colleges, and partners. Let’s connect around growth, training, collaboration, and new possibilities."
-        className="contact-hero connection-hero"
-        artwork={
-          <div className="contact-hero-labels">
-            {[
-              ["lightbulb", "Ideas & possibility"],
-              ["handshake", "Partnerships"],
-              ["chart", "Brand growth"],
-              ["cap", "Learning journeys"],
-            ].map(([icon, label]) => (
-              <div key={label}>
-                <Icon name={icon as IconName} />
-                <span>{label}</span>
-              </div>
-            ))}
-          </div>
-        }
-      >
-        <ButtonLink href="#inquiry">Prepare an inquiry</ButtonLink>
-      </PageHero>
+      <ContactHero />
       <CapabilityStrip />
       <Section className="connection-reveal">
         <SectionHeading
@@ -117,7 +87,7 @@ export default function ContactPage() {
           <SocialLinks variant="labeled" />
         </div>
       </Section>
-      <Section className="connection-pathways connection-reveal">
+      <Section id="conversation-paths" className="connection-pathways connection-reveal">
         <SectionHeading
           eyebrow="Choose a conversation"
           title={<>What brings you <em>here?</em></>}

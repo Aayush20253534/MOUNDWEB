@@ -693,6 +693,43 @@ test("Contact review supports copyable local drafts and never makes a network su
   await expect(dialog.getByRole("status")).not.toBeEmpty();
 });
 
+test("Contact hero animates inquiry preparation with pause, resume and working entry points", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  const posts: string[] = [];
+  page.on("request", (request) => { if (request.method() === "POST") posts.push(request.url()); });
+  await page.goto("/contact");
+  const studio = page.getByTestId("conversation-studio");
+  await expect(studio).toHaveAttribute("data-motion", "running");
+  await expect(studio.getByRole("img")).toHaveAccessibleName(/A draft inquiry opens into a conversation/);
+  await expect(page.locator(".contact-hero img")).toHaveCount(0);
+  await expect.poll(() => studio.evaluate((element) => element.getAnimations({ subtree: true })
+    .some((animation) => animation.playState === "running"))).toBe(true);
+  await page.getByRole("button", { name: "Pause conversation animation" }).click();
+  await expect(studio).toHaveAttribute("data-motion", "paused");
+  await expect.poll(() => studio.evaluate((element) => element.getAnimations({ subtree: true })
+    .every((animation) => animation.playState === "paused"))).toBe(true);
+  const pausedTime = await studio.evaluate((element) => Number(element.getAnimations({ subtree: true })[0].currentTime));
+  await page.waitForTimeout(200);
+  expect(await studio.evaluate((element) => Number(element.getAnimations({ subtree: true })[0].currentTime))).toBe(pausedTime);
+  await page.getByRole("button", { name: "Resume conversation animation" }).click();
+  await expect.poll(() => studio.evaluate((element) => Number(element.getAnimations({ subtree: true })[0].currentTime))).toBeGreaterThan(pausedTime);
+  await page.locator("footer").scrollIntoViewIfNeeded();
+  await expect(studio).toHaveAttribute("data-motion", "paused");
+  await studio.scrollIntoViewIfNeeded();
+  await expect(studio).toHaveAttribute("data-motion", "running");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(studio).toHaveAttribute("data-motion", "static");
+  expect(await studio.evaluate((element) => element.getAnimations({ subtree: true }).length)).toBe(0);
+  const hero = page.locator(".contact-hero");
+  await hero.getByRole("link", { name: "Find your starting point" }).click();
+  await expect(page).toHaveURL(/#conversation-paths$/);
+  await expect(page.locator("#conversation-paths")).toBeInViewport();
+  await hero.getByRole("link", { name: "Prepare an inquiry", exact: true }).click();
+  await expect(page).toHaveURL(/#inquiry$/);
+  await expect(page.locator("#inquiry")).toBeInViewport();
+  expect(posts).toEqual([]);
+});
+
 test("partnership and contact motion respect reduced-motion preference", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 375, height: 900 });
@@ -703,9 +740,11 @@ test("partnership and contact motion respect reduced-motion preference", async (
   expect(anim).toBe("none");
   await page.goto("/contact");
   await expect(page.locator(".connection-pathways .connection-path-card")).toHaveCount(4);
-  await expect(page.locator(".connection-hero")).toBeVisible();
-  const heroMotion = await page.locator(".contact-hero-labels > div").first().evaluate((el) => getComputedStyle(el).animationName);
-  expect(heroMotion).toBe("none");
+  const studio = page.getByTestId("conversation-studio");
+  await expect(studio).toHaveAttribute("data-motion", "static");
+  await expect(studio.getByRole("img")).toBeVisible();
+  expect(await studio.evaluate((element) => element.getAnimations({ subtree: true }).length)).toBe(0);
+  await expect(studio.getByRole("button", { includeHidden: true })).toBeHidden();
 });
 
 

@@ -1890,50 +1890,6 @@
     align-items: start;
     gap: 80px;
   }
-  .contact-hero-labels {
-    position: relative;
-    min-height: 310px;
-  }
-  .contact-hero-labels > div {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    width: 175px;
-    padding: 20px;
-    border: 1px solid var(--accent-border);
-    border-radius: 9px;
-    background: #100b08dd;
-    box-shadow: 0 0 24px var(--glow);
-  }
-  .contact-hero-labels > div svg {
-    flex: none;
-    color: var(--accent);
-  }
-  .contact-hero-labels > div span {
-    font-size: 12px;
-    line-height: 1.4;
-  }
-  .contact-hero-labels > div:nth-child(1) {
-    left: 0;
-    top: 0;
-    transform: rotate(4deg);
-  }
-  .contact-hero-labels > div:nth-child(2) {
-    right: 0;
-    top: 25px;
-    transform: rotate(-3deg);
-  }
-  .contact-hero-labels > div:nth-child(3) {
-    left: 0;
-    bottom: 10px;
-    transform: rotate(-4deg);
-  }
-  .contact-hero-labels > div:nth-child(4) {
-    right: 0;
-    bottom: 0;
-    transform: rotate(3deg);
-  }
   .contact-method-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2698,16 +2654,6 @@
   .hero-pillar:nth-child(4) {
     right: -15px;
   }
-  .contact-hero-labels > div {
-    width: 145px;
-    padding: 16px;
-  }
-  .contact-hero-labels > div:nth-child(even) {
-    right: -14px;
-  }
-  .contact-hero-labels > div:nth-child(odd) {
-    left: -4px;
-  }
   .capability-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -2870,8 +2816,7 @@
   .page-hero-artwork {
     opacity: 0.8;
   }
-  .hero-pillar-grid,
-  .contact-hero-labels {
+  .hero-pillar-grid {
     display: none;
   }
   .page-hero .hero-actions {
@@ -3374,8 +3319,7 @@
   .about-hero .landscape img {
     object-position: 70% 80%;
   }
-  .hero-pillar-grid,
-  .contact-hero-labels {
+  .hero-pillar-grid {
     display: none;
   }
   .feature-grid {
@@ -3519,12 +3463,6 @@
   .accordion summary {
     font-size: 12px;
     padding: 15px;
-  }
-  .contact-hero {
-    min-height: 570px;
-  }
-  .contact-hero > .container {
-    padding-bottom: 200px;
   }
   .contact-method-grid {
     gap: 12px;
@@ -4589,16 +4527,6 @@
   transform: translate3d(var(--connection-x),var(--connection-y),0);
   transition: transform 600ms var(--ease-out);
 }
-.connection-hero .contact-hero-labels > div {
-  animation: connection-card-float 7s ease-in-out infinite alternate;
-}
-.connection-hero .contact-hero-labels > div:nth-child(2) { animation-delay: -2.3s; animation-duration: 8s; }
-.connection-hero .contact-hero-labels > div:nth-child(3) { animation-delay: -4.4s; animation-duration: 7.4s; }
-.connection-hero .contact-hero-labels > div:nth-child(4) { animation-delay: -5.2s; animation-duration: 8.3s; }
-@keyframes connection-card-float {
-  from { translate: 0 0; }
-  to { translate: 0 -8px; }
-}
 .connection-reveal[data-connection-motion="entered"] {
   animation: connection-reveal-in 720ms var(--ease-out) both;
 }
@@ -4717,7 +4645,6 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .connection-hero .page-hero-artwork { transform: none !important; }
-  .connection-hero .contact-hero-labels > div,
   .connection-reveal { animation: none !important; transition: none !important; }
   .connection-path-card:hover { transform: none !important; }
 }
