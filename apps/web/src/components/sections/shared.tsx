@@ -71,10 +71,17 @@ export function CTASection({
     </section>
   );
 }
+const measurementSignals = [
+  { label: "Visibility", value: "Be discovered", note: "Organic search", illustration: "visibility" },
+  { label: "Engagement", value: "Build connection", note: "Audience interaction", illustration: "engagement" },
+  { label: "Conversion", value: "Inspire action", note: "Meaningful inquiries", illustration: "conversion" },
+  { label: "Retention", value: "Create loyalty", note: "Returning customers", illustration: "retention" },
+] as const;
+
 export function MeasurementPanel({ compact = false }: { compact?: boolean }) {
   return (
     <section
-      className={`measurement-section ${compact ? "measurement-section--compact" : ""}`}
+      className={`measurement-section ${compact ? "measurement-section--compact" : "measurement-section--illustrated"}`}
     >
       <Container>
         <div className="measurement-panel">
@@ -90,21 +97,27 @@ export function MeasurementPanel({ compact = false }: { compact?: boolean }) {
             description="A focused view of the signals that shape your next decision."
           />
           <div className="measurement-grid">
-            {[
-              ["Visibility", "Be discovered", "Organic search"],
-              ["Engagement", "Build connection", "Audience interaction"],
-              ["Conversion", "Inspire action", "Meaningful inquiries"],
-              ["Retention", "Create loyalty", "Returning customers"],
-            ].map(([label, value, note], index) => (
+            {measurementSignals.map(({ label, value, note, illustration }, index) => (
               <article className="measurement-card" key={label}>
                 <span className="measurement-index">0{index + 1}</span>
-                <h3>{label}</h3>
-                <strong>{value}</strong>
-                <p>{note}</p>
-                <svg viewBox="0 0 200 52" aria-hidden="true">
-                  <path
-                    d={`M0 46 L20 ${39 - index * 2} 39 41 59 29 78 31 98 21 118 24 138 10 158 13 180 5 200 1`}
+                {!compact && (
+                  <Image
+                    className="measurement-card-art"
+                    src={`/assets/graphics/measurement-${illustration}.svg`}
+                    alt=""
+                    width={256}
+                    height={220}
+                    unoptimized
+                    aria-hidden="true"
                   />
+                )}
+                <div className="measurement-card-copy">
+                  <h3>{label}</h3>
+                  <strong>{value}</strong>
+                  <p>{note}</p>
+                </div>
+                <svg viewBox="0 0 200 52" aria-hidden="true">
+                  <path d={`M0 46 L20 ${39 - index * 2} 39 41 59 29 78 31 98 21 118 24 138 10 158 13 180 5 200 1`} />
                   <path
                     className="chart-fill"
                     d="M0 46 20 39 39 41 59 29 78 31 98 21 118 24 138 10 158 13 180 5 200 1V52H0Z"

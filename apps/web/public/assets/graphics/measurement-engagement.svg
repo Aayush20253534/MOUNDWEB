@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="220" viewBox="0 0 256 220" fill="none">
+<defs>
+ <linearGradient id="hot" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFE0A8"/><stop offset=".38" stop-color="#FF9E4C"/><stop offset="1" stop-color="#FC4A12"/></linearGradient>
+ <linearGradient id="surface" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#3C2118"/><stop offset=".56" stop-color="#1B110E"/><stop offset="1" stop-color="#08090B"/></linearGradient>
+ <radialGradient id="aura"><stop stop-color="#FF6C22" stop-opacity=".4"/><stop offset=".65" stop-color="#FF6C22" stop-opacity=".075"/><stop offset="1" stop-color="#FF6C22" stop-opacity="0"/></radialGradient>
+ <filter id="glow" x="-65%" y="-65%" width="230%" height="230%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <filter id="soft" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="12"/></filter>
+</defs>
+<ellipse cx="144" cy="121" rx="118" ry="93" fill="url(#aura)"/>
+
+<g stroke="#D76832" stroke-width="1.4" stroke-dasharray="4 5" opacity=".7"><path d="M129 48Q38 38 32 122T111 177"/><path d="M129 48Q232 53 226 125T162 181"/><path d="M34 129Q113 15 226 129"/></g>
+<g fill="url(#surface)" stroke="#EE803A" stroke-width="1.6"><circle cx="128" cy="46" r="25"/><circle cx="38" cy="142" r="23"/><circle cx="228" cy="121" r="20"/><circle cx="205" cy="187" r="21"/></g>
+<g fill="url(#hot)" opacity=".96"><circle cx="128" cy="39" r="7"/><path d="M116 56c1-13 23-13 24 0v5h-24z"/><circle cx="38" cy="135" r="6"/><path d="M27 148c2-10 20-10 22 0v6H27z"/><circle cx="228" cy="116" r="5"/><path d="M219 128c0-10 18-10 18 0v4h-18z"/><circle cx="205" cy="182" r="5"/><path d="M195 195c1-10 20-10 21 0v4h-21z"/></g>
+<g filter="url(#soft)"><rect x="70" y="86" width="132" height="99" rx="20" fill="#E65A24" fill-opacity=".25"/></g>
+<path d="M79 91h103a18 18 0 0 1 18 18v49a18 18 0 0 1-18 18h-49l-29 20 5-20H79a18 18 0 0 1-18-18v-49a18 18 0 0 1 18-18Z" fill="url(#surface)" stroke="url(#hot)" stroke-width="3" filter="url(#glow)"/>
+<g fill="url(#hot)" filter="url(#glow)"><circle cx="102" cy="133" r="6"/><circle cx="132" cy="133" r="6"/><circle cx="162" cy="133" r="6"/></g>
+<circle cx="14" cy="63" r="2" fill="#FF9B54"/><circle cx="244" cy="67" r="2" fill="#FFA05A"/>
+</svg>

@@ -5959,3 +5959,108 @@ main :where(h1, h2, h3, h4) {
   .home-hero .hero-float--three { transform: rotate(3deg) !important; }
   .home-hero .hero-float--four { transform: rotate(-3deg) !important; }
 }
+
+
+/* Growth signals: responsive illustrated cards matching the approved orange-on-black design. */
+.measurement-section--illustrated > .container {
+  width: min(1600px, calc(100% - 96px));
+  max-inline-size: 1600px;
+}
+.measurement-section--illustrated .measurement-panel {
+  padding: clamp(26px, 3vw, 48px);
+  border-color: #382b25;
+  border-radius: 16px;
+  background:
+    radial-gradient(ellipse at 26% 0, #24150f29, transparent 62%),
+    linear-gradient(145deg, #12100f 0%, #070707 85%);
+}
+.measurement-section--illustrated .measurement-panel .section-heading {
+  margin-bottom: clamp(25px, 3vw, 38px);
+}
+.measurement-section--illustrated .measurement-grid { gap: clamp(12px, 1.35vw, 22px); }
+.measurement-section--illustrated .measurement-card {
+  min-height: 246px;
+  padding: 26px 22px 12px;
+  border: 1px solid #38302d;
+  border-radius: 11px;
+  background: radial-gradient(circle at 75% 44%, #552a161d, transparent 59%), #090909;
+  box-shadow: inset 0 1px 0 #ffffff07;
+  transition: border-color 260ms ease, box-shadow 260ms ease, transform 260ms ease;
+}
+.measurement-section--illustrated .measurement-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, #090909eb 0%, #090909ae 24%, transparent 75%);
+  z-index: 1;
+}
+.measurement-section--illustrated .measurement-card:hover {
+  border-color: #b76038;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px #e9641b13, inset 0 1px 0 #ffc78a13;
+}
+.measurement-section--illustrated .measurement-card-copy {
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 1px 9px #090909d9;
+}
+.measurement-section--illustrated .measurement-card h3 { font-size: 14px; }
+.measurement-section--illustrated .measurement-card strong {
+  font-size: clamp(18px, 1.48vw, 25px);
+  line-height: 1.25;
+  margin-top: 17px;
+}
+.measurement-section--illustrated .measurement-card p { margin-top: 7px; font-size: 11px; }
+.measurement-section--illustrated .measurement-index { z-index: 3; top: 15px; right: 16px; }
+.measurement-section--illustrated .measurement-card-art {
+  position: absolute;
+  z-index: 0;
+  width: min(73%, 245px);
+  height: auto;
+  top: 9px;
+  right: -8px;
+  pointer-events: none;
+  opacity: .98;
+  object-fit: contain;
+  filter: drop-shadow(0 0 15px #fe632620);
+  transition: transform 350ms ease, filter 350ms ease;
+}
+.measurement-section--illustrated .measurement-card:hover .measurement-card-art {
+  transform: translateY(-3px) scale(1.035);
+  filter: drop-shadow(0 0 20px #fe63264a);
+}
+.measurement-section--illustrated .measurement-card > svg {
+  position: absolute;
+  z-index: 2;
+  width: calc(100% - 44px);
+  height: 57px;
+  left: 22px;
+  bottom: 10px;
+  margin: 0;
+  opacity: .94;
+}
+.measurement-section--illustrated .measurement-card .chart-fill { fill: #ff6b2c10; }
+.measurement-section--illustrated .illustration-note { margin-top: 22px; font-size: 10px; }
+@media (max-width: 1120px) {
+  .measurement-section--illustrated .measurement-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .measurement-section--illustrated .measurement-card { min-height: 260px; }
+  .measurement-section--illustrated .measurement-card strong { font-size: clamp(21px, 2.8vw, 26px); }
+  .measurement-section--illustrated .measurement-card-art { width: min(60%, 240px); }
+}
+@media (max-width: 600px) {
+  .measurement-section--illustrated > .container { width: calc(100% - 32px); }
+  .measurement-section--illustrated .measurement-panel { padding: 24px 16px; }
+  .measurement-section--illustrated .measurement-grid { grid-template-columns: 1fr; gap: 14px; }
+  .measurement-section--illustrated .measurement-card { min-height: 218px; padding: 22px 18px 12px; }
+  .measurement-section--illustrated .measurement-card-art { width: min(63%, 220px); right: -9px; top: 0; }
+  .measurement-section--illustrated .measurement-card > svg { left: 18px; width: calc(100% - 36px); bottom: 6px; height: 52px; }
+  .measurement-section--illustrated .measurement-card strong { font-size: clamp(19px, 5vw, 23px); max-width: 70%; }
+  .measurement-section--illustrated .measurement-index { right: 13px; top: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .measurement-section--illustrated .measurement-card,
+  .measurement-section--illustrated .measurement-card-art { transition: none !important; }
+  .measurement-section--illustrated .measurement-card:hover,
+  .measurement-section--illustrated .measurement-card:hover .measurement-card-art { transform: none !important; }
+}
