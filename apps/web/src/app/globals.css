@@ -1581,41 +1581,6 @@
     color: var(--muted);
     margin-top: 5px;
   }
-  .summit-labels {
-    position: relative;
-    height: 100%;
-  }
-  .summit-labels > div {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 18px;
-    border: 1px solid var(--accent-border);
-    border-radius: 8px;
-    background: #0d0907dc;
-    font-size: 13px;
-    box-shadow: 0 0 20px var(--glow);
-  }
-  .summit-labels svg {
-    color: var(--accent);
-  }
-  .summit-labels > div:nth-child(1) {
-    top: 15%;
-    left: 15%;
-  }
-  .summit-labels > div:nth-child(2) {
-    top: 36%;
-    right: 0;
-  }
-  .summit-labels > div:nth-child(3) {
-    top: 57%;
-    left: 20%;
-  }
-  .summit-labels > div:nth-child(4) {
-    top: 78%;
-    right: 8%;
-  }
   .advertising-banner {
     position: relative;
     overflow: hidden;
@@ -2909,16 +2874,6 @@
   .contact-hero-labels {
     display: none;
   }
-  .summit-labels > div {
-    padding: 10px 13px;
-    font-size: 11px;
-  }
-  .summit-labels > div:nth-child(odd) {
-    left: -5%;
-  }
-  .summit-labels > div:nth-child(even) {
-    right: -7%;
-  }
   .page-hero .hero-actions {
     gap: 10px;
   }
@@ -3422,29 +3377,6 @@
   .hero-pillar-grid,
   .contact-hero-labels {
     display: none;
-  }
-  .summit-labels > div {
-    padding: 8px 12px;
-    font-size: 9px;
-  }
-  .summit-labels > div svg {
-    width: 18px;
-  }
-  .summit-labels > div:nth-child(1) {
-    top: 15%;
-    left: 3%;
-  }
-  .summit-labels > div:nth-child(2) {
-    top: 0;
-    right: 0;
-  }
-  .summit-labels > div:nth-child(3) {
-    top: 64%;
-    left: 13%;
-  }
-  .summit-labels > div:nth-child(4) {
-    top: 50%;
-    right: 5%;
   }
   .feature-grid {
     gap: 12px;
@@ -4427,24 +4359,6 @@
 
 
 /* PART 07 — marketing services, exploration and advertising horizon. */
-.services-hero {
-  --service-pointer-x: 0px;
-  --service-pointer-y: 0px;
-}
-.services-hero .page-hero-artwork {
-  transform: translate3d(var(--service-pointer-x), var(--service-pointer-y), 0);
-  transition: transform 650ms var(--ease-out);
-}
-.services-hero .summit-labels > div {
-  animation: services-marker-float 7s ease-in-out infinite alternate;
-}
-.services-hero .summit-labels > div:nth-child(2) { animation-delay: -2.3s; }
-.services-hero .summit-labels > div:nth-child(3) { animation-delay: -4s; }
-.services-hero .summit-labels > div:nth-child(4) { animation-delay: -5.2s; }
-@keyframes services-marker-float {
-  from { translate: 0 0; }
-  to { translate: 0 -9px; }
-}
 .service-reveal[data-service-motion="entered"] {
   animation: service-fade-up 660ms var(--ease-out) both;
 }
@@ -4656,8 +4570,6 @@
   .advertising-coming-orbit { top: 12%; right: -15%; width: 52vw; opacity: .2; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .services-hero .page-hero-artwork { transform: none !important; }
-  .services-hero .summit-labels > div,
   .service-reveal,
   .advertising-coming-ring,
   .advertising-coming-core,

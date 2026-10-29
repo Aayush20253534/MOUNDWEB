@@ -564,16 +564,50 @@ test("Advertising Coming Soon teaser opens a dedicated non-bookable page", async
   await expect(page.getByRole("link", { name: /Explore current services/ })).toHaveAttribute("href", "/services");
 });
 
+test("services hero connects brand-growth disciplines and can pause and resume", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/services");
+  const studio = page.getByTestId("growth-studio");
+  await expect(studio).toHaveAttribute("data-motion", "running");
+  await expect(studio.getByRole("img")).toHaveAccessibleName(/six connected marketing disciplines/);
+  await expect(page.locator(".services-hero img")).toHaveCount(0);
+  await expect.poll(() => studio.evaluate((element) => element.getAnimations({ subtree: true })
+    .some((animation) => animation.playState === "running"))).toBe(true);
+  await page.getByRole("button", { name: "Pause brand growth animation" }).click();
+  await expect(studio).toHaveAttribute("data-motion", "paused");
+  await expect.poll(() => studio.evaluate((element) => element.getAnimations({ subtree: true })
+    .every((animation) => animation.playState === "paused"))).toBe(true);
+  const pausedTime = await studio.evaluate((element) => Number(element.getAnimations({ subtree: true })[0].currentTime));
+  await page.waitForTimeout(200);
+  expect(await studio.evaluate((element) => Number(element.getAnimations({ subtree: true })[0].currentTime))).toBe(pausedTime);
+  await page.getByRole("button", { name: "Resume brand growth animation" }).click();
+  await expect(studio).toHaveAttribute("data-motion", "running");
+  await expect.poll(() => studio.evaluate((element) => Number(element.getAnimations({ subtree: true })[0].currentTime))).toBeGreaterThan(pausedTime);
+  await page.locator("footer").scrollIntoViewIfNeeded();
+  await expect(studio).toHaveAttribute("data-motion", "paused");
+  await studio.scrollIntoViewIfNeeded();
+  await expect(studio).toHaveAttribute("data-motion", "running");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(studio).toHaveAttribute("data-motion", "static");
+  expect(await studio.evaluate((element) => element.getAnimations({ subtree: true }).length)).toBe(0);
+  const hero = page.locator(".services-hero");
+  await expect(hero.getByRole("link", { name: "Discuss your project" })).toHaveAttribute("href", "/contact?type=growth#inquiry");
+  await hero.getByRole("link", { name: "Explore services", exact: true }).click();
+  await expect(page).toHaveURL(/#growth-services$/);
+  await expect(page.locator("#growth-services")).toBeInViewport();
+});
+
 test("marketing services and Coming Soon respect reduced motion", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 375, height: 900 });
   await page.goto("/services");
   const hero = page.locator(".services-hero");
   await expect(hero).toBeVisible();
-  const duration = await hero.locator(".summit-labels > div").first().evaluate(
-    (el) => getComputedStyle(el).animationDuration,
-  );
-  expect(duration).toBe("0s");
+  const studio = page.getByTestId("growth-studio");
+  await expect(studio).toHaveAttribute("data-motion", "static");
+  await expect(studio.getByRole("img")).toBeVisible();
+  expect(await studio.evaluate((element) => element.getAnimations({ subtree: true }).length)).toBe(0);
+  await expect(studio.getByRole("button", { includeHidden: true })).toBeHidden();
   await page.goto("/services/advertising-coming-soon");
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   const animation = await page.locator(".advertising-coming-ring").first().evaluate(

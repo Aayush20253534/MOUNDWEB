@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { services } from "@/lib/content";
-import { PageHero } from "@/components/sections/page-hero";
+import { ServicesHero } from "@/components/services/services-hero";
 import {
   ButtonLink,
   Section,
@@ -17,7 +17,6 @@ import {
   MeasurementPanel,
   ProcessSteps,
 } from "@/components/sections/shared";
-import { Icon } from "@/components/ui/icon";
 import { ServiceMotion } from "@/components/services/service-motion";
 import { ServiceExplorer } from "@/components/services/service-explorer";
 
@@ -30,46 +29,9 @@ export default function ServicesPage() {
   return (
     <>
       <ServiceMotion />
-      <PageHero
-        eyebrow="Our services"
-        title={
-          <>
-            Brand growth
-            <br />
-            that delivers
-            <br />
-            <em>real direction.</em>
-          </>
-        }
-        description="From search and social to brand identity and performance, build meaningful connections with your audience through digital marketing."
-        className="services-hero"
-        artwork={
-          <div className="summit-labels">
-            {[
-              { icon: "chart" as const, title: "Strategy" },
-              { icon: "lightbulb" as const, title: "Create" },
-              { icon: "settings" as const, title: "Execute" },
-              { icon: "rocket" as const, title: "Grow" },
-            ].map((item) => (
-              <div key={item.title}>
-                <Icon name={item.icon} />
-                <span>{item.title}</span>
-              </div>
-            ))}
-          </div>
-        }
-      >
-        <div className="hero-actions">
-          <ButtonLink href="/contact?type=growth#inquiry">
-            Discuss your project
-          </ButtonLink>
-          <ButtonLink href="#process" variant="ghost" arrow={false}>
-            Explore our process
-          </ButtonLink>
-        </div>
-      </PageHero>
+      <ServicesHero />
       <CapabilityStrip />
-      <Section className="service-reveal">
+      <Section id="growth-services" className="service-reveal">
         <SectionHeading
           eyebrow="What we do"
           title={

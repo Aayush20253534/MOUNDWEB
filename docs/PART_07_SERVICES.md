@@ -10,7 +10,9 @@ The Services page retains six existing marketing-only categories: SEO, Social Me
 - Existing six service image assets remain in place. Each full-size service card links to its detail page.
 - A clickable Advertising Coming Soon teaser opens a distinct cinematic page at /services/advertising-coming-soon.
 - The Advertising page explains that the separate offering is unavailable to book and does not imply a launch date. Existing paid-campaign strategy belongs to Performance Marketing.
-- Distinct Services hero motion, floating summit cards, subtle scroll entrances, hover treatments, decorative orange rings and reduced-motion fallbacks.
+- Original brand-growth hero artwork replaces the mountain photograph. A central brand tile connects SEO, social media, performance marketing, content and creative, brand identity, and growth strategy. Search results, a social post, signal paths and a conceptual campaign chart animate in sequence; no chart displays real client metrics.
+- Pause/resume controls, automatic pause outside the viewport or in a hidden tab, and a complete static illustration for reduced-motion visitors. Hero links open the existing project inquiry, service collection and process section. No animation or image dependencies were added.
+- Subtle section entrances, hover treatments and Advertising Coming Soon decorative rings retain reduced-motion fallbacks.
 - No false statistics, prices, rankings, results, unverified customer testimonials, or fake registration forms.
 
 ## Implementation
@@ -18,6 +20,9 @@ The Services page retains six existing marketing-only categories: SEO, Social Me
 - apps/web/src/lib/service-guides.ts and service-guides.test.ts
 - apps/web/src/components/services/service-explorer.tsx
 - apps/web/src/components/services/service-motion.tsx
+- apps/web/src/components/services/services-hero.tsx
+- apps/web/src/components/services/growth-studio.tsx
+- apps/web/src/components/services/services-hero.module.css
 - apps/web/src/app/services/page.tsx
 - apps/web/src/app/services/[slug]/page.tsx
 - apps/web/src/app/services/advertising-coming-soon/page.tsx
