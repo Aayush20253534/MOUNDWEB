@@ -1,6 +1,7 @@
 import {
   EXPLOSION_START,
   FORMATION_SECONDS,
+  HERO_SEQUENCE_SECONDS,
   IMPACT_TIMES,
   makeMountainParticles,
   mountainPhaseAt,
@@ -43,7 +44,9 @@ const VERTEX = [
   "  gl_PointSize = aSize * uDpr * (uEffect == 1 ? 2.4 : 1.1);",
   "  gl_PointSize *= uEffect == 1 ? 1.0 : (0.6 + 0.4*jitter);",
   "  vOpacity = uEffect == 1 ? 0.95 : (0.2 + 0.68*jitter);",
-  "  vBrightness = uEffect == 1 ? 1.0 : (0.43 + 0.48 * (0.5 + 0.5*sin(p.x*8.2+p.z*4.2)) + burst*0.4);",
+  "  float shimmer = 0.5 + 0.5 * sin(uTime * 5.0 + aRandom * 37.0);",
+  "  float wave = exp(-abs(length(p.xz) - max(0.0, (uTime - 2.0) * 1.7)) * 2.2) * (1.0 - smoothstep(3.6, 4.8, uTime));",
+  "  vBrightness = uEffect == 1 ? 1.0 : clamp(0.31 + 0.40 * (0.5 + 0.5*sin(p.x*8.2+p.z*4.2)) + shimmer*0.19 + wave*0.32 + burst*0.4,0.0,1.0);",
   "}",
 ].join("\n");
 
@@ -227,7 +230,7 @@ export function createMountainWebGL(
 
   function draw(now: number) {
     if (!running || disposed || lost) return;
-    if (lastFrame !== null) elapsed += Math.min(0.06, (now - lastFrame) / 1000);
+    if (lastFrame !== null) elapsed = Math.min(HERO_SEQUENCE_SECONDS, elapsed + Math.min(0.06, (now - lastFrame) / 1000));
     lastFrame = now;
     const phase = mountainPhaseAt(elapsed);
     if (phase !== lastPhase) {
@@ -251,7 +254,13 @@ export function createMountainWebGL(
       gl.drawArrays(gl.POINTS, 0, effectData.length / STRIDE);
     }
     gl.bindVertexArray(null);
-    frameId = requestAnimationFrame(draw);
+    if (elapsed < HERO_SEQUENCE_SECONDS) {
+      frameId = requestAnimationFrame(draw);
+    } else {
+      // Keep the completed mountain visible without an endless GPU render loop.
+      running = false;
+      lastFrame = null;
+    }
   }
   resize();
   const controller: Controller = {
@@ -261,7 +270,7 @@ export function createMountainWebGL(
       lastFrame = null;
     },
     resume() {
-      if (disposed || lost || running) return;
+      if (disposed || lost || running || elapsed >= HERO_SEQUENCE_SECONDS) return;
       running = true;
       lastFrame = null;
       frameId = requestAnimationFrame(draw);

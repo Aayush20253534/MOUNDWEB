@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   EXPLOSION_START,
+  HERO_SEQUENCE_SECONDS,
   IMPACT_TIMES,
   REVEAL_START,
   makeMountainParticles,
@@ -15,6 +16,8 @@ describe("Part 03 mountain storyboard", () => {
     expect(IMPACT_TIMES[1]).toBeLessThan(IMPACT_TIMES[2]);
     expect(IMPACT_TIMES[2]).toBeLessThan(EXPLOSION_START);
     expect(EXPLOSION_START).toBeLessThan(REVEAL_START);
+    expect(REVEAL_START).toBeLessThan(HERO_SEQUENCE_SECONDS);
+    expect(HERO_SEQUENCE_SECONDS).toBe(5);
     expect([0.2, 2.0, 2.4, 2.7, 3.0, 3.5, 4.4].map(mountainPhaseAt))
       .toEqual(["forming", "formed", "impact-one", "impact-two", "impact-three", "exploding", "revealed"]);
   });

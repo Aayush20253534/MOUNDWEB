@@ -2,6 +2,7 @@ import type { MountainPhase } from "./scene-contracts";
 
 export const IMPACT_TIMES = [2.25, 2.57, 2.89] as const;
 export const FORMATION_SECONDS = 1.8;
+export const HERO_SEQUENCE_SECONDS = 5;
 export const EXPLOSION_START = 3.21;
 export const REVEAL_START = 3.91;
 
