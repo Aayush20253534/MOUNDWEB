@@ -1,11 +1,10 @@
-import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
+import { Facebook, Instagram, Linkedin } from "lucide-react";
 import { socialProfiles, type SocialPlatform } from "@/lib/social-profiles";
 
 const icons = {
   instagram: Instagram,
   facebook: Facebook,
   linkedin: Linkedin,
-  youtube: Youtube,
 } satisfies Record<SocialPlatform, typeof Instagram>;
 
 export function SocialLinks({

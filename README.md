@@ -60,11 +60,16 @@ The full check expects API/database readiness. Use `npm run smoke:deployment -- 
 
 ### Social profiles
 
-The global footer and Contact page share the Instagram, Facebook, LinkedIn and
-YouTube icons configured in `apps/web/src/lib/social-profiles.ts`. No official
-MOUNDWEB social profile URLs were present in the repository when these were added.
-Their URLs remain `null`, so the site shows labeled, noninteractive icons and a
-confirmation notice without sending visitors to guessed accounts.
+The global footer and Contact page share the Instagram, Facebook and LinkedIn
+icons configured in `apps/web/src/lib/social-profiles.ts`. The MOUNDWEB owner
+provided these links on October 29, 2026:
+
+- Instagram: https://www.instagram.com/mound_web/
+- Facebook: https://www.facebook.com/share/1A55kyXKqC/
+
+The Facebook share URL is preserved exactly as supplied. LinkedIn stays visible
+with a `null` URL at the owner's request until its profile link is supplied;
+it is noninteractive and labeled as not yet available. YouTube is not displayed.
 
 To activate a profile, obtain its exact HTTPS URL from the MOUNDWEB owner, verify
 that it is the intended account, and replace that platform's `null` value. Leave

@@ -1,4 +1,4 @@
-export type SocialPlatform = "instagram" | "facebook" | "linkedin" | "youtube";
+export type SocialPlatform = "instagram" | "facebook" | "linkedin";
 
 type SocialProfile = {
   platform: SocialPlatform;
@@ -9,8 +9,15 @@ type SocialProfile = {
 // Add only owner-confirmed MOUNDWEB profile URLs. null renders a noninteractive
 // icon, never a guessed handle, platform homepage, or placeholder link.
 export const socialProfiles: readonly SocialProfile[] = [
-  { platform: "instagram", name: "Instagram", url: null },
-  { platform: "facebook", name: "Facebook", url: null },
+  {
+    platform: "instagram",
+    name: "Instagram",
+    url: "https://www.instagram.com/mound_web/",
+  },
+  {
+    platform: "facebook",
+    name: "Facebook",
+    url: "https://www.facebook.com/share/1A55kyXKqC/",
+  },
   { platform: "linkedin", name: "LinkedIn", url: null },
-  { platform: "youtube", name: "YouTube", url: null },
 ];
