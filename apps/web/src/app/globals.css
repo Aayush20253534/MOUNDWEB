@@ -1750,7 +1750,7 @@
     position: absolute;
     inset: 0;
   }
-  .learning-path-labels span {
+  .learning-path-labels > li {
     position: absolute;
     display: flex;
     align-items: center;
@@ -1759,6 +1759,7 @@
     text-transform: uppercase;
     letter-spacing: 0.1em;
     text-shadow: 0 2px 10px #000;
+    transform-origin: left center;
   }
   .learning-path-labels b {
     width: 26px;
@@ -1771,19 +1772,19 @@
     background: #0a0808b8;
     font-size: 9px;
   }
-  .learning-path-labels span:nth-child(1) {
+  .learning-path-labels > li:nth-child(1) {
     top: 83%;
     left: 5%;
   }
-  .learning-path-labels span:nth-child(2) {
+  .learning-path-labels > li:nth-child(2) {
     top: 60%;
     left: 40%;
   }
-  .learning-path-labels span:nth-child(3) {
+  .learning-path-labels > li:nth-child(3) {
     top: 31%;
     left: 52%;
   }
-  .learning-path-labels span:nth-child(4) {
+  .learning-path-labels > li:nth-child(4) {
     top: 1%;
     left: 65%;
   }
@@ -3609,22 +3610,22 @@
   .programs-hero {
     min-height: 720px;
   }
-  .learning-path-labels span {
+  .learning-path-labels > li {
     font-size: 9px;
   }
-  .learning-path-labels span:nth-child(1) {
+  .learning-path-labels > li:nth-child(1) {
     top: 75%;
     left: 0;
   }
-  .learning-path-labels span:nth-child(2) {
+  .learning-path-labels > li:nth-child(2) {
     top: 52%;
     left: 30%;
   }
-  .learning-path-labels span:nth-child(3) {
+  .learning-path-labels > li:nth-child(3) {
     top: 23%;
     left: 55%;
   }
-  .learning-path-labels span:nth-child(4) {
+  .learning-path-labels > li:nth-child(4) {
     top: 0;
     left: 67%;
   }
@@ -4392,6 +4393,62 @@
 
 
 /* PART 06 — Program discovery, detailed learning outlines and inquiry planning. */
+.program-ascent {
+  position: absolute;
+  inset: 0;
+}
+.program-ascent .learning-path-step {
+  padding: 5px 10px 5px 5px;
+  border: 1px solid #ff813e55;
+  border-radius: 24px;
+  background: #0a0808d9;
+  color: var(--text);
+  white-space: nowrap;
+}
+.program-ascent .learning-path-step b {
+  flex: none;
+  box-shadow: 0 0 18px #ff813e45;
+}
+.program-ascent .learning-path-step:last-child b {
+  background: var(--accent);
+  color: var(--background);
+}
+.program-ascent-control {
+  position: absolute;
+  right: 0;
+  bottom: -12px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 12px;
+  border: 1px solid var(--border-hover);
+  border-radius: var(--radius-small);
+  background: #100a07e8;
+  color: var(--muted);
+  font-size: 11px;
+}
+.program-ascent-control[hidden] { display: none; }
+.program-ascent-control:hover,
+.program-ascent-control:focus-visible {
+  color: var(--text);
+  border-color: var(--accent);
+}
+@media (max-width: 600px) {
+  .programs-hero > .container { padding-bottom: 285px; }
+  .programs-hero .page-hero-artwork { height: 235px; bottom: 24px; }
+  .program-ascent .learning-path-step { gap: 7px; padding-right: 8px; }
+  .program-ascent .learning-path-step:nth-child(4) { left: auto; right: 0; }
+  .program-ascent-control { bottom: -12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .program-ascent .learning-path-step {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .program-ascent-control { display: none; }
+}
 .program-catalog-intro { max-width: 740px; margin-bottom: 25px; }
 .program-catalog-intro h2 { font-size: clamp(28px, 3.7vw, 44px); }
 .program-catalog-intro p.body-copy { margin-top: 11px; }

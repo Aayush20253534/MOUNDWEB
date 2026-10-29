@@ -475,10 +475,36 @@ test("young learner page requests guardian consent rather than direct enrollment
   await expect(page.locator(".course-interest")).toContainText("No application, payment, seat reservation");
 });
 
+test("program hero reveals mountain milestones in ascent order and can skip or replay", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/programs");
+  const steps = page.getByRole("list", { name: "Learning journey from base to summit" }).locator("li");
+  await expect(steps).toHaveText(["01Discover", "02Learn", "03Build", "04Grow"]);
+  await expect(page.getByRole("button", { name: "Skip mountain ascent animation" })).toBeVisible();
+  for (let revealed = 1; revealed <= 4; revealed += 1) {
+    await expect.poll(() => steps.evaluateAll((elements) => elements.map((element) => {
+      const opacity = Number(getComputedStyle(element).opacity);
+      return opacity >= 0.99 ? "shown" : opacity === 0 ? "hidden" : "entering";
+    })), { intervals: [50], timeout: 6000 }).toEqual(
+      Array.from({ length: 4 }, (_, index) => index < revealed ? "shown" : "hidden"),
+    );
+  }
+  await page.getByRole("button", { name: "Replay mountain ascent animation" }).click();
+  await page.getByRole("button", { name: "Skip mountain ascent animation" }).click();
+  await expect(page.getByRole("button", { name: "Replay mountain ascent animation" })).toBeVisible();
+  expect(await steps.evaluateAll((elements) => elements.map((element) => getComputedStyle(element).opacity)))
+    .toEqual(["1", "1", "1", "1"]);
+});
+
 test("program animations respect reduced-motion and leave course information visible", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/programs");
   await expect(page.locator(".program-catalog")).toBeVisible();
+  const steps = page.getByRole("list", { name: "Learning journey from base to summit" }).locator("li");
+  await expect(steps).toHaveCount(4);
+  expect(await steps.evaluateAll((elements) => elements.map((element) => getComputedStyle(element).opacity)))
+    .toEqual(["1", "1", "1", "1"]);
+  await expect(page.locator(".program-ascent-control")).toBeHidden();
   const animation = await page.locator(".program-reveal").first().evaluate((element) => getComputedStyle(element).animationName);
   expect(animation).toBe("none");
 });

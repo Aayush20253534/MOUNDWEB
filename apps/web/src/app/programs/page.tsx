@@ -4,6 +4,7 @@ import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { programFaqs } from "@/lib/content";
 import { ProgramCatalog } from "@/components/programs/program-catalog";
 import { ProgramMotion } from "@/components/programs/program-motion";
+import { ProgramAscent } from "@/components/programs/program-ascent";
 import { PageHero } from "@/components/sections/page-hero";
 import {
   Section,
@@ -39,16 +40,7 @@ export default function ProgramsPage() {
         description="Explore Digital Marketing and Web Development. A learning journey built around practical skills, curious minds, and a changing digital world."
         image="programs-ascent"
         className="programs-hero"
-        artwork={
-          <div className="learning-path-labels">
-            {["Discover", "Learn", "Build", "Grow"].map((label, index) => (
-              <span key={label}>
-                <b>0{index + 1}</b>
-                {label}
-              </span>
-            ))}
-          </div>
-        }
+        artwork={<ProgramAscent />}
       >
         <div className="hero-learning-benefits">
           {[
