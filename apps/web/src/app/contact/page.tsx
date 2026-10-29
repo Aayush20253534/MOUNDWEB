@@ -24,6 +24,7 @@ import { Icon } from "@/components/ui/icon";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ConnectionMotion } from "@/components/scenes/connection-motion";
+import { SocialLinks } from "@/components/ui/social-links";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -110,6 +111,10 @@ export default function ContactPage() {
               </div>
             </article>
           ))}
+        </div>
+        <div className="contact-social">
+          <h3>Connect with us online</h3>
+          <SocialLinks variant="labeled" />
         </div>
       </Section>
       <Section className="connection-pathways connection-reveal">

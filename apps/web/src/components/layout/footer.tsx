@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Brand } from "./brand";
 import { Container } from "../ui/primitives";
 import { services } from "@/lib/content";
+import { SocialLinks } from "../ui/social-links";
 
 export function Footer() {
   return (
@@ -19,6 +20,10 @@ export function Footer() {
             <span className="footer-signature">
               <span /> Growth begins here.
             </span>
+            <div className="footer-social">
+              <h2>Find us online</h2>
+              <SocialLinks />
+            </div>
           </div>
           <div>
             <h2>Explore</h2>

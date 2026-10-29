@@ -58,6 +58,22 @@ The full check expects API/database readiness. Use `npm run smoke:deployment -- 
 
 ## Handoff and asset references
 
+### Social profiles
+
+The global footer and Contact page share the Instagram, Facebook, LinkedIn and
+YouTube icons configured in `apps/web/src/lib/social-profiles.ts`. No official
+MOUNDWEB social profile URLs were present in the repository when these were added.
+Their URLs remain `null`, so the site shows labeled, noninteractive icons and a
+confirmation notice without sending visitors to guessed accounts.
+
+To activate a profile, obtain its exact HTTPS URL from the MOUNDWEB owner, verify
+that it is the intended account, and replace that platform's `null` value. Leave
+unconfirmed platforms as `null`. Both locations update together; confirmed links
+open in a new tab with accessible labels, visible keyboard focus and touch targets
+of at least 44px. Record the owner confirmation in the change description.
+
+### References
+
 - [Design system](docs/DESIGN_SYSTEM.md)
 - [Asset manifest](docs/ASSET_MANIFEST.md)
 - [Visual QA and screenshots](docs/VISUAL_QA.md)
