@@ -6064,3 +6064,96 @@ main :where(h1, h2, h3, h4) {
   .measurement-section--illustrated .measurement-card:hover,
   .measurement-section--illustrated .measurement-card:hover .measurement-card-art { transform: none !important; }
 }
+
+
+/* Home-only city CTA: a genuine responsive image with an accessible working link. */
+.cta-section--city .cta-panel {
+  isolation: isolate;
+  display: block;
+  min-height: 0;
+  aspect-ratio: 5.3 / 1;
+  padding: 0;
+  border-color: #713b20;
+  border-radius: 15px;
+  background: #080808;
+}
+.cta-section--city .cta-city-art {
+  z-index: -1;
+  object-fit: cover;
+  object-position: 50% 50%;
+  transform: scale(1.105);
+}
+.cta-section--city .cta-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(circle at 50% 52%, #ff8f380a 0, transparent 25%);
+  animation: city-light-spread 8s ease-in-out infinite;
+}
+@keyframes city-light-spread {
+  0%, 100% { opacity: .15; transform: scale(.92); }
+  46% { opacity: .8; transform: scale(1.08); }
+  65% { opacity: .3; transform: scale(1.2); }
+}
+@media (min-width: 701px) {
+  /* Caption and CTA are rendered in the approved artwork on wide screens.
+     DOM copy remains available to assistive technology. */
+  .cta-section--city .cta-title,
+  .cta-section--city .cta-copy {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .cta-section--city .cta-copy .button {
+    visibility: hidden;
+  }
+  .cta-section--city .cta-city-hotspot {
+    position: absolute;
+    z-index: 5;
+    inset: 0;
+    cursor: pointer;
+  }
+  .cta-section--city .cta-city-hotspot:focus-visible {
+    outline: 3px solid #ff994e;
+    outline-offset: -6px;
+    border-radius: 15px;
+  }
+}
+@media (max-width: 700px) {
+  .cta-section--city .cta-panel {
+    aspect-ratio: auto;
+    min-height: 350px;
+    padding: 34px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+  }
+  .cta-section--city .cta-city-art {
+    object-position: 50% 54%;
+    transform: scale(1.25);
+    opacity: .88;
+  }
+  .cta-section--city .cta-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(90deg, #080808ee, #080808aa 55%, #08080866);
+  }
+  .cta-section--city .cta-title,
+  .cta-section--city .cta-copy { z-index: 2; position: relative; }
+  .cta-section--city .cta-copy { margin-top: 2px; max-width: 360px; }
+  .cta-section--city .cta-copy p { color: #f0e4dc; }
+  .cta-section--city .cta-city-hotspot { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cta-section--city .cta-panel::after { animation: none !important; }
+}

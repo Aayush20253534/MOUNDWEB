@@ -247,6 +247,7 @@ export default function HomePage() {
         </div>
       </Section>
       <CTASection
+        cityBackdrop
         title={
           <>
             Ready to <em>grow</em>

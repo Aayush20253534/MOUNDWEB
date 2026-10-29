@@ -43,6 +43,7 @@ export function CTASection({
   ),
   description = "For brands, students, colleges, and partners. A bigger future starts with a conversation.",
   centered = false,
+  cityBackdrop = false,
   primaryLabel = "Start a conversation",
   href = "/contact#inquiry",
 }: {
@@ -50,14 +51,25 @@ export function CTASection({
   title?: React.ReactNode;
   description?: string;
   centered?: boolean;
+  cityBackdrop?: boolean;
   primaryLabel?: string;
   href?: string;
 }) {
   return (
-    <section className={`cta-section ${centered ? "cta-section--center" : ""}`}>
+    <section className={`cta-section ${centered ? "cta-section--center" : ""} ${cityBackdrop ? "cta-section--city" : ""}`}>
       <Container>
         <div className="cta-panel">
-          <Landscape name="mountain-panorama" />
+          {cityBackdrop ? (
+            <Image
+              src="/assets/landscapes/moundweb-connected-city.jpg"
+              alt=""
+              fill
+              sizes="(max-width: 600px) 100vw, 100vw"
+              className="cta-city-art"
+            />
+          ) : (
+            <Landscape name="mountain-panorama" />
+          )}
           <div className="cta-title">
             <Eyebrow>{eyebrow}</Eyebrow>
             <h2>{title}</h2>
@@ -66,6 +78,11 @@ export function CTASection({
             <p>{description}</p>
             <ButtonLink href={href}>{primaryLabel}</ButtonLink>
           </div>
+          {cityBackdrop && (
+            <Link href={href} className="cta-city-hotspot" aria-label={primaryLabel}>
+              <span className="sr-only">{primaryLabel}</span>
+            </Link>
+          )}
         </div>
       </Container>
     </section>
