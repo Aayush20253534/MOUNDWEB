@@ -4,13 +4,15 @@ Implemented two learning paths and eleven course pages. All AI marketing tracks 
 
 Includes category, level and search filters; detailed draft curriculum modules, learner background guidance, possible learning outcomes, and illustrative projects. The course inquiry builder opens the existing Contact inquiry preview with selected course details prefilled.
 
-The hero's mountain path reveals Discover, Learn, Build and Grow in that order,
-one second apart, from the base toward the summit. Each milestone remains visible
-after its entrance; the complete sequence takes under four seconds and does not
-loop. Visitors can skip to the completed path or replay the ascent. The sequence
-starts when the scene enters view and pauses while its browser tab is hidden.
-Reduced-motion preferences and browsers without animation support show the full
-path immediately; the server-rendered ordered list also works without JavaScript.
+The Programs hero uses original HTML/CSS artwork of a digital learning studio,
+replacing the mountain photograph. Code is written, a sample website assembles,
+and an illustrative campaign chart grows during a ten-second animation cycle.
+The artwork represents Web Development, Digital Marketing and AI-assisted learning;
+it does not present real campaign metrics, student results or an enrollment offer.
+Visitors can pause and resume the scene, which also pauses offscreen or while the
+browser tab is hidden. Reduced-motion preferences show the complete static
+illustration; motion is enabled only after hydration. The hero links to the learning paths and
+the existing training approach page. No new dependencies or image requests are used.
 
 No inquiry is transmitted or stored. No application, fee, seat reservation or enrollment confirmation is performed. Actual submissions, consent, Neon storage and Resend messages are deferred to Part 11.
 

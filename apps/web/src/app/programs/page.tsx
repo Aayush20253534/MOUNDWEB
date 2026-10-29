@@ -4,8 +4,7 @@ import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { programFaqs } from "@/lib/content";
 import { ProgramCatalog } from "@/components/programs/program-catalog";
 import { ProgramMotion } from "@/components/programs/program-motion";
-import { ProgramAscent } from "@/components/programs/program-ascent";
-import { PageHero } from "@/components/sections/page-hero";
+import { ProgramHero } from "@/components/programs/program-hero";
 import {
   Section,
   SectionHeading,
@@ -13,7 +12,6 @@ import {
   IconTile,
   FeaturePanel,
 } from "@/components/ui/primitives";
-import { Icon } from "@/components/ui/icon";
 import { Accordion } from "@/components/ui/accordion";
 import { CTASection } from "@/components/sections/shared";
 
@@ -26,37 +24,8 @@ export default function ProgramsPage() {
   return (
     <>
       <ProgramMotion />
-      <PageHero
-        eyebrow="Our programs"
-        title={
-          <>
-            Skills for today.
-            <br />
-            Possibilities for
-            <br />
-            <em>tomorrow.</em>
-          </>
-        }
-        description="Explore Digital Marketing and Web Development. A learning journey built around practical skills, curious minds, and a changing digital world."
-        image="programs-ascent"
-        className="programs-hero"
-        artwork={<ProgramAscent />}
-      >
-        <div className="hero-learning-benefits">
-          {[
-            { icon: "briefcase" as const, text: "Practical thinking" },
-            { icon: "layers" as const, text: "Project focus" },
-            { icon: "brain" as const, text: "AI integration" },
-            { icon: "cap" as const, text: "Career perspective" },
-          ].map((item) => (
-            <div key={item.text}>
-              <Icon name={item.icon} />
-              <span>{item.text}</span>
-            </div>
-          ))}
-        </div>
-      </PageHero>
-      <Section className="program-paths program-reveal">
+      <ProgramHero />
+      <Section id="learning-paths" className="program-paths program-reveal">
         <SectionHeading
           eyebrow="Explore our programs"
           title={
