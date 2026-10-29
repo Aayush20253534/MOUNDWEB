@@ -15,6 +15,7 @@ import { StatCard } from "@/components/ui/cards";
 import { CTASection, PartnerCards } from "@/components/sections/shared";
 import { Icon } from "@/components/ui/icon";
 import { AboutMotion } from "@/components/scenes/about-motion";
+import { AboutHeroControls } from "@/components/scenes/about-hero-controls";
 import { AboutJourney } from "@/components/sections/about-journey";
 import type { IconName } from "@/lib/content";
 
@@ -60,23 +61,25 @@ export default function AboutPage() {
         image="about-world"
         className="about-hero about-reveal"
         artwork={
-          <div className="hero-pillar-grid">
-            {[
-              ["chart", "Brand growth"],
-              ["brain", "AI-integrated learning"],
-              ["code", "Web development courses"],
-              ["handshake", "Partnerships"],
-            ].map(([icon, label]) => (
-              <div className="hero-pillar about-animate-item" key={label}>
-                <Icon name={icon as IconName} />
-                <span>{label}</span>
-              </div>
-            ))}
+          <>
             <div className="about-hero-orbits" aria-hidden="true">
               <span /><span /><span />
-              <i /><i /><i />
+              <i /><i /><i /><i /><i />
             </div>
-          </div>
+            <div className="hero-pillar-grid">
+              {[
+                ["chart", "Brand growth"],
+                ["brain", "AI-integrated learning"],
+                ["code", "Web development courses"],
+                ["handshake", "Partnerships"],
+              ].map(([icon, label]) => (
+                <div className="hero-pillar" key={label}>
+                  <Icon name={icon as IconName} />
+                  <span>{label}</span>
+                </div>
+              ))}
+            </div>
+          </>
         }
       >
         <h2 className="hero-subheading">
@@ -84,7 +87,10 @@ export default function AboutPage() {
           <br />
           and growth that lasts.
         </h2>
-        <ButtonLink href="#our-story">Our story</ButtonLink>
+        <div className="about-hero-actions">
+          <ButtonLink href="#our-story">Our story</ButtonLink>
+          <AboutHeroControls />
+        </div>
       </PageHero>
       <Section id="our-story" className="about-reveal">
         <div className="split-layout story-layout">

@@ -364,8 +364,23 @@ test("About page animates the guiding approach without showing invented statisti
   await expect.poll(async () => hero.evaluate((el) =>
     (el as HTMLElement).style.getPropertyValue("--about-parallax-x")
   )).not.toBe("");
+  await page.getByRole("button", { name: "Pause hero animation" }).click();
+  await expect.poll(() => hero.evaluate((element) =>
+    element.getAnimations({ subtree: true }).filter((animation) => animation.playState === "running").length
+  )).toBe(0);
+  await page.mouse.move(bounds!.x + bounds!.width * 0.8, bounds!.y + bounds!.height * 0.4);
+  await expect.poll(() => hero.evaluate((element) =>
+    (element as HTMLElement).style.getPropertyValue("--about-parallax-x")
+  )).toBe("");
+  await page.getByRole("button", { name: "Play hero animation" }).click();
+  await expect.poll(() => hero.evaluate((element) =>
+    element.getAnimations({ subtree: true }).filter((animation) => animation.playState === "running").length
+  )).toBeGreaterThan(0);
   const journey = page.locator(".about-journey");
   await journey.scrollIntoViewIfNeeded();
+  await expect.poll(() => hero.evaluate((element) =>
+    element.getAnimations({ subtree: true }).filter((animation) => animation.playState === "running").length
+  )).toBe(0);
   await expect(journey).toHaveAttribute("data-about-motion", "entered");
   const steps = journey.locator(".about-journey-step");
   await expect(steps).toHaveCount(4);
@@ -380,6 +395,16 @@ test("About page reduced-motion mode is accessible without animations", async ({
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 375, height: 900 });
   await page.goto("/about");
+  const hero = page.locator(".about-hero");
+  await expect(hero.getByRole("heading", { level: 1 })).toBeVisible();
+  await expect(hero.locator(".hero-pillar")).toHaveCount(4);
+  for (const card of await hero.locator(".hero-pillar").all()) {
+    await expect(card).toBeVisible();
+  }
+  await expect(page.getByRole("button", { name: "Pause hero animation" })).toBeHidden();
+  expect(await hero.evaluate((element) =>
+    element.getAnimations({ subtree: true }).filter((animation) => animation.playState === "running").length
+  )).toBe(0);
   const journey = page.locator(".about-journey");
   await journey.scrollIntoViewIfNeeded();
   await expect(journey).toBeVisible();
