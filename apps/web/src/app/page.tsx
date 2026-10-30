@@ -25,7 +25,7 @@ import {
 } from "@/components/sections/shared";
 
 export const metadata: Metadata = {
-  title: "Digital Marketing, SEO & Creative Growth | MOUNDWEB",
+  title: "Digital Marketing, SEO & Creative Growth",
   description: "MOUNDWEB combines SEO, social media, performance marketing, branding and creative strategy for business growth in India and online markets.",
   alternates: { canonical: "/" },
 };
