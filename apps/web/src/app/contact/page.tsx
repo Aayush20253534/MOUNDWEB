@@ -217,16 +217,17 @@ export default function ContactPage() {
         </div>
       </Section>
       <CTASection
-        eyebrow="Let’s create impact"
+        contactCityBackdrop
+        eyebrow="Let’s build together"
         title={
           <>
-            Ready to build
+            Ready to <em>grow</em>
             <br />
-            <em>something bigger?</em>
+            your brand?
           </>
         }
-        description="Your next chapter starts with an idea. Put it into words."
-        primaryLabel="Prepare your inquiry"
+        description="From visibility to loyal customers, we help your business shine everywhere."
+        primaryLabel="Start a project"
         href="#inquiry"
       />
     </>

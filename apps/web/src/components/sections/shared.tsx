@@ -44,6 +44,7 @@ export function CTASection({
   description = "For brands, students, colleges, and partners. A bigger future starts with a conversation.",
   centered = false,
   cityBackdrop = false,
+  contactCityBackdrop = false,
   primaryLabel = "Start a conversation",
   href = "/contact#inquiry",
 }: {
@@ -52,14 +53,23 @@ export function CTASection({
   description?: string;
   centered?: boolean;
   cityBackdrop?: boolean;
+  contactCityBackdrop?: boolean;
   primaryLabel?: string;
   href?: string;
 }) {
   return (
-    <section className={`cta-section ${centered ? "cta-section--center" : ""} ${cityBackdrop ? "cta-section--city" : ""}`}>
+    <section className={`cta-section ${centered ? "cta-section--center" : ""} ${cityBackdrop ? "cta-section--city" : ""} ${contactCityBackdrop ? "cta-section--contact-city" : ""}`}>
       <Container>
         <div className="cta-panel">
-          {cityBackdrop ? (
+          {contactCityBackdrop ? (
+            <Image
+              src="/assets/landscapes/contact-city-growth.jpg"
+              alt=""
+              fill
+              sizes="(max-width: 900px) 100vw, 92vw"
+              className="cta-contact-city-art"
+            />
+          ) : cityBackdrop ? (
             <Image
               src="/assets/landscapes/moundweb-connected-city.jpg"
               alt=""
@@ -81,6 +91,15 @@ export function CTASection({
           {cityBackdrop && (
             <Link href={href} className="cta-city-hotspot" aria-label={primaryLabel}>
               <span className="sr-only">{primaryLabel}</span>
+            </Link>
+          )}
+          {contactCityBackdrop && (
+            <Link
+              href={href}
+              className="cta-contact-city-hotspot"
+              aria-label="Start a project. Go to the inquiry form."
+            >
+              <span className="sr-only">Start a project</span>
             </Link>
           )}
         </div>

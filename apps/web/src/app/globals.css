@@ -6177,3 +6177,93 @@ main :where(h1, h2, h3, h4) {
 @media (prefers-reduced-motion: reduce) {
   .cta-section--city .cta-panel::after { animation: none !important; }
 }
+
+
+/* Contact CTA: use the uploaded, pre-composed MOUNDWEB network art once.
+   Desktop text/button are baked into the image; the real link sits over the button. */
+.cta-section--contact-city .cta-panel {
+  display: block;
+  padding: 0;
+  min-height: 0;
+  aspect-ratio: 2048 / 684;
+  border: 0;
+  border-radius: 0;
+  background: #070707;
+  isolation: isolate;
+}
+.cta-section--contact-city .cta-contact-city-art {
+  object-fit: contain;
+  object-position: center;
+  z-index: -1;
+}
+@media (min-width: 901px) {
+  .cta-section--contact-city .cta-title,
+  .cta-section--contact-city .cta-copy {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .cta-section--contact-city .cta-copy .button { display: none; }
+  .cta-section--contact-city .cta-contact-city-hotspot {
+    position: absolute;
+    z-index: 3;
+    top: 36.5%;
+    left: 81.2%;
+    width: 13.5%;
+    height: 15%;
+    border-radius: 999px;
+  }
+  .cta-section--contact-city .cta-contact-city-hotspot:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 4px;
+  }
+}
+@media (max-width: 900px) {
+  .cta-section--contact-city .cta-panel {
+    aspect-ratio: auto;
+    min-height: 380px;
+    padding: 36px 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 16px;
+    border: 1px solid #713b20;
+    border-radius: var(--radius);
+  }
+  .cta-section--contact-city .cta-contact-city-art {
+    object-fit: cover;
+    object-position: 50% 52%;
+    transform: scale(1.38);
+    opacity: .74;
+  }
+  .cta-section--contact-city .cta-panel::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    background: linear-gradient(90deg, #080808f5 0%, #080808c4 63%, #08080870 100%);
+    pointer-events: none;
+  }
+  .cta-section--contact-city .cta-title,
+  .cta-section--contact-city .cta-copy {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+  }
+  .cta-section--contact-city .cta-copy {
+    margin: 0;
+  }
+  .cta-section--contact-city .cta-copy p {
+    color: #eee1d7;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .cta-section--contact-city .cta-contact-city-hotspot { display: none; }
+}
