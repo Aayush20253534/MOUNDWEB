@@ -137,9 +137,9 @@ export default function AboutPage() {
       <Section className="mission-section about-reveal">
         <Eyebrow>Our mission & vision</Eyebrow>
         <div className="mission-grid">
-          <article className="mission-card about-animate-item">
+          <article className="mission-card mission-card--digital-growth about-animate-item">
             <Image
-              src="/assets/landscapes/summit-path.webp"
+              src="/assets/about/mission-digital-growth.jpg"
               alt=""
               fill
               sizes="(max-width: 700px) 100vw, 50vw"
@@ -153,9 +153,9 @@ export default function AboutPage() {
               </p>
             </div>
           </article>
-          <article className="mission-card">
+          <article className="mission-card mission-card--ecosystem">
             <Image
-              src="/assets/landscapes/mountain-panorama.webp"
+              src="/assets/about/vision-connected-ecosystem.jpg"
               alt=""
               fill
               sizes="(max-width: 700px) 100vw, 50vw"

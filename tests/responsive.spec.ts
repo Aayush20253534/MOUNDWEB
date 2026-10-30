@@ -144,3 +144,18 @@ test("shared city CTA appears once immediately before the footer across public r
     await expect(page.locator("#main-content .cta-section")).toHaveCount(0);
   }
 });
+
+
+test("About mission and vision feature distinct brand-relevant artwork", async ({ page }) => {
+  await page.goto("/about", { waitUntil: "domcontentloaded" });
+  const cards = page.locator(".mission-grid > .mission-card");
+  await expect(cards).toHaveCount(2);
+  await expect(cards.nth(0).locator("img")).toHaveAttribute(
+    "src", /mission-digital-growth\.jpg/,
+  );
+  await expect(cards.nth(1).locator("img")).toHaveAttribute(
+    "src", /vision-connected-ecosystem\.jpg/,
+  );
+  await expect(cards.nth(0).getByRole("heading", { name: "Our mission" })).toBeVisible();
+  await expect(cards.nth(1).getByRole("heading", { name: "Our vision" })).toBeVisible();
+});

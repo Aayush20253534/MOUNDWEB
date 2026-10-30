@@ -6267,3 +6267,56 @@ main :where(h1, h2, h3, h4) {
   }
   .cta-section--contact-city .cta-contact-city-hotspot { display: none; }
 }
+
+
+/* About: mission and vision artwork reflects digital growth + the wider
+   MOUNDWEB learning and partner ecosystem instead of unrelated mountain scenery.
+   Copy stays semantic HTML; both visuals remain decorative. */
+.mission-card--digital-growth,
+.mission-card--ecosystem {
+  background: #080808;
+}
+.mission-card--digital-growth > img,
+.mission-card--ecosystem > img {
+  opacity: .77;
+  object-fit: cover;
+  object-position: 58% 51%;
+  filter: saturate(.96) contrast(1.09);
+}
+.mission-card--ecosystem > img {
+  object-position: 50% 50%;
+}
+.mission-card--digital-growth::after,
+.mission-card--ecosystem::after {
+  background: linear-gradient(
+    90deg,
+    #070707fb 0%,
+    #070707f5 24%,
+    #070707e8 39%,
+    #070707b8 55%,
+    #07070748 80%,
+    #07070712 100%
+  );
+}
+.mission-card--digital-growth:hover > img,
+.mission-card--ecosystem:hover > img {
+  opacity: .86;
+  transform: scale(1.035);
+}
+@media (max-width: 700px) {
+  .mission-card--digital-growth::after,
+  .mission-card--ecosystem::after {
+    background: linear-gradient(
+      90deg,
+      #070707fc 0%,
+      #070707ef 32%,
+      #070707d1 58%,
+      #07070780 85%,
+      #07070750 100%
+    );
+  }
+  .mission-card--digital-growth > img,
+  .mission-card--ecosystem > img {
+    object-position: 57% 50%;
+  }
+}
