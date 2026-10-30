@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowUpRight, AudioLines, Headphones, Mic2 } from "lucide-react";
 import { PageHero } from "@/components/sections/page-hero";
-import { CTASection } from "@/components/sections/shared";
+
 import { Eyebrow, Section, ButtonLink } from "@/components/ui/primitives";
 import { EditorialCatalog } from "@/components/editorial/editorial-catalog";
 import { EditorialMotion } from "@/components/editorial/editorial-motion";
@@ -64,12 +64,7 @@ export default function PodcastPage() {
         </div>
         <div className="editorial-process-symbol"><ArrowUpRight size={72} aria-hidden="true"/></div>
       </Section>
-      <CTASection
-        title={<>Something worth <em>talking about?</em></>}
-        description="Use our local inquiry preview to suggest a topic or explore a possible editorial collaboration. Messages are not yet sent."
-        primaryLabel="Prepare a media inquiry"
-        href="/contact?type=media&subject=Podcast%20collaboration#inquiry"
-      />
+      
     </>
   );
 }

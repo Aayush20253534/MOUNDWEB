@@ -16,7 +16,7 @@ import {
   Badge,
   ButtonLink,
 } from "@/components/ui/primitives";
-import { CTASection, CheckList } from "@/components/sections/shared";
+import { CheckList } from "@/components/sections/shared";
 
 type Props = { params: Promise<{ slug: string }> };
 export const dynamicParams = false;
@@ -169,17 +169,7 @@ export default async function CoursePage({ params }: Props) {
           </aside>
         </div>
       </Section>
-      <CTASection
-        title={
-          <>
-            Your curiosity.
-            <br />
-            <em>A new direction.</em>
-          </>
-        }
-        primaryLabel="Explore all programs"
-        href="/programs"
-      />
+      
     </>
   );
 }

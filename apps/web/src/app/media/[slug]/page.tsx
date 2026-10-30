@@ -7,7 +7,7 @@ import { getMedia, isPublishedMedia, mediaItems } from "@/lib/editorial";
 import { getPublishedMedia } from "@/lib/editorial-remote";
 import { EditorialMotion } from "@/components/editorial/editorial-motion";
 import { Breadcrumbs, Container, Eyebrow, Section, ButtonLink } from "@/components/ui/primitives";
-import { CTASection } from "@/components/sections/shared";
+
 
 type Props = { params: Promise<{ slug: string }> };
 export const dynamicParams = true;
@@ -66,9 +66,7 @@ export default async function MediaDetailPage({ params }: Props) {
           <Link href="/podcast" className="text-link">Explore podcast <ArrowRight size={17} aria-hidden="true"/></Link>
         </div>
       </Section>
-      <CTASection title={<>Good ideas deserve <em>attention.</em></>}
-        description="Suggest a perspective or media collaboration using the local inquiry preview."
-        primaryLabel="Prepare a media inquiry" href="/contact?type=media&subject=Editorial%20collaboration#inquiry" />
+      
     </>
   );
 }

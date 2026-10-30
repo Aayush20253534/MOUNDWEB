@@ -11,11 +11,7 @@ import {
   FeaturePanel,
 } from "@/components/ui/primitives";
 import { Accordion } from "@/components/ui/accordion";
-import {
-  CapabilityStrip,
-  CTASection,
-  PartnerCards,
-} from "@/components/sections/shared";
+import { CapabilityStrip, PartnerCards } from "@/components/sections/shared";
 import { OrbitGlobeStage } from "@/components/scenes/scene-stages";
 import { InquiryForm } from "@/components/forms/inquiry-form";
 import { contactFaqs } from "@/lib/content";
@@ -216,20 +212,7 @@ export default function ContactPage() {
           <Accordion items={contactFaqs} />
         </div>
       </Section>
-      <CTASection
-        contactCityBackdrop
-        eyebrow="Let’s build together"
-        title={
-          <>
-            Ready to <em>grow</em>
-            <br />
-            your brand?
-          </>
-        }
-        description="From visibility to loyal customers, we help your business shine everywhere."
-        primaryLabel="Start a project"
-        href="#inquiry"
-      />
+      
     </>
   );
 }

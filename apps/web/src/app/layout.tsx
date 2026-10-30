@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { SiteFooterCTA } from "@/components/layout/site-footer-cta";
 import { SiteMotion } from "@/components/layout/site-motion";
 import { socialProfiles } from "@/lib/social-profiles";
 import { SITE_ORIGIN, SITE_DESCRIPTION, organizationGraph, jsonLd } from "@/lib/seo";
@@ -64,6 +65,7 @@ export default function RootLayout({
         <Header />
         <main id="main-content" tabIndex={-1}>
           {children}
+          <SiteFooterCTA />
         </main>
         <Footer />
       </body>

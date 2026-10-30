@@ -7,7 +7,7 @@ import { services } from "@/lib/content";
 import { breadcrumbGraph, jsonLd, serviceGraph } from "@/lib/seo";
 import { getServiceGuide } from "@/lib/service-guides";
 import { Breadcrumbs, ButtonLink, Container, Eyebrow, Section, SectionHeading } from "@/components/ui/primitives";
-import { CTASection } from "@/components/sections/shared";
+
 import { Accordion } from "@/components/ui/accordion";
 import { ServiceMotion } from "@/components/services/service-motion";
 
@@ -169,13 +169,7 @@ export default async function ServiceDetailPage({ params }: Props) {
           </Link>
         </div>
       </Section>
-      <CTASection
-        eyebrow="Let's talk growth"
-        title={<>A clearer next step <em>starts here.</em></>}
-        primaryLabel="Start a marketing conversation"
-        href={"/contact?type=growth&subject=" + encodeURIComponent(service.title) + "#inquiry"}
-        description="Share your context and goals. Our Contact page currently offers a local inquiry preview; message delivery is not yet enabled."
-      />
+      
     </>
   );
 }

@@ -123,3 +123,24 @@ test("global touch controls preserve targets without hover-only transforms", asy
   expect(box?.width).toBeGreaterThanOrEqual(40);
   expect(box?.height).toBeGreaterThanOrEqual(40);
 });
+
+test("shared city CTA appears once immediately before the footer across public routes", async ({ page }) => {
+  test.setTimeout(120_000);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  for (const route of ["/", "/about", "/programs", "/services", "/contact", "/partners", "/privacy", "/terms"]) {
+    await page.goto(route, { waitUntil: "domcontentloaded" });
+    const banner = page.locator("#main-content > .cta-section--city");
+    await expect(banner, route + " should have exactly one homepage CTA").toHaveCount(1);
+    await expect(banner.locator('img[src*="moundweb-connected-city"]')).toHaveCount(1);
+    await expect(banner.locator(".cta-city-hotspot")).toHaveAttribute("href", "/contact?type=growth#inquiry");
+    await expect(page.locator("#main-content > .cta-section--city + *")).toHaveCount(0);
+    await expect(page.locator("main + footer")).toHaveCount(1);
+  }
+  await page.setViewportSize({ width: 375, height: 800 });
+  await page.goto("/contact", { waitUntil: "domcontentloaded" });
+  await expect(page.locator("#main-content > .cta-section--city .cta-copy .button")).toBeVisible();
+  for (const route of ["/admin", "/design-system"]) {
+    await page.goto(route, { waitUntil: "domcontentloaded" });
+    await expect(page.locator("#main-content .cta-section")).toHaveCount(0);
+  }
+});

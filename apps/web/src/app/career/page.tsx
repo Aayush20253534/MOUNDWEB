@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, BriefcaseBusiness, Compass, HeartHandshake, Lightbulb, Sparkles } from "lucide-react";
 import { PageHero } from "@/components/sections/page-hero";
-import { CTASection } from "@/components/sections/shared";
+
 import { ButtonLink, Eyebrow, Section } from "@/components/ui/primitives";
 import { EditorialMotion } from "@/components/editorial/editorial-motion";
 import { CareerExplorer } from "@/components/careers/career-explorer";
@@ -73,12 +73,7 @@ export default function CareerPage() {
           Prepare a career question <ArrowRight size={16} aria-hidden="true"/>
         </Link>
       </Section>
-      <CTASection
-        title={<>Stay curious about <em>what comes next.</em></>}
-        description="Explore our training programs or prepare a general question. Job application submissions are not available until verified openings and a secure backend are released."
-        primaryLabel="Explore our programs"
-        href="/programs"
-      />
+      
     </>
   );
 }

@@ -8,7 +8,7 @@ import { getPublishedEpisode } from "@/lib/editorial-remote";
 import { AudioPlayer } from "@/components/editorial/audio-player";
 import { EditorialMotion } from "@/components/editorial/editorial-motion";
 import { Breadcrumbs, ButtonLink, Container, Eyebrow, Section } from "@/components/ui/primitives";
-import { CTASection } from "@/components/sections/shared";
+
 
 type Props = { params: Promise<{ slug: string }> };
 export const dynamicParams = true;
@@ -78,9 +78,7 @@ export default async function EpisodePage({ params }: Props) {
           <Link href="/media" className="text-link">Explore media <ArrowRight size={17} aria-hidden="true"/></Link>
         </div>
       </Section>
-      <CTASection title={<>Keep the conversation <em>moving.</em></>}
-        description="Propose a topic or collaboration through the local Contact inquiry preview."
-        primaryLabel="Prepare a topic inquiry" href="/contact?type=media&subject=Podcast%20topic#inquiry"/>
+      
     </>
   );
 }

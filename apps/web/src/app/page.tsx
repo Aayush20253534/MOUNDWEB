@@ -17,12 +17,7 @@ import {
 } from "@/components/ui/primitives";
 import { ServiceCard } from "@/components/ui/cards";
 import { HomeMotion } from "@/components/scenes/home-motion";
-import {
-  CapabilityStrip,
-  CheckList,
-  CTASection,
-  MeasurementPanel,
-} from "@/components/sections/shared";
+import { CapabilityStrip, CheckList, MeasurementPanel } from "@/components/sections/shared";
 
 export const metadata: Metadata = {
   title: "Digital Marketing, SEO & Creative Growth",
@@ -252,19 +247,7 @@ export default function HomePage() {
           </div>
         </div>
       </Section>
-      <CTASection
-        cityBackdrop
-        title={
-          <>
-            Ready to <em>grow</em>
-            <br />
-            your brand?
-          </>
-        }
-        description="Let’s explore a focused strategy for your brand’s next chapter."
-        primaryLabel="Start a project"
-        href="/contact?type=growth#inquiry"
-      />
+      
     </>
   );
 }

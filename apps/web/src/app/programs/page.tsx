@@ -13,7 +13,7 @@ import {
   FeaturePanel,
 } from "@/components/ui/primitives";
 import { Accordion } from "@/components/ui/accordion";
-import { CTASection } from "@/components/sections/shared";
+
 
 export const metadata: Metadata = {
   alternates: { canonical: "/programs" },
@@ -117,18 +117,7 @@ export default function ProgramsPage() {
           </div>
         </div>
       </Section>
-      <CTASection
-        eyebrow="Ready to explore?"
-        title={
-          <>
-            Start your <em>learning journey.</em>
-          </>
-        }
-        centered
-        description="Bring your curiosity. Find a program that fits your next chapter."
-        primaryLabel="Ask about a program"
-        href="/contact?type=course#inquiry"
-      />
+      
       <Section className="program-reveal">
         <div className="split-layout faq-layout">
           <div>

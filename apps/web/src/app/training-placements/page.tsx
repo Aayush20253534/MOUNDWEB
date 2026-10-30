@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, BadgeCheck, ChartColumnIncreasing, GraduationCap, ShieldCheck } from "lucide-react";
 import { PageHero } from "@/components/sections/page-hero";
-import { CTASection } from "@/components/sections/shared";
+
 import { ButtonLink, Eyebrow, Section } from "@/components/ui/primitives";
 import { EditorialMotion } from "@/components/editorial/editorial-motion";
 import { PlacementDashboard } from "@/components/careers/placement-dashboard";
@@ -83,11 +83,7 @@ export default function TrainingPlacementsPage() {
         </div>
         <Link href="/programs" className="text-link">Review training courses <ArrowRight size={16} aria-hidden="true"/></Link>
       </Section>
-      <CTASection
-        title={<>Your next step begins <em>with learning.</em></>}
-        description="Explore the current program guides or prepare a question in our local Contact preview. Placement or employment is not guaranteed."
-        primaryLabel="View learning programs" href="/programs"
-      />
+      
     </>
   );
 }

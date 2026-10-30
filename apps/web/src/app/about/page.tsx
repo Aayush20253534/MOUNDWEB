@@ -12,7 +12,7 @@ import {
   Badge,
 } from "@/components/ui/primitives";
 import { StatCard } from "@/components/ui/cards";
-import { CTASection, PartnerCards } from "@/components/sections/shared";
+import { PartnerCards } from "@/components/sections/shared";
 import { Icon } from "@/components/ui/icon";
 import { AboutMotion } from "@/components/scenes/about-motion";
 import { AboutHeroControls } from "@/components/scenes/about-hero-controls";
@@ -400,16 +400,7 @@ export default function AboutPage() {
           </div>
         </div>
       </Section>
-      <CTASection
-        title={
-          <>
-            Let’s build <em>growth</em>
-            <br />
-            with purpose.
-          </>
-        }
-        primaryLabel="Contact us"
-      />
+      
     </>
   );
 }

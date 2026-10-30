@@ -11,12 +11,7 @@ import {
   Badge,
 } from "@/components/ui/primitives";
 import { ServiceCard } from "@/components/ui/cards";
-import {
-  CapabilityStrip,
-  CTASection,
-  MeasurementPanel,
-  ProcessSteps,
-} from "@/components/sections/shared";
+import { CapabilityStrip, MeasurementPanel, ProcessSteps } from "@/components/sections/shared";
 import { ServiceMotion } from "@/components/services/service-motion";
 import { ServiceExplorer } from "@/components/services/service-explorer";
 
@@ -121,18 +116,7 @@ export default function ServicesPage() {
       <div className="service-reveal">
         <MeasurementPanel compact />
       </div>
-      <CTASection
-        title={
-          <>
-            Let’s take your brand
-            <br />
-            to the <em>next level.</em>
-          </>
-        }
-        description="Tell us where you are and where you want to go."
-        primaryLabel="Start a project"
-        href="/contact?type=growth#inquiry"
-      />
+      
     </>
   );
 }

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowUpRight, Images, Newspaper, Sparkles } from "lucide-react";
 import { PageHero } from "@/components/sections/page-hero";
-import { CTASection } from "@/components/sections/shared";
+
 import { Section, Eyebrow, ButtonLink } from "@/components/ui/primitives";
 import { EditorialCatalog } from "@/components/editorial/editorial-catalog";
 import { EditorialMotion } from "@/components/editorial/editorial-motion";
@@ -54,12 +54,7 @@ export default function MediaPage() {
         </div>
         <div className="editorial-process-symbol"><ArrowUpRight size={72} aria-hidden="true"/></div>
       </Section>
-      <CTASection
-        title={<>An idea worth <em>exploring?</em></>}
-        description="For media questions or editorial collaboration proposals, prepare an inquiry on the Contact page. Sending is not enabled yet."
-        primaryLabel="Prepare media inquiry"
-        href="/contact?type=media&subject=Media%20collaboration#inquiry"
-      />
+      
     </>
   );
 }

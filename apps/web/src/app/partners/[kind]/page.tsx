@@ -9,7 +9,7 @@ import {
   FeaturePanel,
   Badge,
 } from "@/components/ui/primitives";
-import { CTASection } from "@/components/sections/shared";
+
 import { ConnectionMotion } from "@/components/scenes/connection-motion";
 import { PartnershipForm } from "@/components/forms/partnership-form";
 import { PartnershipProcess } from "@/components/partners/partnership-process";
@@ -202,16 +202,7 @@ export default async function PartnershipPage({ params }: Props) {
           returns.
         </p>
       </Section>
-      <CTASection
-        title={
-          <>
-            A bigger future.
-            <br />
-            <em>Built together.</em>
-          </>
-        }
-        href="#partnership-inquiry"
-      />
+      
     </>
   );
 }
