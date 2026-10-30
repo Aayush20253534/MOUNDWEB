@@ -56,6 +56,16 @@ Remove-Item Env:SITE_URL, Env:API_URL
 
 The full check expects API/database readiness. Use `npm run smoke:deployment -- --skip-database-check` only for an early infrastructure check; it is not production launch approval. Follow the Part 15 runbook before enabling the admin or personal-data collection.
 
+## Dependency security baseline (2026-10-30)
+
+The CI security gate is deliberately enforced with `npm audit --audit-level=high`.
+The dependency tree includes `zod@4.6.7`, `resend@6.35.0`,
+`body-parser@1.20.9`, and `fast-uri@3.1.9`, resolving the reported
+security advisories without using `--force` or suppressing the audit.
+The package-lock is committed for reproducible `npm ci` installations.
+Run `npm run verify && npm audit --audit-level=high && npm run test:deployment`
+when modifying dependencies.
+
 ## Handoff and asset references
 
 ### Social profiles
