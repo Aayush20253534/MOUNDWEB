@@ -8,9 +8,9 @@ describe("SEO configuration", () => {
     expect(() => absoluteUrl("//another.example")).toThrow();
   });
   it("generates truthful structured data", () => {
-    expect(organizationGraph([])["@graph"][0].url).toBe(absoluteUrl("/"));
+    expect(organizationGraph([])["@graph"][0]?.url).toBe(absoluteUrl("/"));
     expect(serviceGraph({slug:"seo",title:"SEO",summary:"Search"}).url).toBe(absoluteUrl("/services/seo"));
-    expect(breadcrumbGraph([{name:"Home",path:"/"},{name:"SEO",path:"/services/seo"}]).itemListElement[1].position).toBe(2);
+    expect(breadcrumbGraph([{name:"Home",path:"/"},{name:"SEO",path:"/services/seo"}]).itemListElement[1]?.position).toBe(2);
   });
   it("prevents script tag injection", () => {
     const result = jsonLd({value:"</script>"});
