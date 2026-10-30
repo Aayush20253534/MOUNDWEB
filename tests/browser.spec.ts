@@ -351,6 +351,72 @@ test("globe respects reduced-motion and preserves the static illustration", asyn
   await expect(globe.locator(".globe-image")).toBeVisible();
 });
 
+for (const width of [375, 1440]) {
+  test(`Contact inquiry globe rotates and can be paused at ${width}px`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "no-preference" });
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto("/contact#inquiry");
+    const globe = page.locator("#inquiry .globe-stage");
+    await globe.scrollIntoViewIfNeeded();
+    // This is a real rendering check, so unsupported GPU environments are explicit skips.
+    const webgl = await page.evaluate(() => Boolean(document.createElement("canvas").getContext("webgl2")));
+    test.skip(!webgl, "This browser cannot render WebGL2; the fallback has a separate test.");
+    await expect(globe).toHaveAttribute("data-phase", "orbiting", { timeout: 20000 });
+    await expect(globe).toHaveAttribute("data-playback", "running");
+    const canvas = globe.locator("canvas");
+    const before = await canvas.screenshot();
+    await page.waitForTimeout(600);
+    expect((await canvas.screenshot()).equals(before)).toBe(false);
+
+    await globe.getByRole("button", { name: "Pause globe rotation" }).click();
+    await expect(globe).toHaveAttribute("data-playback", "paused");
+    const paused = await canvas.screenshot();
+    await page.waitForTimeout(300);
+    expect((await canvas.screenshot()).equals(paused)).toBe(true);
+    await globe.getByRole("button", { name: "Resume globe rotation" }).click();
+    await expect(globe).toHaveAttribute("data-playback", "running");
+    await expect.poll(async () => (await canvas.screenshot()).equals(paused)).toBe(false);
+
+    await page.locator("footer").scrollIntoViewIfNeeded();
+    await expect(globe).toHaveAttribute("data-playback", "paused");
+    await globe.scrollIntoViewIfNeeded();
+    await expect(globe).toHaveAttribute("data-playback", "running");
+    await globe.getByRole("button", { name: "Pause globe rotation" }).click();
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await expect(globe).toHaveAttribute("data-phase", "poster");
+    await expect(canvas).toHaveCount(0);
+    await expect(globe.locator(".globe-image")).toBeVisible();
+    await expect(globe.getByRole("button", { includeHidden: true })).toBeHidden();
+    await page.emulateMedia({ reducedMotion: "no-preference" });
+    await expect(globe).toHaveAttribute("data-playback", "running", { timeout: 20000 });
+
+    if (width === 1440) {
+      const artwork = page.locator(".inquiry-art img");
+      await expect(artwork).toHaveAccessibleName(/conversation bubbles connected above an envelope/);
+      await expect(artwork).toHaveAttribute("src", /contact-conversation/);
+      expect(await artwork.evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth > 0)).toBe(true);
+    }
+  });
+}
+
+test("Contact inquiry keeps its globe poster when WebGL is unavailable", async ({ page }) => {
+  await page.addInitScript(() => {
+    const original = HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext = function (type: string, ...args: unknown[]) {
+      if (type === "webgl2") return null;
+      return Reflect.apply(original, this, [type, ...args]);
+    } as typeof original;
+  });
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/contact#inquiry");
+  const globe = page.locator("#inquiry .globe-stage");
+  await globe.scrollIntoViewIfNeeded();
+  await expect(globe).toHaveAttribute("data-phase", "poster");
+  await expect(globe.locator(".globe-image")).toBeVisible();
+  await expect(globe.getByRole("button", { includeHidden: true })).toBeHidden();
+  await expect(page.getByRole("button", { name: "Review inquiry" })).toBeEnabled();
+});
+
 
 test("About page animates the guiding approach without showing invented statistics", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });

@@ -124,7 +124,7 @@ export default function ContactPage() {
               partnership, or a bigger idea, start by telling us what matters to
               you.
             </p>
-            <OrbitGlobeStage compact />
+            <OrbitGlobeStage compact animated />
           </div>
           <div className="inquiry-form-wrap">
             <Suspense
@@ -139,8 +139,8 @@ export default function ContactPage() {
           </div>
           <aside className="inquiry-art">
             <Image
-              src="/assets/partnerships/contact-network.webp"
-              alt="An illuminated path connects distant mountain peaks"
+              src="/assets/partnerships/contact-conversation.webp"
+              alt="Warm orange conversation bubbles connected above an envelope"
               fill
               sizes="25vw"
             />

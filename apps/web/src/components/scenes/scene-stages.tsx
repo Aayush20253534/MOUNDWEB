@@ -50,13 +50,15 @@ export function Landscape({
     </div>
   );
 }
-/** Static, geometrically projected globe. Part 04 owns rotation, camera, and pointer interaction. */
+/** A projected poster with optional progressive enhancement to a rotating sphere. */
 export function OrbitGlobeStage({
   children,
   compact = false,
+  animated = !compact,
 }: {
   children?: ReactNode;
   compact?: boolean;
+  animated?: boolean;
 }) {
   return (
     <div
@@ -126,7 +128,7 @@ export function OrbitGlobeStage({
           ))}
         </div>
       )}
-      {!compact && <GlobeRuntime />}
+      {animated && <GlobeRuntime controls={compact} />}
       {children}
     </div>
   );
