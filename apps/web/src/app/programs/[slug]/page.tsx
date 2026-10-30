@@ -26,7 +26,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const course = courses.find((c) => c.slug === slug);
-  return { title: course?.title ?? "Program", description: course?.summary };
+  return { title: course ? course.title + " - " + course.category + " Learning Path" : "Program", description: course ? course.summary + " Explore the proposed curriculum and learning outcomes at MOUNDWEB." : undefined, alternates: course ? { canonical: "/programs/" + slug } : undefined };
 }
 export default async function CoursePage({ params }: Props) {
   const { slug } = await params;

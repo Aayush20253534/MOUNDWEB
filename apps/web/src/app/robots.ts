@@ -1,11 +1,9 @@
 import type { MetadataRoute } from "next";
+import { SITE_ORIGIN, absoluteUrl } from "@/lib/seo";
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: [
-      { userAgent: "*", allow: "/", disallow: ["/api"] },
-    ],
-    sitemap: process.env.NEXT_PUBLIC_SITE_URL
-      ? process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "") + "/sitemap.xml"
-      : undefined,
+    rules: [{ userAgent: "*", allow: "/", disallow: ["/admin", "/api/"] }],
+    sitemap: absoluteUrl("/sitemap.xml"),
+    host: SITE_ORIGIN,
   };
 }

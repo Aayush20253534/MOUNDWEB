@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: item ? item.title + " | Media" : "Media",
     description: item?.summary,
     robots: { index: Boolean(item && isPublishedMedia(item)), follow: true },
+    alternates: item && isPublishedMedia(item) ? { canonical: "/media/" + slug } : undefined,
   };
 }
 export default async function MediaDetailPage({ params }: Props) {

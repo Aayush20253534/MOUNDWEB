@@ -21,6 +21,7 @@ import { ServiceMotion } from "@/components/services/service-motion";
 import { ServiceExplorer } from "@/components/services/service-explorer";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services" },
   title: "Our Services",
   description:
     "Explore MOUNDWEB digital marketing, SEO, social media, performance, creative, branding, and growth strategy services.",

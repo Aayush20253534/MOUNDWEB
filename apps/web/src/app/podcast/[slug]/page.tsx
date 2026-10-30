@@ -20,6 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: item ? item.title + " | Podcast" : "Podcast",
     description: item?.summary,
     robots: { index: Boolean(item && isPublishedEpisode(item)), follow: true },
+    alternates: item && isPublishedEpisode(item) ? { canonical: "/podcast/" + slug } : undefined,
   };
 }
 export default async function EpisodePage({ params }: Props) {

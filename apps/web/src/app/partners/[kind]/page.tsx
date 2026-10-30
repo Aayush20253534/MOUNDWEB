@@ -80,7 +80,7 @@ export function generateStaticParams() {
 }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { kind } = await params;
-  return { title: partners[kind as Kind]?.title ?? "Partnerships" };
+  return { title: partners[kind as Kind]?.title ?? "Partnerships", description: partners[kind as Kind]?.description, alternates: partners[kind as Kind] ? { canonical: "/partners/" + kind } : undefined };
 }
 export default async function PartnershipPage({ params }: Props) {
   const { kind } = await params;

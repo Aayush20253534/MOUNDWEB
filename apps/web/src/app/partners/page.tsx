@@ -4,6 +4,7 @@ import { Section, SectionHeading } from "@/components/ui/primitives";
 import { CTASection, PartnerCards } from "@/components/sections/shared";
 import { ConnectionMotion } from "@/components/scenes/connection-motion";
 export const metadata: Metadata = {
+  alternates: { canonical: "/partners" },
   title: "Partner With Us",
   description: "Explore college and franchise partnerships with MOUNDWEB.",
 };

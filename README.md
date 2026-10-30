@@ -86,3 +86,7 @@ of at least 44px. Record the owner confirmation in the change description.
 - [Roadmap](docs/ROADMAP.md)
 
 Unverified testimonials, addresses, contact numbers, fees, placement counts, client logos and business results are not presented as facts. Actual public editorial content requires reviewed source material and passing publication gates.
+
+## Search optimization
+
+See [SEO runbook](docs/SEO.md). Canonical site: https://www.moundweb.tech; sitemap: https://www.moundweb.tech/sitemap.xml; robots: https://www.moundweb.tech/robots.txt. Business location and Google Search Console verification require owner-approved data.

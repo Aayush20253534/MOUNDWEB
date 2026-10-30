@@ -16,6 +16,7 @@ import { Accordion } from "@/components/ui/accordion";
 import { CTASection } from "@/components/sections/shared";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/programs" },
   title: "Our Programs",
   description:
     "Digital Marketing and Web Development courses, including AI-integrated marketing programs.",

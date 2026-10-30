@@ -16,6 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
       ? "Published MOUNDWEB podcast episodes on digital growth, creative thinking and learning."
       : "Explore proposed conversations about digital growth, creative thinking and learning. MOUNDWEB has no published episodes yet.",
     robots: { index: hasPublished, follow: true },
+    alternates: hasPublished ? { canonical: "/podcast" } : undefined,
   };
 }
 export default function PodcastPage() {

@@ -20,6 +20,7 @@ import { AboutJourney } from "@/components/sections/about-journey";
 import type { IconName } from "@/lib/content";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/about" },
   title: "About",
   description:
     "Meet MOUNDWEB: digital marketing, brand growth, and practical professional learning.",

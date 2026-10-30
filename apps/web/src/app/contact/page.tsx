@@ -25,6 +25,7 @@ import { ConnectionMotion } from "@/components/scenes/connection-motion";
 import { SocialLinks } from "@/components/ui/social-links";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/contact" },
   title: "Contact Us",
   description:
     "Explore marketing, training, college partnerships, franchise opportunities, and careers with MOUNDWEB.",

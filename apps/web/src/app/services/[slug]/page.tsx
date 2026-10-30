@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Check, Compass, Lightbulb } from "lucide-react";
 import { services } from "@/lib/content";
+import { breadcrumbGraph, jsonLd, serviceGraph } from "@/lib/seo";
 import { getServiceGuide } from "@/lib/service-guides";
 import { Breadcrumbs, ButtonLink, Container, Eyebrow, Section, SectionHeading } from "@/components/ui/primitives";
 import { CTASection } from "@/components/sections/shared";
@@ -20,7 +21,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const service = services.find((item) => item.slug === slug);
   return {
     title: service ? service.title : "Service",
-    description: service?.summary,
+    description: service ? service.title + ": " + service.summary + " Explore MOUNDWEB digital growth services and practical approaches." : undefined,
+    alternates: service ? { canonical: "/services/" + slug } : undefined,
   };
 }
 export default async function ServiceDetailPage({ params }: Props) {
@@ -31,6 +33,12 @@ export default async function ServiceDetailPage({ params }: Props) {
   return (
     <>
       <ServiceMotion />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(serviceGraph(service)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(breadcrumbGraph([
+        { name: "Home", path: "/" },
+        { name: "Services", path: "/services" },
+        { name: service.title, path: "/services/" + service.slug },
+      ])) }} />
       <Container>
         <Breadcrumbs items={[
           { label: "Our Services", href: "/services" },
@@ -65,6 +73,35 @@ export default async function ServiceDetailPage({ params }: Props) {
           </div>
         </div>
       </Section>
+      {service.slug === "seo" && (
+        <Section className="service-reveal" id="local-international-seo">
+          <SectionHeading
+            eyebrow="Local, national and international search"
+            title={<>Get discovered across <em>relevant markets.</em></>}
+            description="Effective SEO helps people find services whether searching nearby, across India or internationally. Plans depend on actual audiences, verified business information and useful content."
+          />
+          <div className="service-activities-grid">
+            <article className="service-activity">
+              <div>
+                <h3>Local SEO and map discovery</h3>
+                <p className="body-copy">For eligible local businesses, start with accurate contact details, Google Business Profile optimization, location-relevant content and consistent service descriptions. Fake addresses and doorway pages are not part of the approach.</p>
+              </div>
+            </article>
+            <article className="service-activity">
+              <div>
+                <h3>India-wide search visibility</h3>
+                <p className="body-copy">Connect relevant service pages, technical crawlability, useful internal links and intent-led content with performance measured through Google Search Console.</p>
+              </div>
+            </article>
+            <article className="service-activity">
+              <div>
+                <h3>International search foundations</h3>
+                <p className="body-copy">Research real overseas intent, localize content for each target market and implement hreflang only after authentic multilingual or regional pages are published.</p>
+              </div>
+            </article>
+          </div>
+        </Section>
+      )}
       <Section className="service-detail-activities service-reveal">
         <SectionHeading
           eyebrow="Where we can focus"

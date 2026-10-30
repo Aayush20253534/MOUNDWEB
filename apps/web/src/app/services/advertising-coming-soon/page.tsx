@@ -5,6 +5,7 @@ import { Breadcrumbs, ButtonLink, Container, Eyebrow, Section } from "@/componen
 import { ServiceMotion } from "@/components/services/service-motion";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "Advertising | Coming Soon",
   description: "MOUNDWEB's upcoming Advertising offering is being developed. Explore our current digital marketing and brand growth services.",
 };

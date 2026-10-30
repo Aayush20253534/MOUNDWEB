@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight, Play, Quote } from "lucide-react";
 import { services } from "@/lib/content";
@@ -23,6 +24,11 @@ import {
   MeasurementPanel,
 } from "@/components/sections/shared";
 
+export const metadata: Metadata = {
+  title: "Digital Marketing, SEO & Creative Growth | MOUNDWEB",
+  description: "MOUNDWEB combines SEO, social media, performance marketing, branding and creative strategy for business growth in India and online markets.",
+  alternates: { canonical: "/" },
+};
 export default function HomePage() {
   return (
     <>

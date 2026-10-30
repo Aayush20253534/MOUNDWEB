@@ -17,6 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
       ? "Published MOUNDWEB perspectives, original features, and editorial updates."
       : "Explore MOUNDWEB editorial concepts and original visual studies. No press coverage or news updates are represented as published yet.",
     robots: { index: hasPublished, follow: true },
+    alternates: hasPublished ? { canonical: "/media" } : undefined,
   };
 }
 export default function MediaPage() {
